@@ -70,9 +70,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Android / Gradle
-/android
-
 # Generated Android packages
 *.apk
 *.aab
