@@ -1,0 +1,285 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+ion-header {
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+ion-spinner {
+  transform: scale(2);
+}
+
+::ng-deep .calendar-day.calendar-day-active {
+  color: white !important;
+}
+
+option:hover,
+option:checked,
+option:active,
+option:focus {
+  background-color: #10421D;
+  color: white;
+}
+
+select:focus>option:checked {
+  background-color: #10421D;
+  color: white;
+  /* selected */
+}
+
+select:focus>option:checked:before {
+  background-color: #10421D;
+  color: white;
+  /* selected */
+}
+
+.checkout-alert {
+  .alert-wrapper {
+    background: var(--ion-color-success-tint);
+    border-radius: 0.5rem;
+    width: 24rem;
+    padding: 20px 0px 20px 0px;
+    text-align: center;
+  }
+
+  .alert-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+  }
+
+  .alert-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+  }
+}
+
+@font-face {
+  font-family: 'Cambria';
+  src: url('https://raw.githubusercontent.com/jondot/dotfiles2/master/.fonts/cambria.ttf') format('truetype');
+}
+
+[type=text],
+input:where(:not([type])),
+[type=email],
+[type=url],
+[type=password],
+[type=number],
+[type=date],
+[type=datetime-local],
+[type=month],
+[type=search],
+[type=tel],
+[type=time],
+[type=week],
+[multiple],
+textarea,
+select {
+  // border-color: #6b7280;
+  border: 0px solid;
+  // border-width: 1px;
+}
+
+.switch-button {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch-button input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked+.slider {
+  background-color: #CDF8BA;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #CDF8BA;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+ion-header {
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+ion-content#resident-content {
+  --offset-bottom: -78px !important;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.record-modal {
+  --height: 90%;
+  --border-radius: 4px;
+  --width: 90%;
+}
+
+.modal-loading {
+  --height: 100%;
+  --border-radius: 4px;
+  --background: none !important;
+  --width: 100%;
+}
+
+
+.payment-modal {
+  --overflow-y: auto;
+  --max-height: 55%;
+  --border-radius: 10px;
+  --padding: 20px;
+  --width: 90%;
+}
+
+.nric-confirmation-modal {
+  --border: black 1px solid;
+  --height: 40%;
+  --border-radius: 4px;
+  --padding: 20px;
+  --width: 60%;
+}
+
+.nric-scan-modal {
+  --border: black 1px solid;
+  --height: 80%;
+  --border-radius: 4px;
+  --padding: 20px;
+  --width: 80%;
+}
+
+.record-modal-notice {
+  --height: 80%;
+  --border-radius: 4px;
+  --padding: 20px;
+  --width: 80%;
+}
+
+.record-resident-modal {
+  --height: 40%;
+  --border-radius: 4px;
+  --padding: 20px;
+  --max-width: 80%
+}
+
+.terms-condition-modal {
+  --height: 50%;
+  --border-radius: 5px;
+  --padding: 35px;
+  --max-width: 90%
+}
+
+.cal-week-view .cal-event {
+  color: black !important;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.transparent-loading {
+  --background: transparent !important;
+  --box-shadow: none !important;
+  --spinner-color: white !important;
+  color: white !important;
+
+  .loading-wrapper.sc-ion-loading-md {
+    box-shadow: none !important
+  }
+}

@@ -1,0 +1,446 @@
+<ion-content [fullscreen]="true" class="flex flex-col justify-between">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)" style="z-index: 999;" pullFactor="0.3" pullMin="40"
+    pullMax="80">
+    <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
+  <div class="flex flex-col items-center justify-between h-full w-full bg-[#DCE7D6] p-6 space-y-4"
+    *ngIf="is_gym || (!facilityInfo && !is_gym)">
+    <div class="w-full flex flex-row justify-between space-x-4 h-[12%]">
+      <div class="text-2xl font-bold break-words whitespace-normal w-1/2 overflow-x-auto">
+        {{ functionMain.returnNone(projectInfo.project_address) }}
+      </div>
+      <div class="flex flex-col justify-start items-end space-y-2 text-2xl font-bold w-1/2">
+        <div class="text-end">
+          {{ currentDate }}
+        </div>
+        <div class="text-end">
+          {{ currentTime }}
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex flex-col justify-center items-center space-y-2 h-[20%]">
+      <div class="w-1/2 flex flex-col justify-center items-center bg-[#ceeaaf] shadow-lg" *ngIf="!is_gym">
+        <div class="w-full flex flex-row justify-center items-center text-xl">
+          <div
+            [class]="'w-1/2 flex flex-col justify-center text-center p-2 ' + ( is_en ? 'rounded-r-2xl bg-[#a7d7af]' : 'bg-[#ceeaaf]' )"
+            (click)="changeLang('en')">
+            English
+          </div>
+          <div
+            [class]="'w-1/2 flex flex-col justify-center text-center p-2 ' + ( is_en ? 'bg-[#ceeaaf]' : 'rounded-l-2xl bg-[#a7d7af]' )"
+            (click)="changeLang('cn')">
+            中文
+          </div>
+        </div>
+      </div>
+      <div class="w-full flex flex-row text-3xl text-center justify-center">
+        <span class="mt-5" *ngIf="!is_gym">{{is_en ? 'WELCOME TO' : '欢迎来到'}}</span>
+        <span class="mt-5 text-4xl" *ngIf="is_gym">{{ functionMain.returnNone(facilityInfo.room_name) }}</span>
+      </div>
+      <div class="w-full flex flex-row text-3xl text-center justify-center">
+        <span class="uppercase" *ngIf="!is_gym">{{ functionMain.returnNone(projectInfo.project_name) }}</span>
+        <span class="text-4xl" *ngIf="is_gym">{{ functionMain.returnNone(facilityInfo.open_hour) }} - {{
+          functionMain.returnNone(facilityInfo.close_hour) }}</span>
+      </div>
+    </div>
+    <div class="w-full flex flex-row h-1/2 space-x-4" *ngIf="!is_gym">
+      <!-- Left Column: Call Host & Face Recognition -->
+      <div class="w-1/2 flex flex-col space-y-4">
+        <!-- Button 1: Call Host -->
+        <div class="h-1/2 w-full bg-[#E6F0E5] hover:bg-[#c0c9bf] active:bg-[#a7d7af] flex flex-row items-center shadow-lg cursor-pointer rounded-xl transition-all"
+          (click)="openModal()">
+          <div class="w-2/5 p-4">
+            <fa-icon [icon]="faPhone"
+              class="flex flex-col justify-center items-center text-6xl text-[var(--ion-color-primary)]">
+            </fa-icon>
+          </div>
+          <div class="w-3/5 p-4">
+            <div class="text-3xl font-bold">
+              {{ is_en ? 'Call Host' : '呼叫主机' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Button 2: Face Recognition -->
+        <div class="h-1/2 w-full bg-[#E6F0E5] hover:bg-[#c0c9bf] active:bg-[#a7d7af] flex flex-row items-center shadow-lg cursor-pointer rounded-xl transition-all"
+          (click)="openScanRecognitionModal()">
+          <div class="w-2/5 p-4">
+            <fa-icon [icon]="faSmile"
+              class="flex flex-col justify-center items-center text-6xl text-[var(--ion-color-primary)]">
+            </fa-icon>
+          </div>
+          <div class="w-3/5 p-4">
+            <div class="text-3xl font-bold" *ngIf="is_en">
+              Face <br> Recognition
+            </div>
+            <div class="text-3xl font-bold" *ngIf="!is_en">
+              人脸 <br> 识别
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Scan QR Code & Call Security -->
+      <div class="w-1/2 flex flex-col space-y-4">
+        <!-- Button 3: Scan QR Code -->
+        <div class="h-1/2 w-full bg-[#E6F0E5] hover:bg-[#c0c9bf] active:bg-[#a7d7af] flex flex-row items-center shadow-lg cursor-pointer rounded-xl transition-all"
+          (click)="openScanModal()">
+          <div class="w-2/5 p-4">
+            <fa-icon [icon]="faQrcode"
+              class="flex flex-col justify-center items-center text-6xl text-[var(--ion-color-primary)]">
+            </fa-icon>
+          </div>
+          <div class="w-3/5 p-4">
+            <div class="text-3xl font-bold" *ngIf="is_en">
+              Scan <br> QR Code
+            </div>
+            <div class="text-3xl font-bold" *ngIf="!is_en">
+              QR Code <br> 邀请扫描
+            </div>
+          </div>
+        </div>
+
+        <!-- Button 4: Call Security -->
+        <div class="h-1/2 w-full bg-[#E6F0E5] hover:bg-[#c0c9bf] active:bg-[#a7d7af] flex flex-row items-center shadow-lg cursor-pointer rounded-xl transition-all"
+          (click)="callSecurity()">
+          <div class="w-2/5 p-4 flex justify-center items-center">
+            <img alt="Security Icon" src="assets/guard.png" class="max-h-20 object-contain">
+          </div>
+          <div class="w-3/5 p-4">
+            <div class="text-3xl font-bold">
+              {{ is_en ? 'Call Security' : '呼叫保安' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="h-[19%] w-full flex flex-col justify-between items-center">
+      <div class="h-10"></div>
+      <img alt="iFS360 logo" src="assets/logoIFS.png" class="max-h-20 max-w-44" />
+      <div class="w-full flex flex-row justify-between">
+        <fa-icon [icon]="faGear" (click)="onSettingClick()"
+          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
+        </fa-icon>
+        <fa-icon [icon]="faSignOut" (click)="onLogoutClick()"
+          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
+        </fa-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center justify-between h-full w-full bg-[#DCE7D6] p-4 space-y-4"
+    *ngIf="facilityInfo && !is_gym">
+    <div class="w-full flex flex-row justify-between space-x-4 h-[12%]">
+      <div class="text-2xl font-bold break-words whitespace-normal w-1/2 overflow-x-auto uppercase">
+        {{ functionMain.returnNone(projectInfo.project_name) }}
+      </div>
+    </div>
+    <div class="flex flex-col justify-center items-center space-y-4 h-[30%] w-full">
+      <div class="flex flex-row justify-center items-end space-y-2 text-2xl font-bold w-full">
+        <div>
+          {{ currentDate }}
+        </div>
+        <div>
+          &nbsp;-&nbsp;
+        </div>
+        <div>
+          {{ currentTime }}
+        </div>
+      </div>
+      <div
+        class="w-4/5 bg-[#E6F0E5] h-full rounded-lg flex flex-col items-center justify-center text-5xl font-bold p-4">
+        <div class="text-center w-full">
+          {{ functionMain.returnNone(facilityInfo.room_name) }}
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="w-4/5 text-white bg-[var(--ion-color-success-tint)] h-[10%] rounded-lg p-4 flex flex-col justify-center items-center text-3xl font-bold"
+      *ngIf="!currentBook && !isBookLoading">
+      VACANT
+    </div>
+    <div class="w-full text-center text-2xl flex flex-col justify-center items-center h-[15%] font-bold"
+      *ngIf="currentBook && !isBookLoading">
+      <div
+        class="w-4/5 text-white bg-[var(--ion-color-danger-tint)] h-full rounded-lg p-4 flex flex-col justify-center items-center text-3xl font-bold mb-4">
+        OCCUPIED
+      </div>
+      Booked By {{ functionMain.returnNone(currentBook.booked_by) }} at {{
+      functionMain.formatHours(currentBook.start_datetime) }} - {{ functionMain.formatHours(currentBook.stop_datettime)
+      }}
+    </div>
+    <div
+      class="w-4/5 text-white bg-[var(--ion-color-warning-tint)] h-[10%] rounded-lg p-4 flex flex-col justify-center items-center text-3xl font-bold mt-4"
+      *ngIf="isBookLoading">
+      <ion-spinner name="crescent" color="light"></ion-spinner>
+    </div>
+    <div class="h-[19%] w-full flex flex-col justify-between items-center">
+      <div class="h-10"></div>
+      <img alt="iFS360 logo" src="assets/logoIFS.png" class="max-h-20 max-w-44" />
+      <div class="w-full flex flex-row justify-between">
+        <fa-icon [icon]="faGear" (click)="onSettingClick()"
+          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
+        </fa-icon>
+        <fa-icon [icon]="faSignOut" (click)="onLogoutClick()"
+          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
+        </fa-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- <ion-modal id="family-code-search-modal" [isOpen]="isCallModal" (didDismiss)="closeModal()">
+    <ng-template>
+      <div class="flex flex-row justify-center space-x-2 m-10">
+        <app-text-input #textInput [id]="'family_code'" [placeholder]="'Call Code'" [customClasses]="{'w-full ':true}"
+          [type]="'text'" [(ngModel)]="family_code" [autoComplete]="'off'" [showPlaceholder]="true"
+          [customInputClasses]="{'w-[60%]': true,'border':true, 'w-full':true,'rounded':true, 'py-2':true, 'px-3':true, 'outline-[#BDBDBD]':true,'h-20':true, 'text-2xl':true}">
+        </app-text-input>
+        <button class="h-20 w-2/5 bg-[var(--ion-color-primary)] text-2xl font-bold rounded text-white"
+          (click)="onFamilySearch()">Call</button>
+      </div>
+    </ng-template>
+  </ion-modal> -->
+  <ion-modal id="scan-modal" [isOpen]="showScanModal" (didDismiss)="closeScanModal()">
+    <ng-template>
+      <div class="wrapper">
+        <div class="w-full flex flex-col justify-center items-center space-y-2">
+          <img class="w-56 h-56" src="assets/qr-code.gif" alt="QR Scan" />
+          <h2 class="font-bold text-center text-2xl">
+            {{ is_en ? 'Please place the QR Code in front of this device.' : '请将 QR Code 放在此设备前方。' }}
+          </h2>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal id="scan-recognition-modal" [isOpen]="showScanRecognitionModal" (didDismiss)="closeScanRecognitionModal()">
+    <ng-template>
+      <div class="wrapper p-6">
+        <div class="w-full flex flex-col justify-center items-center space-y-4 max-w-lg mx-auto">
+
+          <!-- Face Recognition Status Header -->
+          <div class="w-full text-center">
+            <h2 class="font-bold text-3xl mb-1 text-gray-800">
+              {{ is_en ? 'Face Recognition' : '面部识别' }}
+            </h2>
+            <p class="text-xl font-medium text-[var(--ion-color-primary)]">{{ faceStatus }}</p>
+          </div>
+
+          <!-- Camera Reflection / Scanner Box Placeholder (Matches Native SurfaceView 360x310) -->
+          <div class="w-[360px] h-[310px] flex flex-col items-center justify-center p-2 bg-gray-50 border-2 border-dashed border-[var(--ion-color-primary)] rounded-2xl relative mx-auto overflow-hidden">
+            
+            <!-- Scanning Animation & Visual Frame -->
+            <div class="flex flex-col items-center justify-center" *ngIf="!isRecognizedSuccess">
+              <div class="relative flex justify-center items-center">
+                <fa-icon [icon]="faSmile" class="text-8xl text-[var(--ion-color-primary)] opacity-60 animate-pulse"></fa-icon>
+              </div>
+              <h3 class="font-bold text-center text-xl mt-4 text-gray-700">
+                {{ is_en ? 'Please look at the camera' : '请面向摄像头' }}
+              </h3>
+              <p class="text-sm text-gray-500 mt-1">
+                {{ is_en ? 'Position your face inside the frame' : '请将面部对准识别框' }}
+              </p>
+            </div>
+
+            <!-- Success State -->
+            <div class="flex flex-col items-center justify-center py-2" *ngIf="isRecognizedSuccess">
+              <ion-icon name="checkmark-circle" class="text-green-500" style="font-size: 88px;"></ion-icon>
+              <h3 class="font-bold text-center text-2xl mt-2 text-green-600">
+                {{ is_en ? 'Recognition Successful!' : '识别成功！' }}
+              </h3>
+              <div class="mt-3 px-6 py-2 bg-green-100 rounded-full border border-green-400 text-center">
+                <p class="text-xl font-bold text-green-800">{{ recognizedUserName || ('Resident #' + recognizedUserId) }}</p>
+                <p class="text-sm text-green-600 font-semibold" *ngIf="recognitionScore > 0">{{ is_en ? 'Accuracy / Score' : '准确率' }}: {{ recognitionScore }}%</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Live Detection Metrics -->
+          <div class="w-[360px] grid grid-cols-2 gap-3" *ngIf="isFaceRecognitionActive && !isRecognizedSuccess">
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-center">
+              <p class="text-xs font-semibold text-blue-600 uppercase">
+                {{ is_en ? 'Faces Detected' : '检测到的人脸' }}
+              </p>
+              <p class="text-2xl font-bold text-blue-800">{{ faceDetectionCount }}</p>
+            </div>
+
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-center">
+              <p class="text-xs font-semibold text-emerald-600 uppercase">
+                {{ is_en ? 'Status' : '状态' }}
+              </p>
+              <p class="text-sm font-bold text-emerald-800 truncate mt-1">{{ isFaceRecognitionActive ? (is_en ? 'Scanning...' : '扫描中...') : (is_en ? 'Ready' : '就绪') }}</p>
+            </div>
+          </div>
+
+          <!-- Close / Cancel Button -->
+          <button class="w-[360px] bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-bold py-3.5 px-6 rounded-xl text-xl transition-all shadow-md mt-1" 
+            (click)="closeScanRecognitionModal()">
+            {{ is_en ? 'Cancel / Close' : '取消 / 关闭' }}
+          </button>
+
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal id="logout-modal" [isOpen]="showLogoutModal" (didDismiss)="closeLogoutModal()">
+    <ng-template>
+      <div class="wrapper w-full">
+        <div class="w-full flex flex-col justify-center items-center space-y-2" *ngIf="isSettingSwitch || !isSetting">
+          <h2 class="font-bold text-center text-xl">
+            {{ isSetting ? (is_en ? version + ' Enter project code to open settings.' : version +' 输入项目代码以打开设置') :
+            (is_en ? 'Enter project code to logout.' : '输入项目代码以退出登录') }}
+          </h2>
+          <div class="w-full flex flex-row justify-between space-x-2">
+            <div class="w-3/5">
+              <app-text-input (input)="onChangeLogoutCode()" #textInput [id]="'project_key'"
+                [placeholder]="is_en ? 'PROJECT CODE' : '项目代码'" [customClasses]="{'w-full ':true}" [type]="'text'"
+                [autoComplete]="'off'" [(ngModel)]="logoutCode" [showPlaceholder]="true"
+                [customInputClasses]="{'border':true, 'w-full':true,'rounded':true, 'py-2':true, 'px-3':true, 'outline-[#BDBDBD]':true,'h-20':true, 'text-xl':true}">
+              </app-text-input>
+            </div>
+            <button class="h-20 p-2 w-[35%] bg-[var(--ion-color-primary)] text-xl font-bold rounded text-white"
+              (click)="onLogout()">
+              {{ isSetting ? (is_en ? 'SUBMIT' : '提交') : (is_en ? 'LOGOUT' : '登出')}}
+            </button>
+          </div>
+        </div>
+        <div class="w-full flex flex-col justify-center items-center space-y-2" *ngIf="!isSettingSwitch && isSetting">
+          <div class="flex flex-row space-x-2 w-full">
+            <!-- <button class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="startRingtone()">Play Ringtone</button> -->
+            <button [disabled]="ringtoneDelay" [class]="ringtoneDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
+              class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="stopRingtone()">{{ is_en ? 'Stop Ringtone' : '停止铃声'}}</button>
+            <button [disabled]="faceRefreshDelay"
+              [class]="faceRefreshDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
+              class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="onRefreshCameraClick()">{{ is_en ? 'Refresh Camera' : '刷新摄像头'}}</button>
+            <button [disabled]="pingTestDelay" [class]="pingTestDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
+              class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="pingTest()">{{ is_en ? 'Connection Test' : '连接测试'}}</button>
+            <button class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="openSettingSwitch()">{{is_en ? 'Open Settings' : '打开设置'}}</button>
+            <!-- <button class="h-20 w-full bg-red-600 text-lg font-bold rounded text-white"
+              (click)="rebootDevice()">{{is_en ? 'Reboot Device' : '重启设备'}}</button> -->
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
+
+<ion-footer>
+  <div class="w-full h-full bg-red fixed bottom-0 z-50 flex flex-col justify-start" *ngIf="isCallModal" @slideInOut>
+    <div class="w-full h-[15%]" (click)="closeModal()">
+
+    </div>
+    <!-- <div class="w-full h-[75%] bg-white rounded-t-[25px] flex flex-col justify-between">
+      <div class="w-full h-[20%] flex flex-row justify-between">
+        <div class="w-1/3 flex flex-row justify-center items-center">
+          <ion-icon name="chevron-down-outline" class="text-3xl" (click)="closeModal()"></ion-icon>
+        </div>
+        <div class="w-1/3 flex flex-row justify-center items-center text-2xl border-b-2 overflow-x-auto">
+          {{ family_code }}
+        </div>
+        <div class="w-1/3 flex flex-row justify-center items-center">
+          <ion-icon name="call-outline" class="text-3xl" (click)="onFamilySearch()"></ion-icon>
+        </div>
+      </div>
+      <div class="w-full h-[80%] grid grid-cols-3 justify-items-center">
+        <div class="w-2/3 h-full flex flex-row justify-center items-center" *ngFor="let button of tempArrayButton" (click)="buttonClicked(button)">
+          <span *ngIf="!button.isCustomIcon" class="text-2xl p-3">{{ button.text }}</span>
+          <ion-icon *ngIf="button.isCustomIcon" class="text-3xl p-3" [name]="button.text"></ion-icon>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="w-full h-[1000px] overflow-y-auto bg-white rounded-t-[25px] flex flex-col justify-start p-3">
+      <div
+        class="w-full flex flex-col justify-between text-justify border-2 border-[var(--ion-color-primary)] rounded-2xl mb-3 p-3"
+        *ngIf="is_en">
+        <b>To Contact Unit:</b>
+        <ol class="list-decimal pl-6">
+          <li>Key in blk number, unit number.<br><span *ngIf="extraConfig.unit_code_placeholder">(example {{
+              extraConfig.unit_code_placeholder }})</span></li>
+          <li>Press <fa-icon [icon]="faPhone" class="text-1xl text-black"></fa-icon> to call unit residents.</li>
+        </ol>
+        <b>To Contact Host Directly:</b>
+        <ol class="list-decimal pl-6">
+          <li>Key in blk number, unit number and host id.<br><span *ngIf="extraConfig.host_code_placeholder">(example {{
+              extraConfig.host_code_placeholder }})</span></li>
+          <li>Press <fa-icon [icon]="faPhone" class="text-1xl text-black"></fa-icon> to call unit host directly.</li>
+        </ol>
+      </div>
+      <div
+        class="w-full flex flex-col justify-between text-justify border-2 border-[var(--ion-color-primary)] rounded-2xl mb-3 p-3"
+        *ngIf="!is_en">
+        <b>联系单元:</b>
+        <ol class="list-decimal pl-6">
+          <li>输入楼号、单元号。<br><span *ngIf="extraConfig.unit_code_placeholder">(例如 {{ extraConfig.unit_code_placeholder
+              }})</span></li>
+          <li>按下 <fa-icon [icon]="faPhone" class="text-1xl text-black"></fa-icon> 以联系该单元住户。</li>
+        </ol>
+        <b>直接呼叫主机:</b>
+        <ol class="list-decimal pl-6">
+          <li>输入楼号、单元号和员工编号。<br><span *ngIf="extraConfig.host_code_placeholder">(例如 {{ extraConfig.host_code_placeholder
+              }})</span></li>
+          <li>按下 <fa-icon [icon]="faPhone" class="text-1xl text-black"></fa-icon> 直接呼叫单元员工。</li>
+        </ol>
+      </div>
+      <div class="w-full h-16 flex flex-row justify-between">
+        <div class="w-1/5 flex flex-row justify-center items-center">
+          <ion-icon name="chevron-down-outline" class="text-4xl text-[var(--ion-color-primary)]"
+            (click)="closeModal()"></ion-icon>
+        </div>
+
+        <div class="w-3/5 flex flex-row justify-center items-center text-3xl overflow-x-auto"
+          style="line-height: 0px !important;">
+          {{ family_code }}
+        </div>
+
+        <div class="w-1/5 flex flex-row justify-center items-center">
+          <ion-icon name="backspace-outline" class="text-4xl text-[var(--ion-color-primary)]"
+            (click)="buttonClicked({value: 'pop'})"></ion-icon>
+        </div>
+
+      </div>
+      <hr class="w-full border-none h-3 rounded-full bg-[var(--ion-color-primary)] mt-2 mb-3" />
+      <div class="w-full h-[440px] overflow-y-auto grid grid-cols-3 justify-center items-center mb-3">
+        <div class="w-full h-20 flex flex-row justify-center items-center mb-2"
+          *ngFor="let button of (isKey ? buttonKeyArray :buttonArray); let i = index" [ngClass]="{
+          'justify-start': (i % 3 == 0),
+          'justify-center': (i % 3 == 1),
+          'justify-end': (i % 3 == 2),
+        }">
+          <div class="w-[95%] h-20 bg-[var(--ion-color-primary)] flex flex-row items-center rounded-2xl justify-center"
+            (click)="buttonClicked(button)">
+            <span *ngIf="!button.isCustomIcon" class="text-4xl font-bold text-white">{{ button.text }}</span>
+            <fa-icon *ngIf="button.isCustomIcon" [icon]="button.text" class="text-4xl text-white"></fa-icon>
+          </div>
+        </div>
+
+      </div>
+      <div class="w-full h-20 flex flex-row justify-between items-center">
+        <div class="w-1/3 flex flex-row justify-start">
+          <div class="w-[95%] h-20 flex flex-row justify-center items-center bg-[var(--ion-color-primary)] rounded-2xl"
+            (click)="changeKey()">
+            <span *ngIf="isKey" class="text-4xl font-bold text-white p-3">123</span>
+            <span *ngIf="!isKey" class="text-4xl font-bold text-white p-3">ABC</span>
+          </div>
+        </div>
+        <div class="w-1/3 flex flex-row justify-center">
+        </div>
+        <div class="w-1/3 flex flex-row justify-end">
+          <div class="w-[95%] h-20 flex flex-row justify-center items-center bg-[var(--ion-color-primary)] rounded-2xl"
+            (click)="onFamilySearch()">
+            <fa-icon [icon]="faPhone" class="flex flex-col justify-center items-center text-4xl text-white"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-footer>

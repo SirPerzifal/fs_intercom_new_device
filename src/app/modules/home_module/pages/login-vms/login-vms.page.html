@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true" class="vms-body flex flex-col justify-between">
+  <div class="flex flex-col items-center justify-center h-full w-full">
+    <div class="mb-10">
+      <img alt="iFS360 logo" src="assets/logoIFS.png" class="max-h-44 max-w-44" />
+    </div>
+    <div class="flex flex-col text-4xl font-bold items-center text-[var(--ion-color-primary)] mb-10">
+      <span class="flex flex-row justify-center text-center">WELCOME TO iFS360</span>
+      <span class="flex flex-row justify-center text-center">INTERCOM SYSTEM</span>
+    </div>
+    <div class="w-full flex flex-row justify-center space-x-2">
+      <app-text-input #textInput [id]="'project_key'" [placeholder]="'PROJECT CODE'" [customClasses]="{'w-full ':true}"
+        [type]="'text'" [autoComplete]="'off'" [(ngModel)]="code" [showPlaceholder]="true"
+        [customInputClasses]="{'w-[60%]': true,'border':true, 'w-full':true,'rounded':true, 'py-2':true, 'px-3':true, 'outline-[#BDBDBD]':true,'h-20':true, 'text-2xl':true}">
+      </app-text-input>
+      <button class="h-20 w-1/5 bg-[var(--ion-color-primary)] text-2xl font-bold rounded text-white"
+        (click)="login()">LOGIN</button>
+    </div>
+    <!-- <div class="w-full flex-row flex text-xl text-red ">
+      <pre>{{videoDevices | json}}</pre>
+    </div> -->
+  </div>
+</ion-content>

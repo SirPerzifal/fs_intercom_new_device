@@ -1,0 +1,53 @@
+ion-modal#family-code-search-modal {
+    --width: 90%;
+    --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+    font-family: 'Comic Neue', serif;
+}
+
+ion-modal#family-code-search-modal .wrapper {
+    padding: 15px;
+    background-color: white;
+}
+
+ion-modal#scan-modal {
+    --width: 75%;
+    // --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  }
+  
+ion-modal#scan-modal .wrapper {
+    padding: 15px;
+    background-color: white;
+}
+
+ion-modal#scan-recognition-modal {
+    --width: 88%;
+    --min-width: 340px;
+    --height: fit-content;
+    --border-radius: 12px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+ion-modal#scan-recognition-modal .wrapper {
+    padding: 18px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+ion-modal#logout-modal {
+    --width: 75%;
+    // --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  }
+  
+ion-modal#logout-modal .wrapper {
+    padding: 15px;
+    background-color: white;
+}

@@ -1,0 +1,136 @@
+<div class="flex flex-col w-full">
+  <div class="flex flex-row justify-start">
+    <p class="font-bold" *ngIf="!isVMS">{{ labelText }}</p>
+    <p class="text-2xl font-bold" *ngIf="isVMS">
+      <u>{{ labelText }}</u>
+    </p>
+  </div>
+  <div [class]="'flex flex-row w-full justify-between space-x-2 ' + customTopDiv">
+    <div [class]="'flex flex-col ' + (showButton ? 'w-[90%]' : 'w-full')">
+      <div
+        [class]="
+          'border  w-full rounded px-3 py-1 outline-[#BDBDBD] text-[#6B7280] flex flex-row items-center justify-between ' +
+          (isReadonly ? 'bg-[#F5F5F5]' : 'bg-white')
+        "
+        tabindex="0"
+        [ngClass]="isVMS ? 'min-h-20 text-2xl border-[#6B7280]' : divOuterClass"
+        (click)="focusInput()"
+      >
+        <input
+          [(ngModel)]="unit_key"
+          (keyup)="onUnitKeyUp($event)"
+          #before_click_unit
+          class="border-0"
+          [ngClass]="isVMS ? 'text-2xl p-0' : customTextClass"
+          type="text"
+          [placeholder]="placeholder"
+          *ngIf="unitArrayProcess.length == 0 && !isReadonly"
+          style="padding-left: 0px"
+          (focus)="onFocusInput()"
+          style="outline: none; box-shadow: none"
+        />
+        <div
+          class="flex flex-row flex-wrap gap-1"
+          *ngIf="unitArrayProcess.length > 0"
+        >
+          <div
+            class="flex flex-row space-x-1 items-center rounded bg-transparent"
+            [ngClass]="isOne ? '' : 'border border-black p-1'"
+            *ngFor="let array of unitNames"
+          >
+            <ion-icon
+              name="close-circle-outline"
+              class="size-5"
+              (click)="onUnitChange(array.id)"
+              *ngIf="!isOne"
+            ></ion-icon>
+            <span>{{ array.name }}</span>
+          </div>
+          <input
+            #unit_typing
+            class="border-0 w-[30%]"
+            type="text"
+            [ngClass]="isVMS ? 'text-2xl p-0' : customTextClass"
+            (keyup)="onUnitKeyUp($event)"
+            [placeholder]="isOne ? '' : '. . .'"
+            [(ngModel)]="unit_key"
+            style="padding-left: 0px"
+            (focus)="onFocusInput()"
+            style="outline: none; box-shadow: none"
+            *ngIf="!isReadonly"
+          />
+        </div>
+        <svg
+          class="h-2.5"
+          [ngClass]="isVMS ? 'w-5 mr-1' : 'w-[10px] mr-[2px]'"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          (click)="toggleOnlyDrop()"
+          viewBox="0 0 10 6"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 4 4 4-4"
+          />
+        </svg>
+      </div>
+      <div
+        id="dropdown_choose_unit"
+        [ngClass]="setDropdownChooseUnit && !isReadonly ? '' : 'hidden'"
+        class="bg-gray-100 w-full max-h-[130px] overflow-y-auto rounded-lg shadow-sm dark:bg-gray-700"
+      >
+        <ul
+          class="p-3 space-y-1 text-gray-700 dark:text-gray-200"
+          [ngClass]="isVMS ? 'text-2xl' : ''"
+        >
+          <li *ngIf="!isOne">
+            <div class="flex items-center p-2 rounded-sm">
+              <input
+                [id]="'select_all_selection'"
+                type="checkbox"
+                (click)="selectAllSelection()"
+                [(ngModel)]="selectAll"
+                class="text-[var(--ion-color-primary)] bg-gray-100 border-gray-300 rounded-sm focus:ring-[var(--ion-color-primary)] dark:focus:ring-[var(--ion-color-primary)] dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500 accent-[var(--ion-color-primary)]"
+                [ngClass]="isVMS ? 'w-6 h-6' : 'w-4 h-4'"
+              />
+              <label
+                [for]="'select_all_selection'"
+                class="w-full ms-2 font-medium text-gray-900 rounded-sm dark:text-gray-300 text-start"
+                >Select All</label
+              >
+            </div>
+          </li>
+          <li *ngFor="let unit of showUnit">
+            <div class="flex items-center p-2 rounded-sm">
+              <input
+                [id]="'unit_' + unit.id"
+                type="checkbox"
+                [value]="unit.id"
+                (click)="selectOptionChooseUnit(unit.id)"
+                [checked]="optionCheck(unit.id)"
+                class="text-[var(--ion-color-primary)] bg-gray-100 border-gray-300 rounded-sm focus:ring-[var(--ion-color-primary)] dark:focus:ring-[var(--ion-color-primary)] dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500 accent-[var(--ion-color-primary)]"
+                [ngClass]="isVMS ? 'w-6 h-6' : 'w-4 h-4'"
+              />
+              <label
+                [for]="'unit_' + unit.id"
+                class="w-full ms-2 font-medium text-gray-900 rounded-sm dark:text-gray-300 text-start"
+                >{{ unit.name }}</label
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="h-20 w-20 flex flex-col justify-center items-center bg-[var(--ion-color-primary)] rounded"
+      (click)="onClickCall()"
+      *ngIf="showButton"
+    >
+      <ion-icon name="call" class="text-white size-7" size="large"></ion-icon>
+    </div>
+  </div>
+</div>

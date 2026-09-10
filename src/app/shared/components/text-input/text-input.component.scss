@@ -1,0 +1,21 @@
+.positioning-calendar-icon {
+    position: relative;
+    left: -15px;
+    margin-left: -18px;
+}
+
+input {
+    background-color: white
+}
+
+input:read-only {
+    background-color: #F5F5F5;
+    color: #7D8390;
+}
+
+ion-modal#choose-date-court-modal {
+    --height: 41%;
+    --width: 90%;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}

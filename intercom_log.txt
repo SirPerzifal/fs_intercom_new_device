@@ -1,0 +1,1293 @@
+--------- beginning of kernel
+09-03 11:03:02.654     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+--------- beginning of main
+09-03 11:03:02.846   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:04.214     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:05.045 22286 22286 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 44019618, pluginId: Intercom, methodName: startScan
+09-03 11:03:05.045 22286 22286 V Capacitor: callback: 44019618, pluginId: Intercom, methodName: startScan, methodData: {}
+09-03 11:03:05.045 22286 22362 D IntercomPlugin: startScan() dipanggil dari Ionic JS
+09-03 11:03:05.045 22286 22286 D FacePassHelper: FacePass scanning started
+09-03 11:03:05.046 22286 22286 V Capacitor/IntercomPlugin: Notifying listeners for event scanStarted
+09-03 11:03:05.046 22286 22286 D Capacitor/IntercomPlugin: No listeners found for event scanStarted
+09-03 11:03:05.096 22286 22286 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Face recognition started
+09-03 11:03:05.851   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:06.282     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:08.455     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:11.197     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:13.800     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:16.122     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:11.978   462   549 I chatty  : uid=1000(system) WifiHandlerThre identical 2 lines
+09-03 11:03:14.999   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:17.557 22286 22286 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 44019619, pluginId: Intercom, methodName: stopScan
+09-03 11:03:17.558 22286 22286 V Capacitor: callback: 44019619, pluginId: Intercom, methodName: stopScan, methodData: {}
+09-03 11:03:17.558 22286 22362 D IntercomPlugin: stopScan() dipanggil dari Ionic JS
+09-03 11:03:17.558 22286 22362 D FacePassHelper: FacePass scanning stopped
+09-03 11:03:17.622 22286 22286 I Capacitor/Console: File:  - Line 353 - Msg: undefined
+09-03 11:03:17.693 22286 22286 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Face recognition stopped
+09-03 11:03:18.009   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:18.561     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:19.536   462   478 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: start_output_stream:980 xwliu force_device = 0x0
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: start_output_stream:985 out = 0xf4142720,device = 0x2,outputs[OUTPUT_HDMI_MULTI] = 0x0
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: card0 id:rockchiprk809co
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: card1 id:rockchiphdmi
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: No exist proc/asound/card2/id, break and finish parsing
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: dump out device info
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: dev_info SPEAKER  card=0, device:0
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: dev_info HDMI  card=1, device:0
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: out->Device     : 0x2
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: out->SampleRate : 44100
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: out->Channels   : 2
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: out->Format     : 0
+09-03 11:03:19.539   233  6959 D AudioHardwareTiny: out->PreiodSize : 512
+09-03 11:03:19.539   233  6959 D alsa_route: route_info->sound_card 0, route_info->devices 0
+09-03 11:03:19.540   233  6959 D alsa_route: route_set_controls() set route 0
+09-03 11:03:19.540   462   478 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:19.553   233  6959 D AudioHardwareTiny: start_output_stream:1106, out = 0xf4142720
+--------- beginning of system
+09-03 11:03:19.643   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:03:19.644   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:03:19.648   462   482 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.android.launcher3/.uioverrides.QuickstepLauncher (has extras)} from uid 0
+09-03 11:03:19.650   462   482 D ActivityTaskManager: process:com.android.launcher3,com.android.launcher3.uioverrides.QuickstepLauncher
+09-03 11:03:19.816   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:03:19.817   462   478 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:19.820   462   482 V WindowManager: updateRotationUncheckedLocked: don't allow rotation#########.
+09-03 11:03:19.831 22286 22286 V Capacitor/AppPlugin: Notifying listeners for event pause
+09-03 11:03:19.831 22286 22286 D Capacitor/AppPlugin: No listeners found for event pause
+09-03 11:03:19.832 22286 22286 D Capacitor: App paused
+09-03 11:03:19.835   462   482 W Looper  : Slow dispatch took 194ms android.ui h=com.android.server.policy.PhoneWindowManager$PolicyHandler c=com.android.server.policy.-$$Lambda$PhoneWindowManager$DisplayHomeButtonHandler$ljCIzo7y96OZCYYMVaAi6LAwRAE@b050436 m=0
+09-03 11:03:19.847   788 22402 W System.err: java.lang.InterruptedException
+09-03 11:03:19.847   788 22402 W System.err:    at java.lang.Thread.sleep(Native Method)
+09-03 11:03:19.847   788 22402 W System.err:    at java.lang.Thread.sleep(Thread.java:442)
+09-03 11:03:19.847   788 22402 W System.err:    at java.lang.Thread.sleep(Thread.java:358)
+09-03 11:03:19.847   788 22402 W System.err:    at android.app.smdt.server.SmdtServiceNew$WiegandThread.run(SmdtServiceNew.java:292)
+09-03 11:03:19.847   462   482 W Looper  : Slow delivery took 204ms android.ui h=android.os.Handler c=com.android.server.autofill.ui.-$$Lambda$AutoFillUI$56AC3ykfo4h_e2LSjdkJ3XQn370@39f4ca4 m=0
+09-03 11:03:19.849   788   814 D serial_port: close(fd = 1212)
+09-03 11:03:19.849   788   814 D SMDTAPI : serial close success
+09-03 11:03:19.850   462   482 W Looper  : Drained
+09-03 11:03:19.883   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:03:19.886   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:03:19.907   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:20.008   462   591 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:19.923   242   242 I chatty  : uid=1000(system) allocator@4.0-s identical 2 lines
+09-03 11:03:19.960   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:20.040   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:03:20.040   983   983 I chatty  : uid=10144(com.android.launcher3) identical 2 lines
+09-03 11:03:20.040   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:03:20.263   604   618 I ndroid.systemu: NativeAlloc concurrent copying GC freed 10503(497KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 8063KB/15MB, paused 184us total 202.438ms
+09-03 11:03:20.354   462   882 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:20.355   462   882 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:20.368   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:20.381   186   195 E BufferQueueProducer: [io.ionic.starter/io.ionic.starter.MainActivity#0](id:ba00000081,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:03:20.381 22286 22310 W libEGL  : EGLNativeWindowType 0xec4c64d8 disconnect failed
+09-03 11:03:20.435 22286 22286 D Capacitor/AppPlugin: Firing change: false
+09-03 11:03:20.435 22286 22286 V Capacitor/AppPlugin: Notifying listeners for event appStateChange
+09-03 11:03:20.437 22286 22286 D Capacitor: App stopped
+09-03 11:03:20.448 22286 22286 D Capacitor: Saving instance state!
+09-03 11:03:20.466   462   882 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:20.378   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:20.510   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:03:20.520   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:03:20.699   462   591 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:20.700   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:03:21.006   462   472 I system_server: NativeAlloc concurrent copying GC freed 324314(15MB) AllocSpace objects, 51(1468KB) LOS objects, 49% free, 18MB/37MB, paused 442us total 442.519ms
+09-03 11:03:21.015   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:21.044  1570  1570 I Thread-21: type=1400 audit(0.0:1421): avc: denied { getattr } for path="/dev/ttySMT7" dev="tmpfs" ino=1418 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:03:21.122     0     0 I chatty  : uid=0(root) logd identical 56774 lines
+09-03 11:03:21.122     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:21.122     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:03:21.122     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:21.445   462   484 I ActivityManager: Killing 22286:io.ionic.starter/u0a167 (adj 905): remove task
+09-03 11:03:21.446   462   484 I ActivityManager: Killing 22322:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a167i4 (adj 905): remove task
+09-03 11:03:21.681   462 14167 W ActivityManager: Scheduling restart of crashed service io.ionic.starter/org.chromium.content.app.SandboxedProcessService0:0 in 1000ms for connection
+09-03 11:03:21.685   752   752 I Zygote  : Process 22322 exited due to signal 9 (Killed)
+09-03 11:03:21.694   184   184 I Binder:184_2: type=1400 audit(0.0:1422): avc: denied { read } for name="wakeup2" dev="sysfs" ino=17954 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
+09-03 11:03:21.694   184   184 I Binder:184_2: type=1400 audit(0.0:1423): avc: denied { open } for path="/sys/devices/platform/fdef0000.iep/wakeup/wakeup2" dev="sysfs" ino=17954 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
+09-03 11:03:21.694   184   184 I Binder:184_2: type=1400 audit(0.0:1424): avc: denied { read } for name="event_count" dev="sysfs" ino=17961 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+09-03 11:03:21.694   184   184 I Binder:184_2: type=1400 audit(0.0:1425): avc: denied { open } for path="/sys/devices/platform/fdef0000.iep/wakeup/wakeup2/event_count" dev="sysfs" ino=17961 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+09-03 11:03:21.694   184   184 I Binder:184_2: type=1400 audit(0.0:1426): avc: denied { getattr } for path="/sys/devices/platform/fdef0000.iep/wakeup/wakeup2/event_count" dev="sysfs" ino=17961 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+09-03 11:03:21.694   184   184 I Binder:184_2: type=1400 audit(0.0:1427): avc: denied { read } for name="wakeup7" dev="sysfs" ino=28762 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_power:s0 tclass=dir permissive=1
+09-03 11:03:21.694   184   184 I Binder:184_2: type=1400 audit(0.0:1428): avc: denied { open } for path="/sys/devices/virtual/power_supply/test_battery/wakeup7" dev="sysfs" ino=28762 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_power:s0 tclass=dir permissive=1
+09-03 11:03:21.677     0     0 I chatty  : uid=0(root) logd identical 15449 lines
+09-03 11:03:21.677     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:21.682     0     0 I binder  : undelivered transaction 5897314, process died.
+09-03 11:03:21.687     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:21.835   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:03:21.846   462  7926 D ConnectivityService: ConnectivityService NetworkRequestInfo binderDied(NetworkRequest [ LISTEN id=112, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ], android.os.BinderProxy@2aa16ca)
+09-03 11:03:21.846   462   555 D ConnectivityService: releasing NetworkRequest [ LISTEN id=112, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] (release request)
+09-03 11:03:21.848   462 14167 I WindowManager: WIN DEATH: Window{5137b95 u0 io.ionic.starter/io.ionic.starter.MainActivity}
+09-03 11:03:21.835   983   983 I chatty  : uid=10144(com.android.launcher3) identical 2 lines
+09-03 11:03:21.836   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:03:21.848   462 14167 W InputDispatcher: Attempted to unregister already unregistered input channel '5137b95 io.ionic.starter/io.ionic.starter.MainActivity (server)'
+09-03 11:03:21.850   462 22283 D ConnectivityService: ConnectivityService NetworkRequestInfo binderDied(NetworkRequest [ TRACK_DEFAULT id=111, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ], android.os.BinderProxy@f99703b)
+09-03 11:03:21.851   462   555 D ConnectivityService: releasing NetworkRequest [ TRACK_DEFAULT id=111, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] (release request)
+09-03 11:03:21.851   462   555 D ConnectivityService:  Removing from current network [102 WIFI], leaving 49 requests.
+09-03 11:03:21.853   228   228 I Zygote  : Process 22286 exited due to signal 9 (Killed)
+09-03 11:03:21.857   462   492 I libprocessgroup: Successfully killed process cgroup uid 10167 pid 22286 in 411ms
+09-03 11:03:21.854   462   462 I ActivityManager: type=1400 audit(0.0:1429): avc: denied { dac_override } for capability=1 scontext=u:r:system_server:s0 tcontext=u:r:system_server:s0 tclass=capability permissive=1
+09-03 11:03:21.860   462   492 I libprocessgroup: Successfully killed process cgroup uid 99004 pid 22322 in 0ms
+09-03 11:03:21.863   462   484 W ActivityManager: setHasOverlayUi called on unknown pid: 22286
+09-03 11:03:21.813     0     0 I chatty  : uid=0(root) logd identical 4921 lines
+09-03 11:03:21.814     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:21.847     0     0 I binder  : undelivered transaction 5897326, process died.
+09-03 11:03:21.847     0     0 I binder  : undelivered transaction 5897313, process died.
+09-03 11:03:22.523   462  8039 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.hf.facex/.MainActivity bnds=[475,32][625,241]} from uid 10144
+09-03 11:03:22.524   462  8039 D ActivityTaskManager: process:com.hf.facex,com.hf.facex.MainActivity
+09-03 11:03:22.532   462   809 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:22.592   462  8039 V WindowManager: updateRotationUncheckedLocked: don't allow rotation#########.
+09-03 11:03:22.661   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:22.669   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:22.674   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:22.708   462 22283 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.hf.facex/com.hf.facex.MainActivity} -- com.hf.facex -- mode=0
+09-03 11:03:22.766   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:03:22.766   462  8039 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:23.056   462 17728 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.hf.facex/com.hf.facex.MainActivity} -- com.hf.facex -- mode=0
+09-03 11:03:23.058   462 17728 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.hf.facex/com.hf.facex.MainActivity} -- com.hf.facex -- mode=0
+09-03 11:03:23.059   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.hf.facex/com.hf.facex.MainActivity} -- com.hf.facex -- mode=0
+09-03 11:03:23.067   186   186 E Layer   : [Surface(name=Task=318)/@0xcc80d59 - animation-leash#0] No local sync point found
+09-03 11:03:23.067   186   186 E Layer   : [Surface(name=Task=318)/@0xcc80d59 - animation-leash#0] No local sync point found
+09-03 11:03:23.067   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:03:23.067   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:03:23.099   186   186 E Layer   : [Surface(name=Task=318)/@0xcc80d59 - animation-leash#0] No local sync point found
+09-03 11:03:23.099   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:03:23.103   186   196 E BufferQueueProducer: [com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher#0](id:ba00000083,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:03:23.103   983  1312 W libEGL  : EGLNativeWindowType 0xb4000077fee12060 disconnect failed
+09-03 11:03:23.183   462 22283 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:23.070   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.hf.facex/com.hf.facex.MainActivity} -- com.hf.facex -- mode=0
+09-03 11:03:23.272   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:03:23.273   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:03:23.274   462   482 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.android.launcher3/.uioverrides.QuickstepLauncher (has extras)} from uid 0
+09-03 11:03:23.275   462   482 D ActivityTaskManager: process:com.android.launcher3,com.android.launcher3.uioverrides.QuickstepLauncher
+09-03 11:03:23.400   462   482 V WindowManager: updateRotationUncheckedLocked: don't allow rotation#########.
+09-03 11:03:23.404   462   482 W Looper  : Slow dispatch took 135ms android.ui h=com.android.server.policy.PhoneWindowManager$PolicyHandler c=com.android.server.policy.-$$Lambda$PhoneWindowManager$DisplayHomeButtonHandler$ljCIzo7y96OZCYYMVaAi6LAwRAE@89e01ef m=0
+09-03 11:03:23.415   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:03:23.416   462 22283 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:23.433   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:03:23.437   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:03:23.467   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:23.476   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:23.482   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:23.493   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:23.513   462  8039 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:23.831   462 14167 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:23.833   462  8039 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:23.833   462 14167 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:23.834   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:23.846   186  1052 E BufferQueueProducer: [com.hf.facex/com.hf.facex.MainActivity#0](id:ba00000085,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:03:23.846 16172 16195 W libEGL  : EGLNativeWindowType 0xb4000077feefe550 disconnect failed
+09-03 11:03:23.847   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:23.922   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:03:23.928   462   482 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.android.launcher3/.uioverrides.QuickstepLauncher (has extras)} from uid 0
+09-03 11:03:23.929   462   482 D ActivityTaskManager: process:com.android.launcher3,com.android.launcher3.uioverrides.QuickstepLauncher
+09-03 11:03:23.929   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:03:24.019   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:24.065   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:03:24.065   462  8039 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:24.083   788   802 I app.smdt.serve: Background concurrent copying GC freed 252048(21MB) AllocSpace objects, 3(60KB) LOS objects, 49% free, 5885KB/11MB, paused 688us total 116.688ms
+09-03 11:03:24.083   788   802 W app.smdt.serve: Reducing the number of considered missed Gc histogram windows from 1042 to 100
+09-03 11:03:24.103   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:03:24.105   462   482 W Looper  : Slow dispatch took 185ms android.ui h=com.android.server.policy.PhoneWindowManager$PolicyHandler c=com.android.server.policy.-$$Lambda$PhoneWindowManager$DisplayHomeButtonHandler$ljCIzo7y96OZCYYMVaAi6LAwRAE@d6e34ad m=0
+09-03 11:03:24.105   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:03:24.129   462   483 I DropBoxManagerService: add tag=system_app_strictmode isTagEnabled=true flags=0x2
+09-03 11:03:24.244   462   483 I chatty  : uid=1000(system) android.io identical 4 lines
+09-03 11:03:24.258   462   483 I DropBoxManagerService: add tag=system_app_strictmode isTagEnabled=true flags=0x2
+09-03 11:03:24.304   462  8039 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:03:25.388     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:03:25.608   462 22283 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=io.ionic.starter/.MainActivity bnds=[620,311][768,520]} from uid 10144
+09-03 11:03:25.609   462 22283 D ActivityTaskManager: process:io.ionic.starter,io.ionic.starter.MainActivity
+09-03 11:03:25.622   462  8039 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:25.661   462   484 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10167; state: DISABLED
+09-03 11:03:25.662   462   491 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10167; state: ENABLED
+09-03 11:03:25.678   228   228 D Zygote  : Forked child process 22534
+09-03 11:03:25.680   462   491 I ActivityManager: Start proc 22534:io.ionic.starter/u0a167 for pre-top-activity {io.ionic.starter/io.ionic.starter.MainActivity}
+09-03 11:03:25.684 22534 22534 I Zygote  : seccomp disabled by setenforce 0
+09-03 11:03:25.689 22534 22534 I o.ionic.starte: Late-enabling -Xcheck:jni
+09-03 11:03:25.723 22534 22534 I o.ionic.starte: Unquickening 12 vdex files!
+09-03 11:03:25.727   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:25.745  1111  1116 I adbd    : jdwp connection from 22534
+09-03 11:03:25.771   462 14167 V WindowManager: updateRotationUncheckedLocked: don't allow rotation#########.
+09-03 11:03:25.853   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:03:25.854   462 22283 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:26.229   462   490 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.DROPBOX_ENTRY_ADDED flg=0x10 (has extras) } to com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver
+09-03 11:03:26.299   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:03:26.300   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:03:26.300   186   186 E Layer   : [Surface(name=Task=321)/@0xd64b2a2 - animation-leash#0] No local sync point found
+09-03 11:03:26.300   186   186 E Layer   : [Surface(name=Task=321)/@0xd64b2a2 - animation-leash#0] No local sync point found
+09-03 11:03:26.347   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:03:26.347   186   186 E Layer   : [Surface(name=Task=321)/@0xd64b2a2 - animation-leash#0] No local sync point found
+09-03 11:03:26.350   186   196 E BufferQueueProducer: [com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher#0](id:ba00000086,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:03:26.351   983  1312 W libEGL  : EGLNativeWindowType 0xb4000077fee12060 disconnect failed
+09-03 11:03:26.376 22534 22534 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: true
+09-03 11:03:26.382 22534 22534 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: true
+09-03 11:03:26.398 22534 22534 W FirebaseApp: Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+09-03 11:03:26.398 22534 22534 I FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-03 11:03:26.590 22534 22534 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+09-03 11:03:26.612 22534 22534 E MainActivity: onCreate MainActivity
+09-03 11:03:26.749 22534 22534 W o.ionic.starte: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (greylist, reflection, allowed)
+09-03 11:03:26.751 22534 22534 W o.ionic.starte: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (greylist, reflection, allowed)
+09-03 11:03:26.787 22534 22534 I WebViewFactory: Loading com.google.android.webview version 151.0.7922.199 (code 792219903)
+09-03 11:03:26.794 22534 22534 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+09-03 11:03:26.853 22534 22534 I cr_WVCFactoryProvider: version=151.0.7922.199 (792219903) minSdkVersion=29 multiprocess=true packageId=127 splits=<none>
+09-03 11:03:26.869 22534 22563 I chromium: [0903/110326.868875:INFO:android_webview/browser/variations/variations_seed_loader.cc:67] Failed to open file for reading.: No such file or directory (2)
+09-03 11:03:26.869 22534 22563 I cr_VariationsUtils: Failed reading seed file "/data/user/0/io.ionic.starter/app_webview/variations_seed_new"
+09-03 11:03:26.932 22534 22534 I cr_LibraryLoader: Successfully loaded native library
+09-03 11:03:26.934 22534 22534 I cr_CachingUmaRecorder: Flushed 38 samples from 15 histograms, 0 samples were dropped.
+09-03 11:03:26.937 22534 22534 I cr_ChildProcLH: ScopedServiceBindingBatch.tryActivate: false
+09-03 11:03:26.937 22534 22534 I cr_VariationsUtils: Loaded seed with age 9754s
+09-03 11:03:26.941 22534 22534 I cr_CombinedPProvider: #registerProvider() provider:WV.sj@92a0452 isPolicyCacheEnabled:false policyProvidersSize:0
+09-03 11:03:26.942 22534 22534 I cr_PolicyProvider: #setManagerAndSource() 0
+09-03 11:03:26.945 22534 22565 I cr_policy: registerReceiver succeeded after 3ms
+09-03 11:03:26.948 22534 22534 I cr_DisplayManager: Is Display Topology available: false
+09-03 11:03:26.960   462 22283 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10167; state: DISABLED
+09-03 11:03:26.961   462 22283 D CompatibilityChangeReporter: Compat change id reported: 135754954; UID 10167; state: ENABLED
+09-03 11:03:26.961   462   491 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10167; state: ENABLED
+09-03 11:03:26.972   752   752 D Zygote  : Forked child process 22569
+09-03 11:03:26.976   462   491 I ActivityManager: Start proc 22569:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i5 for  {io.ionic.starter/org.chromium.content.app.SandboxedProcessService0:0}
+09-03 11:03:26.977 22569 22569 I Zygote  : seccomp disabled by setenforce 0
+09-03 11:03:26.977 22569 22569 E libc    : SetHeapTaggingLevel: re-enabling tagging after it was disabled is not supported
+09-03 11:03:26.978 22534 22534 I cr_CombinedPProvider: #linkNativeInternal() 1
+09-03 11:03:26.980 22534 22534 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+09-03 11:03:26.980 22534 22534 I cr_PolicyProvider: #notifySettingsAvailable() 0
+09-03 11:03:26.981 22534 22534 I cr_CombinedPProvider: #onSettingsAvailable() 0
+09-03 11:03:26.981 22534 22534 I cr_CombinedPProvider: #flushPolicies()
+09-03 11:03:26.988  1111  1116 I adbd    : jdwp connection from 22569
+09-03 11:03:26.999   462  8039 D CompatibilityChangeReporter: Compat change id reported: 136274596; UID 10167; state: ENABLED
+09-03 11:03:27.001  1570  1570 I Thread-21: type=1400 audit(0.0:1430): avc: denied { getattr } for path="/dev/ttySMT7" dev="tmpfs" ino=1418 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:03:27.012 22569 22569 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+09-03 11:03:27.019 22569 22569 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+09-03 11:03:27.020 22569 22569 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+09-03 11:03:27.020 22569 22569 I cr_WebViewApkApp: version=151.0.7922.199 (792219903) minSdkVersion=29 processName=com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 splits=<none>
+09-03 11:03:27.025   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:27.027 22569 22569 I cr_ChildProcessService: Creating new ChildProcessService pid=22569
+09-03 11:03:27.049 22534 22534 I TetheringManager: registerTetheringEventCallback:io.ionic.starter
+09-03 11:03:27.103   462  8039 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:03:27.103 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:27.105 22534 22602 W GoogleApiManager: The service for WV.k82 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:27.107 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:27.107 22534 22602 W GoogleApiManager: The service for WV.k82 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:27.111 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:27.111 22534 22602 W GoogleApiManager: The service for WV.c72 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:27.113 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:27.113 22534 22602 W GoogleApiManager: The service for WV.c72 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:27.116 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:27.116 22534 22602 W GoogleApiManager: The service for WV.vw2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:27.118 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:27.119 22534 22602 W GoogleApiManager: The service for WV.vw2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:27.124 22534 22590 E cr_PlatformSer-Internal: UsageReporting query failed
+09-03 11:03:27.115   462  8039 I chatty  : uid=1000(system) Binder:462_1A identical 4 lines
+09-03 11:03:27.118   462  8039 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:03:27.152   462  8039 D ConnectivityService: requestNetwork for uid/pid:10167/22534 NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:03:27.153   462   555 D ConnectivityService: NetworkReassignment :
+09-03 11:03:27.153   462   555 D ConnectivityService:   113 : null → 102
+09-03 11:03:27.153   462   555 D ConnectivityService: rematch for [102 WIFI]
+09-03 11:03:27.153   462   555 D ConnectivityService:    accepting network in place of null
+09-03 11:03:27.153   462   555 D ConnectivityService: sending new Min Network Score(300): NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:03:27.153   462   582 D Ethernet: got request NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] with score 300 and providerId 2
+09-03 11:03:27.153   462   555 D ConnectivityService: sending notification CALLBACK_AVAILABLE for NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:03:27.154   462   549 D UntrustedWifiNetworkFactory: got request NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] with score 300 and providerId 2
+09-03 11:03:27.154   462   549 D WifiNetworkFactory: got request NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] with score 300 and providerId 2
+09-03 11:03:27.157   462  8039 D ConnectivityService: listenForNetwork for uid/pid:10167/22534 NetworkRequest [ LISTEN id=114, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:03:27.158   462   555 D ConnectivityService: NetworkReassignment : no changes
+09-03 11:03:27.159   462   555 D ConnectivityService: sending notification CALLBACK_AVAILABLE for NetworkRequest [ LISTEN id=114, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:03:27.242 22534 22534 D Capacitor: Starting BridgeActivity
+09-03 11:03:27.312 22534 22534 D Capacitor: Registering plugin instance: CapacitorCookies
+09-03 11:03:27.326 22534 22534 D Capacitor: Registering plugin instance: WebView
+09-03 11:03:27.332 22534 22534 D Capacitor: Registering plugin instance: CapacitorHttp
+09-03 11:03:27.339 22534 22534 D Capacitor: Registering plugin instance: Intercom
+09-03 11:03:27.347 22534 22534 D Capacitor: Registering plugin instance: Contacts
+09-03 11:03:27.356 22534 22534 D Capacitor: Registering plugin instance: FileOpener
+09-03 11:03:27.362 22534 22534 D Capacitor: Registering plugin instance: CapacitorOcr
+09-03 11:03:27.366 22534 22534 D Capacitor: Registering plugin instance: App
+09-03 11:03:27.372 22534 22534 D Capacitor: Registering plugin instance: Camera
+09-03 11:03:27.379 22534 22534 D Capacitor: Registering plugin instance: Filesystem
+09-03 11:03:27.388 22534 22534 D Capacitor: Registering plugin instance: Haptics
+09-03 11:03:27.395 22534 22534 D Capacitor: Registering plugin instance: Keyboard
+09-03 11:03:27.401 22534 22534 D Capacitor: Registering plugin instance: Preferences
+09-03 11:03:27.409 22534 22534 D Capacitor: Registering plugin instance: PushNotifications
+09-03 11:03:27.421 22534 22534 D Capacitor: Registering plugin instance: StatusBar
+09-03 11:03:27.488 22534 22534 W Capacitor: Unable to read file at path public/plugins
+09-03 11:03:27.501 22534 22534 D Capacitor: Loading app at https://localhost
+09-03 11:03:27.522     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:03:27.563 22534 22613 I mali_so : [File] : hardware/rockchip/mali_so/driver/product/base/src/mali_base_kbase.c; [Line] : 1311; [Func] : base_context_deal_with_version_affairs_rk_ext;
+09-03 11:03:27.563 22534 22613 I mali_so : arm_release_ver of this mali_so is 'g2p0-01eac0', rk_so_ver is '8@0 '.
+09-03 11:03:27.563 22534 22613 I mali_so : [File] : hardware/rockchip/mali_so/driver/product/base/src/mali_base_kbase.c; [Line] : 1327; [Func] : base_context_deal_with_version_affairs_rk_ext;
+09-03 11:03:27.563 22534 22613 I mali_so : arm_release_vers are match. to set the full mali_ver 'g2p0-01eac0-x-8@0' as value of 'sys.gmali.version'.
+09-03 11:03:27.557 22534 22534 I Chrome_InProcGp: type=1400 audit(0.0:1431): avc: denied { write } for name="property_service" dev="tmpfs" ino=3563 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:property_socket:s0 tclass=sock_file permissive=1 app=io.ionic.starter
+09-03 11:03:27.557 22534 22534 I Chrome_InProcGp: type=1400 audit(0.0:1432): avc: denied { connectto } for path="/dev/socket/property_service" scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1 app=io.ionic.starter
+09-03 11:03:27.579 22569 22591 I cr_LibraryLoader: Successfully loaded native library
+09-03 11:03:27.581 22569 22591 I cr_CachingUmaRecorder: Flushed 2 samples from 2 histograms, 0 samples were dropped.
+09-03 11:03:27.583 22569 22591 W chromium: [WARNING:content/app/android/content_main_android.cc:82] android_setCpu already initialized
+09-03 11:03:27.596   155   155 I hwservicemanager: getTransport: Cannot find entry android.hardware.configstore@1.0::ISurfaceFlingerConfigs/default in either framework or device manifest.
+09-03 11:03:27.609 22534 22534 W o.ionic.starte: Accessing hidden method Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder; (greylist, linking, allowed)
+09-03 11:03:27.609 22534 22590 D Capacitor: Handling local request: https://localhost/
+09-03 11:03:27.626 22569 22591 W chromium: [WARNING:content/child/runtime_features.cc:542] Fenced frames cannot be enabled in this configuration. Use --enable-features=FencedFrames instead.
+09-03 11:03:27.626 22569 22591 W chromium: [WARNING:content/child/runtime_features.cc:567] Topics cannot be enabled in this configuration. Use --enable-features=BrowsingTopics in addition.
+09-03 11:03:27.626 22569 22591 W chromium: [WARNING:content/child/runtime_features.cc:588] SharedStorage cannot be enabled in this configuration. Use --enable-features=SharedStorageAPI in addition.
+09-03 11:03:27.660 22534 22534 D SMDTAPI : get service binder :android.app.smdt.ISmdtManagerNew$Stub$Proxy@f159889
+09-03 11:03:27.660 22534 22534 D DMAccessUtil: SmdtManagerNew initialized
+09-03 11:03:27.679 22569 22627 I chromium: [INFO:third_party/skia/src/ports/SkFontMgr_android_parser.cpp:724] [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+09-03 11:03:27.679 22569 22627 I chromium:
+09-03 11:03:27.689  1081  1372 I FontLog : Received query name=Google Sans&weight=700&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:03:27.689  1081  1372 I FontLog : Query [name=Google Sans&weight=700&besteffort=false] resolved to {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.692  1081  1372 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.692  1081  1372 I FontLog : Fetch {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:03:27.700  1081  1372 I FontLog : Pulling font file for id = 53, cache size = 6 [CONTEXT service_id=132 ]
+09-03 11:03:27.715  1081  1372 I FontLog : Received query name=Noto Color Emoji Compat&weight=400&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:03:27.716  1081  1372 I FontLog : Query [name=Noto Color Emoji Compat&weight=400&besteffort=false] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.722  1081  1372 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:03:27.729  1081  1372 I FontLog : Pulling font file for id = 54, cache size = 5 [CONTEXT service_id=132 ]
+09-03 11:03:27.743  1081  1372 I FontLog : Received query name=Google Sans Flex&weight=400&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:03:27.744  1081  1372 I FontLog : Query [name=Google Sans Flex&weight=400&besteffort=false] resolved to {Google Sans Flex, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.747  1081  1372 I FontLog : Font PFD returned from cache for {Google Sans Flex, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.747  1081  1372 I FontLog : Fetch {Google Sans Flex, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:03:27.748 22534 22534 D Capacitor: App started
+09-03 11:03:27.756 22534 22534 D Capacitor/AppPlugin: Firing change: true
+09-03 11:03:27.756  1081  1372 I FontLog : Pulling font file for id = 55, cache size = 4 [CONTEXT service_id=132 ]
+09-03 11:03:27.757 22534 22534 V Capacitor/AppPlugin: Notifying listeners for event appStateChange
+09-03 11:03:27.757 22534 22534 D Capacitor/AppPlugin: No listeners found for event appStateChange
+09-03 11:03:27.759 22534 22534 D Capacitor: App resumed
+09-03 11:03:27.773  1081  1372 I FontLog : Received query name=Google Sans&weight=400&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:03:27.774  1081  1372 I FontLog : Query [name=Google Sans&weight=400&besteffort=false] resolved to {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.777  1081  1372 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.778  1081  1372 I FontLog : Fetch {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:03:27.787  1081  1372 I FontLog : Pulling font file for id = 56, cache size = 5 [CONTEXT service_id=132 ]
+09-03 11:03:27.803  1081  1372 I FontLog : Received query name=Google Sans&weight=500&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:03:27.804  1081  1372 I FontLog : Query [name=Google Sans&weight=500&besteffort=false] resolved to {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.805  1081 22430 I SQLiteConnectionPool: The connection pool for /data/user/0/com.google.android.gms/databases/metadata.db has been closed but there are still 1 connections in use.  They will be closed as they are released back to the pool.
+09-03 11:03:27.806  1081 22635 W FontLog : Error updating last accessed time for {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false}. [CONTEXT service_id=132 ]
+09-03 11:03:27.806  1081 22635 W FontLog : java.lang.IllegalStateException: Cannot perform this operation because the connection pool has been closed.
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteConnectionPool.throwIfClosedLocked(SQLiteConnectionPool.java:1071)
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteConnectionPool.waitForConnection(SQLiteConnectionPool.java:763)
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteConnectionPool.acquireConnection(SQLiteConnectionPool.java:380)
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteSession.acquireConnection(SQLiteSession.java:896)
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteSession.executeForChangedRowCount(SQLiteSession.java:754)
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteStatement.executeUpdateDelete(SQLiteStatement.java:66)
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteDatabase.executeSql(SQLiteDatabase.java:1920)
+09-03 11:03:27.806  1081 22635 W FontLog :      at android.database.sqlite.SQLiteDatabase.execSQL(SQLiteDatabase.java:1897)
+09-03 11:03:27.806  1081 22635 W FontLog :      at cbzy.run(:com.google.android.gms@263234022@26.32.34 (150400-968093310):59)
+09-03 11:03:27.806  1081 22635 W FontLog :      at bizh.d(:com.google.android.gms@263234022@26.32.34 (150400-968093310):50)
+09-03 11:03:27.806  1081 22635 W FontLog :      at bizh.c(:com.google.android.gms@263234022@26.32.34 (150400-968093310):6)
+09-03 11:03:27.806  1081 22635 W FontLog :      at bizh.run(:com.google.android.gms@263234022@26.32.34 (150400-968093310):33)
+09-03 11:03:27.806  1081 22635 W FontLog :      at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+09-03 11:03:27.806  1081 22635 W FontLog :      at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+09-03 11:03:27.806  1081 22635 W FontLog :      at bjfe.run(:com.google.android.gms@263234022@26.32.34 (150400-968093310):8)
+09-03 11:03:27.806  1081 22635 W FontLog :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:27.808  1081  1372 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:27.808  1081  1372 I FontLog : Fetch {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:03:27.821  1081  1372 I FontLog : Pulling font file for id = 57, cache size = 6 [CONTEXT service_id=132 ]
+09-03 11:03:27.888 22534 22636 I CameraManagerGlobal: Connecting to camera service
+09-03 11:03:27.896   311   311 W ServiceManager: Permission failure: android.permission.CAMERA_OPEN_CLOSE_LISTENER from uid=10167 pid=22534
+09-03 11:03:27.900 22534 22534 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+09-03 11:03:27.900 22534 22534 I cr_PolicyProvider: #notifySettingsAvailable() 0
+09-03 11:03:27.900 22534 22534 I cr_CombinedPProvider: #onSettingsAvailable() 0
+09-03 11:03:27.900 22534 22534 I cr_CombinedPProvider: #flushPolicies()
+09-03 11:03:27.905 22534 22593 D Capacitor: Handling local request: https://localhost/runtime.da14ad1e5130cbde.js
+09-03 11:03:27.907 22534 22534 I Choreographer: Skipped 89 frames!  The application may be doing too much work on its main thread.
+09-03 11:03:27.919 22534 22592 D Capacitor: Handling local request: https://localhost/main.d5b5068db735bc86.js
+09-03 11:03:27.923 22534 22596 D Capacitor: Handling local request: https://localhost/polyfills.45b15749fa958a1d.js
+09-03 11:03:27.987 22534 22643 D Capacitor: Handling local request: https://localhost/styles.8865a035b3f38492.css
+09-03 11:03:28.030   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:28.047   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:28.069   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:28.125 22534 22596 W o.ionic.starte: Long monitor contention with owner ThreadPoolForeg (22593) at java.lang.Object libcore.content.type.MimeMap$MemoizingSupplier.get()(MimeMap.java:403) waiters=0 in java.lang.Object libcore.content.type.MimeMap$MemoizingSupplier.get() for 198ms
+09-03 11:03:28.168     0     0 W healthd : battery l=50 v=3 t=2.6 h=2 st=3 fc=100 chg=au
+09-03 11:03:28.203 22534 22558 I OpenGLRenderer: Davey! duration=1742ms; Flags=1, IntendedVsync=10449335058352, Vsync=10450770542200, OldestInputEvent=9223372036854775807, NewestInputEvent=0, HandleInputStart=10450782616920, AnimationStart=10450782635587, PerformTraversalsStart=10450783530420, DrawStart=10450905788641, SyncQueued=10450920147100, SyncStart=10450920962017, IssueDrawCommandsStart=10450921108434, SwapBuffers=10451043296071, FrameCompleted=10451077972908, DequeueBufferDuration=406875, QueueBufferDuration=2414709, GpuCompleted=72904454231491229,
+09-03 11:03:28.201 22569 22569 I CrRendererMain: type=1400 audit(0.0:1433): avc: denied { open } for path="/dev/__properties__/u:object_r:vendor_default_prop:s0" dev="tmpfs" ino=3537 scontext=u:r:isolated_app:s0:c512,c768 tcontext=u:object_r:vendor_default_prop:s0 tclass=file permissive=1
+09-03 11:03:28.201 22569 22569 I CrRendererMain: type=1400 audit(0.0:1434): avc: denied { getattr } for path="/dev/__properties__/u:object_r:vendor_default_prop:s0" dev="tmpfs" ino=3537 scontext=u:r:isolated_app:s0:c512,c768 tcontext=u:object_r:vendor_default_prop:s0 tclass=file permissive=1
+09-03 11:03:28.201 22569 22569 I CrRendererMain: type=1400 audit(0.0:1435): avc: denied { map } for path="/dev/__properties__/u:object_r:vendor_default_prop:s0" dev="tmpfs" ino=3537 scontext=u:r:isolated_app:s0:c512,c768 tcontext=u:object_r:vendor_default_prop:s0 tclass=file permissive=1
+09-03 11:03:28.222 22534 22593 E cr_PlatformSer-Internal: Unable to determine Safe Browsing user opt-in preference. Exception: com.google.android.gms.common.api.ApiException: 17: API: SafetyNet.API is not available on this device. Connection failed with: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:28.223 22534 22593 E cr_AwSupervisedUserDel: Unable to determine if restricted content blocking is required. Exception: com.google.android.gms.common.api.ApiException: 17: API: SafeBrowsing.API is not available on this device. Connection failed with: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:28.307   462   489 I ActivityTaskManager: Displayed io.ionic.starter/.MainActivity: +2s617ms
+09-03 11:03:28.327  1081  1372 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:03:28.327  1081  1372 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:03:28.335  1081  1372 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:03:28.337   462   809 V WindowManager: getPackagePerformanceMode -- ComponentInfo{io.ionic.starter/io.ionic.starter.MainActivity} -- io.ionic.starter -- mode=0
+09-03 11:03:28.369  1081  1372 I FontLog : Pulling font file for id = 58, cache size = 7 [CONTEXT service_id=132 ]
+09-03 11:03:28.386  1081  1372 I FontLog : Pulling font file for id = 58, cache size = 7 [CONTEXT service_id=132 ]
+09-03 11:03:28.730   233   300 D AudioHardwareTiny: do_out_standby,out = 0xf4142720,device = 0x2
+09-03 11:03:28.738   233   300 D alsa_route: route_set_controls() set route 24
+09-03 11:03:28.738   233   300 D AudioHardwareTiny: close device
+09-03 11:03:28.739   462   809 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:03:28.757   788   788 I Binder:788_2: type=1400 audit(0.0:1436): avc: denied { read write } for name="smdtio" dev="tmpfs" ino=658 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:03:28.757   788   788 I Binder:788_2: type=1400 audit(0.0:1437): avc: denied { open } for path="/dev/smdtio" dev="tmpfs" ino=658 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:03:28.757   788   788 I Binder:788_2: type=1400 audit(0.0:1438): avc: denied { ioctl } for path="/dev/smdtio" dev="tmpfs" ino=658 ioctlcmd=0xa4 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:03:28.763   788   807 D serial_port: Opening serial port /dev/ttyS7 with flags 0x2
+09-03 11:03:28.763   788   807 D serial_port: open() fd = 69
+09-03 11:03:28.763   788   807 D serial_port: Configuring serial port
+09-03 11:03:28.764   788   807 D SMDTAPI : serial open success
+09-03 11:03:28.781 22534 22534 E MainActivity: DERK USB Card Reader inisialisasi sukses!
+09-03 11:03:28.787 22534 22648 I UsbHidManager: usb设备：android.hardware.usb.UsbManager@203b99d
+09-03 11:03:28.793 22534 22648 I UsbHidManager: usb设备：12
+09-03 11:03:28.793 22534 22648 I UsbHidManager: 找到设备
+09-03 11:03:28.794 22534 22648 D UsbHidManager:  UsbInterface[mId=0,mAlternateSetting=0,mName=null,mClass=3,mSubclass=0,mProtocol=0,mEndpoints=[
+09-03 11:03:28.794 22534 22648 D UsbHidManager: UsbEndpoint[mAddress=130,mAttributes=3,mMaxPacketSize=64,mInterval=1]
+09-03 11:03:28.794 22534 22648 D UsbHidManager: UsbEndpoint[mAddress=1,mAttributes=3,mMaxPacketSize=64,mInterval=1]]
+09-03 11:03:28.801     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:28.800 22534 22648 I UsbHidManager: 找到接口，有权限！
+09-03 11:03:28.943 16172 16187 W com.hf.facex: Reducing the number of considered missed Gc histogram windows from 403 to 100
+09-03 11:03:30.031   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:30.744  1570  3703 I android.heysta: IncrementDisableThreadFlip blocked for 32.539ms
+09-03 11:03:30.766     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:31.367  1570  1588 I android.heysta: ThreadFlipBegin blocked for 5.028ms
+09-03 11:03:31.721 22534 22590 D Capacitor: Handling local request: https://localhost/common.462521a78df2ead5.js
+09-03 11:03:31.722 22534 22592 D Capacitor: Handling local request: https://localhost/7720.21b4830628196df0.js
+09-03 11:03:31.834 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248985, pluginId: App, methodName: addListener
+09-03 11:03:31.836 22534 22534 V Capacitor: callback: 16248985, pluginId: App, methodName: addListener, methodData: {"eventName":"appStateChange"}
+09-03 11:03:31.852 22534 22592 D Capacitor: Handling local request: https://localhost/1703.cab5e9fc7b79c18d.js
+09-03 11:03:31.866 22534 22590 D Capacitor: Handling local request: https://localhost/5948.04de4f7a069df57b.js
+09-03 11:03:31.979 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: RUN INITIAL SOCKET
+09-03 11:03:31.988 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248986, pluginId: Preferences, methodName: get
+09-03 11:03:31.989 22534 22534 V Capacitor: callback: 16248986, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:03:32.019 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbnRlcmNvbV9pZCI6MzYsImludGVyY29tX25hbWUiOiJNYWluIERldiA0IiwicHJvamVjdF9pZCI6MjQ2LCJwcm9qZWN0X25hbWUiOiJEZXYgVGVzdGluZyBSZXNpZGVudGlhbCAoVGVzdGluZykiLCJwcm9qZWN0X2FkZHJlc3MiOiJEZXYgQ29uZG8gMjMgQUJDIFN0cmVldCBTaW5nYXBvcmUgMTIzNDU2IiwiZmFtaWx5X2lkIjoiSW50ZXJjb20tMzYiLCJwcm9qZWN0X3R5cGUiOiJSZXNpZGVudGlhbCIsImxvZ2luX2NvZGUiOiJNNDMiLCJleHAiOjMzMjkyODcyMDY3LCJyb29tIjpmYWxzZSwiaXNfZ3ltIjpmYWxzZX0.mOoW9aYEJaQ9qWyutQPVh5tZMkOFfbg-_IKDHE7Jw9Q
+09-03 11:03:32.021 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: /
+09-03 11:03:32.073 22534 22593 D Capacitor: Handling local request: https://localhost/1904.344794facd69dc7a.js
+09-03 11:03:32.145 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: null
+09-03 11:03:32.150 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248987, pluginId: Preferences, methodName: get
+09-03 11:03:32.151 22534 22534 V Capacitor: callback: 16248987, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:03:32.155   462   809 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:03:32.167 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:32.168 22534 22602 W GoogleApiManager: The service for WV.iq2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:32.171 22534 22602 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:03:32.193 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248988, pluginId: Preferences, methodName: get
+09-03 11:03:32.193 22534 22534 V Capacitor: callback: 16248988, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:03:32.202 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: Got userInfo from USER_INFO for Intercom [object Object]
+09-03 11:03:32.204 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: hellooo hereeeee ---> Intercom-36
+09-03 11:03:32.205 22534 22602 W GoogleApiManager: The service for WV.iq2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:03:32.236 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbnRlcmNvbV9pZCI6MzYsImludGVyY29tX25hbWUiOiJNYWluIERldiA0IiwicHJvamVjdF9pZCI6MjQ2LCJwcm9qZWN0X25hbWUiOiJEZXYgVGVzdGluZyBSZXNpZGVudGlhbCAoVGVzdGluZykiLCJwcm9qZWN0X2FkZHJlc3MiOiJEZXYgQ29uZG8gMjMgQUJDIFN0cmVldCBTaW5nYXBvcmUgMTIzNDU2IiwiZmFtaWx5X2lkIjoiSW50ZXJjb20tMzYiLCJwcm9qZWN0X3R5cGUiOiJSZXNpZGVudGlhbCIsImxvZ2luX2NvZGUiOiJNNDMiLCJleHAiOjMzMjkyODcyMDY3LCJyb29tIjpmYWxzZSwiaXNfZ3ltIjpmYWxzZX0.mOoW9aYEJaQ9qWyutQPVh5tZMkOFfbg-_IKDHE7Jw9Q
+09-03 11:03:32.237 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: /main-intercom
+09-03 11:03:32.348 22534 22592 D Capacitor: Handling local request: https://localhost/5197.aa9994ed22d81b68.js
+09-03 11:03:32.356 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248989, pluginId: Keyboard, methodName: getResizeMode
+09-03 11:03:32.357 22534 22534 V Capacitor: callback: 16248989, pluginId: Keyboard, methodName: getResizeMode, methodData: {}
+09-03 11:03:32.358 22534 22593 D Capacitor: Handling local request: https://localhost/441.e9cfae45601880a4.js
+09-03 11:03:32.360 22534 22610 D Capacitor: Sending plugin error: {"save":false,"callbackId":"16248989","pluginId":"Keyboard","methodName":"getResizeMode","success":false,"error":{"message":"not implemented","code":"UNIMPLEMENTED"}}
+09-03 11:03:32.370 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: RUN INITIAL SOCKET
+09-03 11:03:32.372 22534 22534 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: TEST INIT
+09-03 11:03:32.377 22534 22534 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: FS_INTERCOM: Web App successfully initialized with WebRTC updates!
+09-03 11:03:32.435 22534 22592 D Capacitor: Handling local request: https://localhost/2484.38c7c43d2ecdfeaf.js
+09-03 11:03:32.446 22534 22593 D Capacitor: Handling local request: https://localhost/845.2422f3e9e1549a81.js
+09-03 11:03:32.448 22534 22599 D Capacitor: Handling local request: https://localhost/1053.de2143bc865fbf2e.js
+09-03 11:03:32.463 22534 22592 D Capacitor: Handling local request: https://localhost/8462.4195f373df06c935.js
+09-03 11:03:32.479 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248990, pluginId: Preferences, methodName: get
+09-03 11:03:32.480 22534 22534 V Capacitor: callback: 16248990, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:03:32.489 22534 22592 D Capacitor: Handling local request: https://localhost/assets/logoIFS.png
+09-03 11:03:32.494 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248991, pluginId: Intercom, methodName: addListener
+09-03 11:03:32.494 22534 22534 V Capacitor: callback: 16248991, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"faceDetected"}
+09-03 11:03:32.503 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248992, pluginId: Intercom, methodName: addListener
+09-03 11:03:32.503 22534 22534 V Capacitor: callback: 16248992, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"faceRecognized"}
+09-03 11:03:32.506 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248993, pluginId: Intercom, methodName: addListener
+09-03 11:03:32.507 22534 22534 V Capacitor: callback: 16248993, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"sendToastMessage"}
+09-03 11:03:32.510 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248994, pluginId: Intercom, methodName: addListener
+09-03 11:03:32.510 22534 22534 V Capacitor: callback: 16248994, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"noFace"}
+09-03 11:03:32.512 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248995, pluginId: Intercom, methodName: addListener
+09-03 11:03:32.513 22534 22534 V Capacitor: callback: 16248995, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"faceNearby"}
+09-03 11:03:32.568 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248996, pluginId: Preferences, methodName: get
+09-03 11:03:32.568 22534 22534 V Capacitor: callback: 16248996, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:03:32.634 22534 22592 D Capacitor: Handling local request: https://localhost/assets/guard.png
+09-03 11:03:32.673 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: null
+09-03 11:03:32.681 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248997, pluginId: Preferences, methodName: get
+09-03 11:03:32.681 22534 22534 V Capacitor: callback: 16248997, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:03:32.707 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248998, pluginId: Preferences, methodName: get
+09-03 11:03:32.707 22534 22534 V Capacitor: callback: 16248998, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:03:32.741 22534 22592 D Capacitor: Handling local request: https://localhost/8805.81eadbecd3059c43.js
+09-03 11:03:32.749 22534 22592 D Capacitor: Handling local request: https://localhost/4591.41ea4903979ae9ad.js
+09-03 11:03:32.776 22534 22596 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+09-03 11:03:32.831 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: Got userInfo from USER_INFO for Intercom [object Object]
+09-03 11:03:32.835 22534 22534 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: hellooo hereeeee ---> Intercom-36
+09-03 11:03:33.039   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:33.228 22534 22659 D ProfileInstaller: Installing profile for io.ionic.starter
+09-03 11:03:33.277 22534 22592 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+09-03 11:03:33.279 22534 22592 E Capacitor: Unable to open asset URL: https://localhost/assets/icon/favicon.png
+09-03 11:03:33.281 22534 22593 E Capacitor: Unable to open asset URL: https://localhost/assets/icon/favicon.png
+09-03 11:03:33.284 22534 22596 E Capacitor: Unable to open asset URL: https://localhost/assets/icon/favicon.png
+09-03 11:03:33.285 22534 22596 E Capacitor: Unable to open asset URL: https://localhost/assets/icon/favicon.png
+09-03 11:03:33.336 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16248999, pluginId: App, methodName: addListener
+09-03 11:03:33.337 22534 22534 V Capacitor: callback: 16248999, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+09-03 11:03:33.349 22534 22593 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+09-03 11:03:33.358 22534 22596 D Capacitor: Handling local request: https://localhost/9364.45ccf879540ccc24.js
+09-03 11:03:34.012     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:34.395     0     0 I chatty  : uid=0(root) logd identical 10955 lines
+09-03 11:03:34.395     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:34.395     0     0 W RTW     : rtl8723d_fill_default_txdesc(wlan0): SP Packet(0x0806) rate=0x0 SeqNum = 2522
+09-03 11:03:34.395     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:36.046   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:36.137     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:37.094  1570  3703 I android.heysta: IncrementDisableThreadFlip blocked for 5.637ms
+09-03 11:03:37.800     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:39.054   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:39.499     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:41.215     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:41.314  1570  1570 I Timer-1 : type=1400 audit(0.0:1439): avc: denied { lock } for path="/data/db/heystar_db" dev="mmcblk2p16" ino=3453650 scontext=u:r:system_app:s0 tcontext=u:object_r:system_data_root_file:s0 tclass=file permissive=1
+09-03 11:03:41.314  1570  1570 I Timer-1 : type=1400 audit(0.0:1440): avc: denied { getattr } for path="/data/db/heystar_db-journal" dev="mmcblk2p16" ino=3453651 scontext=u:r:system_app:s0 tcontext=u:object_r:system_data_root_file:s0 tclass=file permissive=1
+09-03 11:03:42.062   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:42.950     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:44.629     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:46.347     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:48.055     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:45.073   462   549 I chatty  : uid=1000(system) WifiHandlerThre identical 1 line
+09-03 11:03:48.083   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:48.182 22534 22650 I UsbHidManager: 接收到数据：0063900004752a440708
+09-03 11:03:48.201 22534 22650 E MainActivity: >>> [DERK USB CARD TAP] UID: 752a4407
+09-03 11:03:48.204 22534 22534 D CompatibilityChangeReporter: Compat change id reported: 147798919; UID 10167; state: ENABLED
+09-03 11:03:48.258 22534 22676 I CapacitorCookies: Getting cookies at: 'https://ifs360-sg.com/api/card'
+09-03 11:03:48.266   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:48.267   242  7110 I chatty  : uid=1000(system) HwBinder:242_3 identical 1 line
+09-03 11:03:48.268   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:03:49.158 22534 22676 D IntercomPlugin: sendToastMessage(): message=Failed to open the door, is_success=false
+09-03 11:03:49.159 22534 22676 V Capacitor/IntercomPlugin: Notifying listeners for event sendToastMessage
+09-03 11:03:49.178 22534 22676 E MainActivity: Proses backend Card selesai. Response: {"jsonrpc": "2.0", "id": null, "result": {"response_code": 400, "open_door": false}}
+09-03 11:03:49.184 22534 22592 D Capacitor: Handling local request: https://localhost/2415.a701a5c33b82c080.js
+09-03 11:03:50.088     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:50.225   186   195 E BufferQueueProducer: [Toast#0](id:ba00000089,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:03:50.225   604  1033 W libEGL  : EGLNativeWindowType 0xb4000077fefa6840 disconnect failed
+09-03 11:03:32.170   462   809 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:03:50.244   462  8039 W NotificationService: Toast already killed. pkg=io.ionic.starter token=android.os.BinderProxy@fadf6c
+09-03 11:03:50.988     0     0 I chatty  : uid=0(root) logd identical 36126 lines
+09-03 11:03:50.988     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:50.989     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:03:50.989     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:03:51.092   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:51.742   462   484 W WindowManager: Unable to start animation, surface is null or no children.
+09-03 11:03:52.637     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:52.763 22534 22534 W o.ionic.starte: Accessing hidden method Landroid/view/MotionEvent;->getEventTimeNano()J (greylist, reflection, allowed)
+09-03 11:03:52.807 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16249000, pluginId: Intercom, methodName: startScan
+09-03 11:03:52.807 22534 22534 V Capacitor: callback: 16249000, pluginId: Intercom, methodName: startScan, methodData: {}
+09-03 11:03:52.807 22534 22610 D IntercomPlugin: startScan() dipanggil dari Ionic JS
+09-03 11:03:52.881 22534 22684 I Sentinel Envelope: Protected with Sentinel Envelope for android native (ELF ARM and AARCH64) applications, Version 4.0.15775.60001
+09-03 11:03:52.882 22534 22684 I Sentinel Envelope: Warning::new_libfacepassandroid.so is not loaded from java code via system.loadlibrary(). Application may not work as expected.
+09-03 11:03:52.966 22534 22684 I Sentinel Envelope: Protected with Sentinel Envelope for android native (ELF ARM and AARCH64) applications, Version 4.0.15775.60001
+09-03 11:03:53.073 22534 22684 D FacePassHandler: initSDK success.
+09-03 11:03:53.089  1570  3703 I android.heysta: IncrementDisableThreadFlip blocked for 8.455ms
+09-03 11:03:53.315 22534 22548 I o.ionic.starte: ThreadFlipBegin blocked for 114.271ms
+09-03 11:03:53.411 22534 22548 I o.ionic.starte: Background concurrent copying GC freed 98380(4238KB) AllocSpace objects, 14(280KB) LOS objects, 31% free, 51MB/75MB, paused 135us total 320.542ms
+09-03 11:03:53.454 22534 22534 I Thread-5: type=1400 audit(0.0:1441): avc: denied { read write } for name="atsh204a-enc" dev="tmpfs" ino=3759 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1 app=io.ionic.starter
+09-03 11:03:53.454 22534 22534 I Thread-5: type=1400 audit(0.0:1442): avc: denied { open } for path="/dev/atsh204a-enc" dev="tmpfs" ino=3759 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1 app=io.ionic.starter
+09-03 11:03:53.454 22534 22534 I Thread-5: type=1400 audit(0.0:1443): avc: denied { ioctl } for path="/dev/atsh204a-enc" dev="tmpfs" ino=3759 ioctlcmd=0x401 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1 app=io.ionic.starter
+09-03 11:03:54.107   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:54.175 22534 22684 W o.ionic.starte: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (greylist, JNI, allowed)
+09-03 11:03:54.176 22534 22684 W o.ionic.starte: Accessing hidden method Landroid/app/ActivityThread;->getApplication()Landroid/app/Application; (greylist, JNI, allowed)
+09-03 11:03:54.184 22534 22534 I Thread-5: type=1400 audit(0.0:1444): avc: denied { ioctl } for path="socket:[448296]" dev="sockfs" ino=448296 ioctlcmd=0x8927 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tclass=tcp_socket permissive=1 app=io.ionic.starter
+09-03 11:03:54.187 22534 22534 I Thread-5: type=1400 audit(0.0:1445): avc: denied { read } for name="u:object_r:firstboot_prop:s0" dev="tmpfs" ino=3469 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:firstboot_prop:s0 tclass=file permissive=1 app=io.ionic.starter
+09-03 11:03:54.187 22534 22534 I Thread-5: type=1400 audit(0.0:1446): avc: denied { open } for path="/dev/__properties__/u:object_r:firstboot_prop:s0" dev="tmpfs" ino=3469 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:firstboot_prop:s0 tclass=file permissive=1 app=io.ionic.starter
+09-03 11:03:54.187 22534 22534 I Thread-5: type=1400 audit(0.0:1447): avc: denied { getattr } for path="/dev/__properties__/u:object_r:firstboot_prop:s0" dev="tmpfs" ino=3469 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:firstboot_prop:s0 tclass=file permissive=1 app=io.ionic.starter
+09-03 11:03:54.187 22534 22534 I Thread-5: type=1400 audit(0.0:1448): avc: denied { map } for path="/dev/__properties__/u:object_r:firstboot_prop:s0" dev="tmpfs" ino=3469 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:firstboot_prop:s0 tclass=file permissive=1 app=io.ionic.starter
+09-03 11:03:55.112 22534 22684 E FacePassAuth: Java facepplus don't prepare >>>
+09-03 11:03:55.115 22534 22684 D FacePassAuth: Java check check auth failed >>>
+09-03 11:03:55.117 22534 22684 E InitFacePassHandler: Exception in InitFacePassHandler: need initSDK first or auth.
+09-03 11:03:55.117 22534 22684 E InitFacePassHandler: mcv.facepass.FacePassException: need initSDK first or auth.
+09-03 11:03:55.117 22534 22684 E InitFacePassHandler:   at mcv.facepass.FacePassHandler.initHandle(FacePassHandler.java:136)
+09-03 11:03:55.117 22534 22684 E InitFacePassHandler:   at io.ionic.starter.facepass.InitFacePassHandler.lambda$init$0(InitFacePassHandler.java:64)
+09-03 11:03:55.117 22534 22684 E InitFacePassHandler:   at io.ionic.starter.facepass.InitFacePassHandler$$ExternalSyntheticLambda0.run(Unknown Source:4)
+09-03 11:03:55.117 22534 22684 E InitFacePassHandler:   at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:55.118 22534 22684 D Capacitor: Sending plugin error: {"save":false,"callbackId":"16249000","pluginId":"Intercom","methodName":"startScan","success":false,"error":{"message":"Gagal inisialisasi FacePass SDK"}}
+09-03 11:03:55.104 22534 22534 I Thread-5: type=1400 audit(0.0:1449): avc: denied { read } for name="devices" dev="sysfs" ino=13584 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1 app=io.ionic.starter
+09-03 11:03:55.172 22534 22534 E Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Error starting face recognition: Error: Gagal inisialisasi FacePass SDK
+09-03 11:03:55.232     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:57.115   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:03:57.267     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:03:57.974  1081 22635 I .gms.persisten: Explicit concurrent copying GC freed 43137(2016KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 15MB/30MB, paused 221us total 597ms
+09-03 11:03:57.977  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.978  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.978  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.978  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.978  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.978  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.978  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.978  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.979  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.979  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.979  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.979  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.979  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.979  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.979  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.979  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.979  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.980  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.980  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.980  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.980  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.980  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.980  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.980  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.980  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.981  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.981  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.981  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.981  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.981  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.981  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.981  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.982  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.982  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.982  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.982  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.982  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.982  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.982  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.982  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.982  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.982  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.982  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.982  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.982  1081  1099 E System  : Uncaught exception thrown by finalizer
+09-03 11:03:57.983  1081  1099 E System  : java.lang.IllegalStateException: Lock wasn't released correctly
+09-03 11:03:57.983  1081  1099 E System  :      at cyrv.finalize(:com.google.android.gms@263234022@26.32.34 (150400-968093310):12)
+09-03 11:03:57.983  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:291)
+09-03 11:03:57.983  1081  1099 E System  :      at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:278)
+09-03 11:03:57.983  1081  1099 E System  :      at java.lang.Daemons$Daemon.run(Daemons.java:139)
+09-03 11:03:57.983  1081  1099 E System  :      at java.lang.Thread.run(Thread.java:923)
+09-03 11:03:57.983  1081  1099 W SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/com.google.android.gms/databases/metadata.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-03 11:03:57.983  1081  1099 W System  : A resource failed to call close.
+09-03 11:03:57.985  1081  1099 W SQLiteConnectionPool: A SQLiteConnection object for database '/data/user/0/com.google.android.gms/databases/metadata.db' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.
+09-03 11:03:57.986  1081  1099 W System  : A resource failed to call close.
+09-03 11:03:58.477 22534 22534 W o.ionic.starte: Accessing hidden method Landroid/view/MotionEvent;->getHistoricalEventTimeNano(I)J (greylist-max-o, reflection, denied)
+09-03 11:03:58.596  1570  3703 I android.heysta: IncrementDisableThreadFlip blocked for 23.771ms
+09-03 11:03:58.959 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16249001, pluginId: Intercom, methodName: stopScan
+09-03 11:03:58.959 22534 22534 V Capacitor: callback: 16249001, pluginId: Intercom, methodName: stopScan, methodData: {}
+09-03 11:03:58.961 22534 22610 D IntercomPlugin: stopScan() dipanggil dari Ionic JS
+09-03 11:03:58.963 22534 22610 D FacePassHelper: FacePass scanning stopped
+09-03 11:03:59.004 22534 22534 I Capacitor/Console: File:  - Line 353 - Msg: undefined
+09-03 11:03:59.005 22534 22534 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Face recognition stopped
+09-03 11:04:00.002   604   604 D KeyguardClockSwitch: Updating clock: 11:04 AM
+09-03 11:04:00.128   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:00.205     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:01.245   462   462 W WindowManager: removeWindowToken: Attempted to remove non-existing token: android.os.Binder@a394c5
+09-03 11:04:01.654     0     0 I chatty  : uid=0(root) logd identical 52613 lines
+09-03 11:04:01.654     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:01.656     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:04:01.660     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:03.131     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:03.789     0     0 I chatty  : uid=0(root) logd identical 26733 lines
+09-03 11:04:03.789     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:03.789     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:04:03.789     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:05.278     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:06.822     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:08.055     0     0 I chatty  : uid=0(root) logd identical 45310 lines
+09-03 11:04:08.055     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:08.055     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:04:08.055     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:09.793     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:11.473     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:13.106     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:09.160   462   549 I chatty  : uid=1000(system) WifiHandlerThre identical 3 lines
+09-03 11:04:12.169   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:13.820 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16249002, pluginId: Intercom, methodName: startScan
+09-03 11:04:13.821 22534 22534 V Capacitor: callback: 16249002, pluginId: Intercom, methodName: startScan, methodData: {}
+09-03 11:04:13.821 22534 22610 D IntercomPlugin: startScan() dipanggil dari Ionic JS
+09-03 11:04:13.821 22534 22534 D FacePassHelper: FacePass scanning started
+09-03 11:04:13.821 22534 22534 V Capacitor/IntercomPlugin: Notifying listeners for event scanStarted
+09-03 11:04:13.821 22534 22534 D Capacitor/IntercomPlugin: No listeners found for event scanStarted
+09-03 11:04:13.975 22534 22534 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Face recognition started
+09-03 11:04:15.048     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:15.178   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:17.995     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:20.814     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:22.711     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:21.202   462   549 I chatty  : uid=1000(system) WifiHandlerThre identical 2 lines
+09-03 11:04:24.209   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:24.942 22534 22534 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 16249003, pluginId: Intercom, methodName: stopScan
+09-03 11:04:24.942 22534 22534 V Capacitor: callback: 16249003, pluginId: Intercom, methodName: stopScan, methodData: {}
+09-03 11:04:24.943 22534 22610 D IntercomPlugin: stopScan() dipanggil dari Ionic JS
+09-03 11:04:24.943 22534 22610 D FacePassHelper: FacePass scanning stopped
+09-03 11:04:25.006 22534 22534 I Capacitor/Console: File:  - Line 353 - Msg: undefined
+09-03 11:04:25.008 22534 22534 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Face recognition stopped
+09-03 11:04:25.018     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:26.701     0     0 I chatty  : uid=0(root) logd identical 65535 lines
+09-03 11:04:27.216   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:27.226     0     0 I chatty  : uid=0(root) logd identical 21464 lines
+09-03 11:04:27.227     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:27.227     0     0 W RTW     : rtl8723d_fill_default_txdesc(wlan0): SP Packet(0x0806) rate=0x0 SeqNum = 2755
+09-03 11:04:27.227     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:28.168     0     0 I chatty  : uid=0(root) logd identical 39234 lines
+09-03 11:04:28.168     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:28.168     0     0 W healthd : battery l=50 v=3 t=2.6 h=2 st=3 fc=100 chg=au
+09-03 11:04:28.168     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:29.147   462  8039 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:29.147   233  6959 D AudioHardwareTiny: start_output_stream:980 xwliu force_device = 0x0
+09-03 11:04:29.147   233  6959 D AudioHardwareTiny: start_output_stream:985 out = 0xf4142720,device = 0x2,outputs[OUTPUT_HDMI_MULTI] = 0x0
+09-03 11:04:29.147   233  6959 D AudioHardwareTiny: card0 id:rockchiprk809co
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: card1 id:rockchiphdmi
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: No exist proc/asound/card2/id, break and finish parsing
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: dump out device info
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: dev_info SPEAKER  card=0, device:0
+09-03 11:04:29.148   462  1236 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: dev_info HDMI  card=1, device:0
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: out->Device     : 0x2
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: out->SampleRate : 44100
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: out->Channels   : 2
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: out->Format     : 0
+09-03 11:04:29.148   233  6959 D AudioHardwareTiny: out->PreiodSize : 512
+09-03 11:04:29.148   233  6959 D alsa_route: route_info->sound_card 0, route_info->devices 0
+09-03 11:04:29.148   233  6959 D alsa_route: route_set_controls() set route 0
+09-03 11:04:29.161   233  6959 D AudioHardwareTiny: start_output_stream:1106, out = 0xf4142720
+09-03 11:04:29.189   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:04:29.190   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:04:29.193   462   482 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.android.launcher3/.uioverrides.QuickstepLauncher (has extras)} from uid 0
+09-03 11:04:29.194   462   482 D ActivityTaskManager: process:com.android.launcher3,com.android.launcher3.uioverrides.QuickstepLauncher
+09-03 11:04:29.359   462   482 V WindowManager: updateRotationUncheckedLocked: don't allow rotation#########.
+09-03 11:04:29.370   462   482 W Looper  : Slow dispatch took 183ms android.ui h=com.android.server.policy.PhoneWindowManager$PolicyHandler c=com.android.server.policy.-$$Lambda$PhoneWindowManager$DisplayHomeButtonHandler$ljCIzo7y96OZCYYMVaAi6LAwRAE@a4fb004 m=0
+09-03 11:04:29.378 22534 22534 V Capacitor/AppPlugin: Notifying listeners for event pause
+09-03 11:04:29.378 22534 22534 D Capacitor/AppPlugin: No listeners found for event pause
+09-03 11:04:29.379 22534 22534 D Capacitor: App paused
+09-03 11:04:29.381   788 22649 W System.err: java.lang.InterruptedException
+09-03 11:04:29.381   788 22649 W System.err:    at java.lang.Thread.sleep(Native Method)
+09-03 11:04:29.381   788 22649 W System.err:    at java.lang.Thread.sleep(Thread.java:442)
+09-03 11:04:29.381   788 22649 W System.err:    at java.lang.Thread.sleep(Thread.java:358)
+09-03 11:04:29.381   788 22649 W System.err:    at android.app.smdt.server.SmdtServiceNew$WiegandThread.run(SmdtServiceNew.java:292)
+09-03 11:04:29.382     0     0 I chatty  : uid=0(root) logd identical 46545 lines
+09-03 11:04:29.382     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:29.382     0     0 W WIEGAND6cardno: 0, number is :: 1
+09-03 11:04:29.382     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:29.384   788   807 D serial_port: close(fd = 69)
+09-03 11:04:29.384   788   807 D SMDTAPI : serial close success
+09-03 11:04:29.409   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:04:29.409   462 22283 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:29.411   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:04:29.413   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:04:29.433   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:29.462   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:29.483   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:29.548   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:29.590   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:04:29.591   983   983 I chatty  : uid=10144(com.android.launcher3) identical 2 lines
+09-03 11:04:29.591   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:04:29.610   462   478 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:04:29.803   604   618 I ndroid.systemu: NativeAlloc concurrent copying GC freed 10321(498KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 8083KB/15MB, paused 254us total 225.749ms
+09-03 11:04:29.909   462  1236 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:04:29.910   462  1236 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:04:29.931   186   196 E BufferQueueProducer: [io.ionic.starter/io.ionic.starter.MainActivity#0](id:ba00000088,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:04:29.933 22534 22558 W libEGL  : EGLNativeWindowType 0xec4cb068 disconnect failed
+09-03 11:04:29.934   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:04:29.936   462   484 V WindowManager: getPackagePerformanceMode -- ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} -- com.android.launcher3 -- mode=0
+09-03 11:04:29.989 22534 22534 D Capacitor/AppPlugin: Firing change: false
+09-03 11:04:29.989 22534 22534 V Capacitor/AppPlugin: Notifying listeners for event appStateChange
+09-03 11:04:29.991   462  1236 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:29.995 22534 22534 D Capacitor: App stopped
+09-03 11:04:30.000 22534 22534 D Capacitor: Saving instance state!
+09-03 11:04:30.078   462   481 D AutofillManagerService: Close system dialogs
+09-03 11:04:30.082   604   604 V ShadeControllerImpl: NotificationShadeWindow: com.android.systemui.statusbar.phone.NotificationShadeWindowView{19f3f4 I.E...... ......ID 0,0-800,1280} canPanelBeCollapsed(): false
+09-03 11:04:30.091  1570  1570 I Thread-21: type=1400 audit(0.0:1453): avc: denied { getattr } for path="/dev/ttySMT7" dev="tmpfs" ino=1418 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:04:30.222   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:04:30.224   462   478 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:30.226   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:30.232   983   997 I droid.launcher: NativeAlloc concurrent copying GC freed 23912(1053KB) AllocSpace objects, 0(0B) LOS objects, 49% free, 3960KB/7921KB, paused 115us total 133.634ms
+09-03 11:04:31.063   462   484 I ActivityManager: Killing 22534:io.ionic.starter/u0a167 (adj 905): remove task
+09-03 11:04:31.069   462   484 I ActivityManager: Killing 22569:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0a167i5 (adj 905): remove task
+09-03 11:04:31.113   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:31.202   462  1236 W ActivityManager: Scheduling restart of crashed service io.ionic.starter/org.chromium.content.app.SandboxedProcessService0:0 in 1000ms for connection
+09-03 11:04:31.203   752   752 I Zygote  : Process 22569 exited due to signal 9 (Killed)
+09-03 11:04:31.210   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:31.224   184   184 I Binder:184_2: type=1400 audit(0.0:1454): avc: denied { read } for name="wakeup2" dev="sysfs" ino=17954 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
+09-03 11:04:31.224   184   184 I Binder:184_2: type=1400 audit(0.0:1455): avc: denied { open } for path="/sys/devices/platform/fdef0000.iep/wakeup/wakeup2" dev="sysfs" ino=17954 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
+09-03 11:04:31.224   184   184 I Binder:184_2: type=1400 audit(0.0:1456): avc: denied { read } for name="event_count" dev="sysfs" ino=17961 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+09-03 11:04:31.224   184   184 I Binder:184_2: type=1400 audit(0.0:1457): avc: denied { open } for path="/sys/devices/platform/fdef0000.iep/wakeup/wakeup2/event_count" dev="sysfs" ino=17961 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+09-03 11:04:31.224   184   184 I Binder:184_2: type=1400 audit(0.0:1458): avc: denied { getattr } for path="/sys/devices/platform/fdef0000.iep/wakeup/wakeup2/event_count" dev="sysfs" ino=17961 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+09-03 11:04:31.227   184   184 I Binder:184_2: type=1400 audit(0.0:1459): avc: denied { read } for name="wakeup7" dev="sysfs" ino=28762 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_power:s0 tclass=dir permissive=1
+09-03 11:04:31.227   184   184 I Binder:184_2: type=1400 audit(0.0:1460): avc: denied { open } for path="/sys/devices/virtual/power_supply/test_battery/wakeup7" dev="sysfs" ino=28762 scontext=u:r:system_suspend:s0 tcontext=u:object_r:sysfs_power:s0 tclass=dir permissive=1
+09-03 11:04:31.319     0     0 I chatty  : uid=0(root) logd identical 48867 lines
+09-03 11:04:31.319     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:31.351     0     0 I binder  : undelivered transaction 5927242, process died.
+09-03 11:04:31.351     0     0 I binder  : undelivered transaction 5927264, process died.
+09-03 11:04:31.351   462   809 D ConnectivityService: ConnectivityService NetworkRequestInfo binderDied(NetworkRequest [ LISTEN id=114, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ], android.os.BinderProxy@9ba1f6)
+09-03 11:04:31.352   462   555 D ConnectivityService: releasing NetworkRequest [ LISTEN id=114, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] (release request)
+09-03 11:04:31.352   462 14167 D ConnectivityService: ConnectivityService NetworkRequestInfo binderDied(NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ], android.os.BinderProxy@6515e91)
+09-03 11:04:31.352   462   555 D ConnectivityService: releasing NetworkRequest [ TRACK_DEFAULT id=113, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] (release request)
+09-03 11:04:31.352   462   555 D ConnectivityService:  Removing from current network [102 WIFI], leaving 49 requests.
+09-03 11:04:31.353   462  8039 I WindowManager: WIN DEATH: Window{35e6857 u0 io.ionic.starter/io.ionic.starter.MainActivity}
+09-03 11:04:31.353   462  8039 W InputDispatcher: Attempted to unregister already unregistered input channel '35e6857 io.ionic.starter/io.ionic.starter.MainActivity (server)'
+09-03 11:04:31.354   228   228 I Zygote  : Process 22534 exited due to signal 9 (Killed)
+09-03 11:04:31.369   462   484 W ActivityManager: setHasOverlayUi called on unknown pid: 22534
+09-03 11:04:31.394   462   462 I ActivityManager: type=1400 audit(0.0:1461): avc: denied { dac_override } for capability=1 scontext=u:r:system_server:s0 tcontext=u:r:system_server:s0 tclass=capability permissive=1
+09-03 11:04:31.397   462   492 I libprocessgroup: Successfully killed process cgroup uid 10167 pid 22534 in 325ms
+09-03 11:04:31.399   462   492 I libprocessgroup: Successfully killed process cgroup uid 99005 pid 22569 in 1ms
+09-03 11:04:31.529   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:04:31.529   983   983 I chatty  : uid=10144(com.android.launcher3) identical 2 lines
+09-03 11:04:31.529   983   983 D RecentsOrientedState: current RecentsOrientedState: [this=RecentsOrientedState@373d2d0 mOrientationHandler=PortraitPagedViewHandler@f6c52c9 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 isRecentsActivityRotationAllowed=true mSystemRotation=false mFlags=289]
+09-03 11:04:33.091   233   300 D AudioHardwareTiny: do_out_standby,out = 0xf4142720,device = 0x2
+09-03 11:04:33.098   233   300 D alsa_route: route_set_controls() set route 24
+09-03 11:04:33.098   233   300 D AudioHardwareTiny: close device
+09-03 11:04:33.100   462 22283 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:33.232   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:35.789     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:04:38.854     0     0 D logd    : logdr: UID=0 GID=0 PID=22748 b tail=0 logMask=99 pid=0 start=0ns timeout=0ns
+09-03 11:04:40.055     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:04:40.614     0     0 W RTW     : recv_decache: tid=0 seq=1113 frag=0
+09-03 11:04:45.587   462 22283 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=io.ionic.starter/.MainActivity bnds=[620,311][768,520]} from uid 10144
+09-03 11:04:45.588   462 22283 D ActivityTaskManager: process:io.ionic.starter,io.ionic.starter.MainActivity
+09-03 11:04:42.255   462   549 I chatty  : uid=1000(system) WifiHandlerThre identical 3 lines
+09-03 11:04:45.262   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:45.591   233  6959 D AudioHardwareTiny: start_output_stream:980 xwliu force_device = 0x0
+09-03 11:04:45.591   233  6959 D AudioHardwareTiny: start_output_stream:985 out = 0xf4142720,device = 0x2,outputs[OUTPUT_HDMI_MULTI] = 0x0
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: card0 id:rockchiprk809co
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: card1 id:rockchiphdmi
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: No exist proc/asound/card2/id, break and finish parsing
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: dump out device info
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: dev_info SPEAKER  card=0, device:0
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: dev_info HDMI  card=1, device:0
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: out->Device     : 0x2
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: out->SampleRate : 44100
+09-03 11:04:45.592   462 22740 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: out->Channels   : 2
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: out->Format     : 0
+09-03 11:04:45.592   233  6959 D AudioHardwareTiny: out->PreiodSize : 512
+09-03 11:04:45.592   233  6959 D alsa_route: route_info->sound_card 0, route_info->devices 0
+09-03 11:04:45.592   233  6959 D alsa_route: route_set_controls() set route 0
+09-03 11:04:45.593   462 22740 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:45.605   233  6959 D AudioHardwareTiny: start_output_stream:1106, out = 0xf4142720
+09-03 11:04:45.645   462   484 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10167; state: DISABLED
+09-03 11:04:45.646   462   491 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10167; state: ENABLED
+09-03 11:04:45.660   228   228 D Zygote  : Forked child process 22760
+09-03 11:04:45.670 22760 22760 I Zygote  : seccomp disabled by setenforce 0
+09-03 11:04:45.675 22760 22760 I o.ionic.starte: Late-enabling -Xcheck:jni
+09-03 11:04:45.675   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:45.713   462   491 W ActivityManager: Slow operation: 76ms so far, now at startProcess: returned from zygote!
+09-03 11:04:45.714   462   491 W ActivityManager: Slow operation: 77ms so far, now at startProcess: done updating battery stats
+09-03 11:04:45.714   462   491 W ActivityManager: Slow operation: 77ms so far, now at startProcess: building log message
+09-03 11:04:45.714   462   491 I ActivityManager: Start proc 22760:io.ionic.starter/u0a167 for pre-top-activity {io.ionic.starter/io.ionic.starter.MainActivity}
+09-03 11:04:45.714   462   491 W ActivityManager: Slow operation: 77ms so far, now at startProcess: starting to update pids map
+09-03 11:04:45.714   462   491 W ActivityManager: Slow operation: 77ms so far, now at startProcess: done updating pids map
+09-03 11:04:45.718 22760 22760 I o.ionic.starte: Unquickening 12 vdex files!
+09-03 11:04:45.742  1111  1116 I adbd    : jdwp connection from 22760
+09-03 11:04:45.787   462  7926 V WindowManager: updateRotationUncheckedLocked: don't allow rotation#########.
+09-03 11:04:45.866   254   401 W APM::AudioPolicyEngine: getDevicesForStrategy() unknown strategy: -1
+09-03 11:04:45.867   462  7926 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:46.293   186   186 E Layer   : [Surface(name=Task=322)/@0x9911283 - animation-leash#0] No local sync point found
+09-03 11:04:46.293   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:04:46.318   186  1052 E BufferQueueProducer: [com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher#0](id:ba0000008a,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:04:46.319   983  1312 W libEGL  : EGLNativeWindowType 0xb4000077feeda240 disconnect failed
+09-03 11:04:46.325   186   186 E Layer   : [Surface(name=Task=322)/@0x9911283 - animation-leash#0] No local sync point found
+09-03 11:04:46.325   186   186 E Layer   : [Surface(name=Task=1)/@0x501db42 - animation-leash#0] No local sync point found
+09-03 11:04:46.364 22760 22760 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: true
+09-03 11:04:46.368 22760 22760 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: true
+09-03 11:04:46.383 22760 22760 W FirebaseApp: Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+09-03 11:04:46.383 22760 22760 I FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-03 11:04:46.579 22760 22760 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+09-03 11:04:46.600 22760 22760 E MainActivity: onCreate MainActivity
+09-03 11:04:46.742 22760 22760 W o.ionic.starte: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (greylist, reflection, allowed)
+09-03 11:04:46.743 22760 22760 W o.ionic.starte: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (greylist, reflection, allowed)
+09-03 11:04:46.779 22760 22760 I WebViewFactory: Loading com.google.android.webview version 151.0.7922.199 (code 792219903)
+09-03 11:04:46.786 22760 22760 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+09-03 11:04:46.846 22760 22760 I cr_WVCFactoryProvider: version=151.0.7922.199 (792219903) minSdkVersion=29 multiprocess=true packageId=127 splits=<none>
+09-03 11:04:46.861 22760 22791 I chromium: [0903/110446.861325:INFO:android_webview/browser/variations/variations_seed_loader.cc:67] Failed to open file for reading.: No such file or directory (2)
+09-03 11:04:46.861 22760 22791 I cr_VariationsUtils: Failed reading seed file "/data/user/0/io.ionic.starter/app_webview/variations_seed_new"
+09-03 11:04:46.914 22760 22760 I cr_LibraryLoader: Successfully loaded native library
+09-03 11:04:46.932 22760 22760 I cr_CachingUmaRecorder: Flushed 38 samples from 15 histograms, 0 samples were dropped.
+09-03 11:04:46.934 22760 22760 I cr_ChildProcLH: ScopedServiceBindingBatch.tryActivate: false
+09-03 11:04:46.935 22760 22760 I cr_VariationsUtils: Loaded seed with age 9834s
+09-03 11:04:46.943 22760 22760 I cr_CombinedPProvider: #registerProvider() provider:WV.sj@92a0452 isPolicyCacheEnabled:false policyProvidersSize:0
+09-03 11:04:46.944 22760 22760 I cr_PolicyProvider: #setManagerAndSource() 0
+09-03 11:04:46.947 22760 22793 I cr_policy: registerReceiver succeeded after 3ms
+09-03 11:04:46.951 22760 22760 I cr_DisplayManager: Is Display Topology available: false
+09-03 11:04:46.963   462  8039 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10167; state: DISABLED
+09-03 11:04:46.963   462  8039 D CompatibilityChangeReporter: Compat change id reported: 135754954; UID 10167; state: ENABLED
+09-03 11:04:46.963   462   491 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10167; state: ENABLED
+09-03 11:04:46.974   752   752 D Zygote  : Forked child process 22797
+09-03 11:04:46.978   462   491 I ActivityManager: Start proc 22797:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0i6 for  {io.ionic.starter/org.chromium.content.app.SandboxedProcessService0:0}
+09-03 11:04:46.978 22797 22797 I Zygote  : seccomp disabled by setenforce 0
+09-03 11:04:46.978 22797 22797 E libc    : SetHeapTaggingLevel: re-enabling tagging after it was disabled is not supported
+09-03 11:04:46.979 22760 22760 I cr_CombinedPProvider: #linkNativeInternal() 1
+09-03 11:04:46.981 22760 22760 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+09-03 11:04:46.981 22760 22760 I cr_PolicyProvider: #notifySettingsAvailable() 0
+09-03 11:04:46.981 22760 22760 I cr_CombinedPProvider: #onSettingsAvailable() 0
+09-03 11:04:46.981 22760 22760 I cr_CombinedPProvider: #flushPolicies()
+09-03 11:04:46.989  1111  1116 I adbd    : jdwp connection from 22797
+09-03 11:04:46.999   462  7926 D CompatibilityChangeReporter: Compat change id reported: 136274596; UID 10167; state: ENABLED
+09-03 11:04:47.012 22797 22797 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+09-03 11:04:47.020 22797 22797 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+09-03 11:04:47.017  1570  1570 I Thread-21: type=1400 audit(0.0:1462): avc: denied { getattr } for path="/dev/ttySMT7" dev="tmpfs" ino=1418 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:04:47.021 22797 22797 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+09-03 11:04:47.022 22797 22797 I cr_WebViewApkApp: version=151.0.7922.199 (792219903) minSdkVersion=29 processName=com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 splits=<none>
+09-03 11:04:47.025 22797 22797 I cr_ChildProcessService: Creating new ChildProcessService pid=22797
+09-03 11:04:47.049 22760 22760 I TetheringManager: registerTetheringEventCallback:io.ionic.starter
+09-03 11:04:47.112   462  7926 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:04:47.113 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:47.114 22760 22834 W GoogleApiManager: The service for WV.k82 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:47.116 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:47.116 22760 22834 W GoogleApiManager: The service for WV.k82 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:47.121 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:47.122 22760 22834 W GoogleApiManager: The service for WV.c72 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:47.123 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:47.124 22760 22834 W GoogleApiManager: The service for WV.c72 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:47.126 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:47.126 22760 22834 W GoogleApiManager: The service for WV.vw2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:47.128 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:47.129 22760 22834 W GoogleApiManager: The service for WV.vw2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:47.130 22760 22818 E cr_PlatformSer-Internal: UsageReporting query failed
+09-03 11:04:47.126   462  7926 I chatty  : uid=1000(system) Binder:462_16 identical 4 lines
+09-03 11:04:47.128   462  7926 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:04:47.149   462  7926 D ConnectivityService: requestNetwork for uid/pid:10167/22760 NetworkRequest [ TRACK_DEFAULT id=115, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:04:47.150   462   555 D ConnectivityService: NetworkReassignment :
+09-03 11:04:47.150   462   555 D ConnectivityService:   115 : null → 102
+09-03 11:04:47.150   462   555 D ConnectivityService: rematch for [102 WIFI]
+09-03 11:04:47.150   462   555 D ConnectivityService:    accepting network in place of null
+09-03 11:04:47.150   462   555 D ConnectivityService: sending new Min Network Score(300): NetworkRequest [ TRACK_DEFAULT id=115, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:04:47.150   462   582 D Ethernet: got request NetworkRequest [ TRACK_DEFAULT id=115, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] with score 300 and providerId 2
+09-03 11:04:47.150   462   549 D UntrustedWifiNetworkFactory: got request NetworkRequest [ TRACK_DEFAULT id=115, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] with score 300 and providerId 2
+09-03 11:04:47.151   462   549 D WifiNetworkFactory: got request NetworkRequest [ TRACK_DEFAULT id=115, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ] with score 300 and providerId 2
+09-03 11:04:47.151   462   555 D ConnectivityService: sending notification CALLBACK_AVAILABLE for NetworkRequest [ TRACK_DEFAULT id=115, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:04:47.157   462  7926 D ConnectivityService: listenForNetwork for uid/pid:10167/22760 NetworkRequest [ LISTEN id=116, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:04:47.158   462   555 D ConnectivityService: NetworkReassignment : no changes
+09-03 11:04:47.158   462   555 D ConnectivityService: sending notification CALLBACK_AVAILABLE for NetworkRequest [ LISTEN id=116, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED Uid: 10167 AdministratorUids: [] RequestorUid: 10167 RequestorPackageName: io.ionic.starter] ]
+09-03 11:04:47.255 22760 22760 D Capacitor: Starting BridgeActivity
+09-03 11:04:47.326 22760 22760 D Capacitor: Registering plugin instance: CapacitorCookies
+09-03 11:04:47.339 22760 22760 D Capacitor: Registering plugin instance: WebView
+09-03 11:04:47.346 22760 22760 D Capacitor: Registering plugin instance: CapacitorHttp
+09-03 11:04:47.353 22760 22760 D Capacitor: Registering plugin instance: Intercom
+09-03 11:04:47.361 22760 22760 D Capacitor: Registering plugin instance: Contacts
+09-03 11:04:47.370 22760 22760 D Capacitor: Registering plugin instance: FileOpener
+09-03 11:04:47.375 22760 22760 D Capacitor: Registering plugin instance: CapacitorOcr
+09-03 11:04:47.379 22760 22760 D Capacitor: Registering plugin instance: App
+09-03 11:04:47.385 22760 22760 D Capacitor: Registering plugin instance: Camera
+09-03 11:04:47.392 22760 22760 D Capacitor: Registering plugin instance: Filesystem
+09-03 11:04:47.401 22760 22760 D Capacitor: Registering plugin instance: Haptics
+09-03 11:04:47.408 22760 22760 D Capacitor: Registering plugin instance: Keyboard
+09-03 11:04:47.414 22760 22760 D Capacitor: Registering plugin instance: Preferences
+09-03 11:04:47.423 22760 22760 D Capacitor: Registering plugin instance: PushNotifications
+09-03 11:04:47.434 22760 22760 D Capacitor: Registering plugin instance: StatusBar
+09-03 11:04:47.500 22760 22760 W Capacitor: Unable to read file at path public/plugins
+09-03 11:04:47.514 22760 22760 D Capacitor: Loading app at https://localhost
+09-03 11:04:47.571 22760 22760 I Chrome_InProcGp: type=1400 audit(0.0:1463): avc: denied { write } for name="property_service" dev="tmpfs" ino=3563 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:property_socket:s0 tclass=sock_file permissive=1 app=io.ionic.starter
+09-03 11:04:47.574 22760 22841 I mali_so : [File] : hardware/rockchip/mali_so/driver/product/base/src/mali_base_kbase.c; [Line] : 1311; [Func] : base_context_deal_with_version_affairs_rk_ext;
+09-03 11:04:47.574 22760 22841 I mali_so : arm_release_ver of this mali_so is 'g2p0-01eac0', rk_so_ver is '8@0 '.
+09-03 11:04:47.574 22760 22841 I mali_so : [File] : hardware/rockchip/mali_so/driver/product/base/src/mali_base_kbase.c; [Line] : 1327; [Func] : base_context_deal_with_version_affairs_rk_ext;
+09-03 11:04:47.574 22760 22841 I mali_so : arm_release_vers are match. to set the full mali_ver 'g2p0-01eac0-x-8@0' as value of 'sys.gmali.version'.
+09-03 11:04:47.571 22760 22760 I Chrome_InProcGp: type=1400 audit(0.0:1464): avc: denied { connectto } for path="/dev/socket/property_service" scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1 app=io.ionic.starter
+09-03 11:04:47.592   155   155 I hwservicemanager: getTransport: Cannot find entry android.hardware.configstore@1.0::ISurfaceFlingerConfigs/default in either framework or device manifest.
+09-03 11:04:47.593 22797 22819 I cr_LibraryLoader: Successfully loaded native library
+09-03 11:04:47.598 22797 22819 I cr_CachingUmaRecorder: Flushed 2 samples from 2 histograms, 0 samples were dropped.
+09-03 11:04:47.600 22797 22819 W chromium: [WARNING:content/app/android/content_main_android.cc:82] android_setCpu already initialized
+09-03 11:04:47.631 22760 22818 D Capacitor: Handling local request: https://localhost/
+09-03 11:04:47.632 22760 22760 W o.ionic.starte: Accessing hidden method Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder; (greylist, linking, allowed)
+09-03 11:04:47.633 22797 22819 W chromium: [WARNING:content/child/runtime_features.cc:542] Fenced frames cannot be enabled in this configuration. Use --enable-features=FencedFrames instead.
+09-03 11:04:47.633 22797 22819 W chromium: [WARNING:content/child/runtime_features.cc:567] Topics cannot be enabled in this configuration. Use --enable-features=BrowsingTopics in addition.
+09-03 11:04:47.633 22797 22819 W chromium: [WARNING:content/child/runtime_features.cc:588] SharedStorage cannot be enabled in this configuration. Use --enable-features=SharedStorageAPI in addition.
+09-03 11:04:47.638 22797 22855 I chromium: [INFO:third_party/skia/src/ports/SkFontMgr_android_parser.cpp:724] [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+09-03 11:04:47.638 22797 22855 I chromium:
+09-03 11:04:47.683 22760 22760 D SMDTAPI : get service binder :android.app.smdt.ISmdtManagerNew$Stub$Proxy@f159889
+09-03 11:04:47.683 22760 22760 D DMAccessUtil: SmdtManagerNew initialized
+09-03 11:04:47.699  1081  1372 I FontLog : Received query name=Google Sans&weight=700&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:04:47.700  1081  1372 I FontLog : Query [name=Google Sans&weight=700&besteffort=false] resolved to {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.707  1081  1372 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.708  1081  1372 I FontLog : Fetch {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:04:47.737  1081  1372 I FontLog : Pulling font file for id = 59, cache size = 7 [CONTEXT service_id=132 ]
+09-03 11:04:47.758  1081  1372 I FontLog : Received query name=Noto Color Emoji Compat&weight=400&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:04:47.765  1081  1372 I FontLog : Query [name=Noto Color Emoji Compat&weight=400&besteffort=false] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.775  1081  1372 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:04:47.782  1081  1103 I FontLog : Pulling font file for id = 60, cache size = 8 [CONTEXT service_id=132 ]
+09-03 11:04:47.791 22760 22760 D Capacitor: App started
+09-03 11:04:47.795  1081  1103 I FontLog : Received query name=Google Sans Flex&weight=400&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:04:47.796  1081  1103 I FontLog : Query [name=Google Sans Flex&weight=400&besteffort=false] resolved to {Google Sans Flex, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.798 22760 22760 D Capacitor/AppPlugin: Firing change: true
+09-03 11:04:47.799 22760 22760 V Capacitor/AppPlugin: Notifying listeners for event appStateChange
+09-03 11:04:47.799 22760 22760 D Capacitor/AppPlugin: No listeners found for event appStateChange
+09-03 11:04:47.800  1081  1103 I FontLog : Font PFD returned from cache for {Google Sans Flex, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.801  1081  1103 I FontLog : Fetch {Google Sans Flex, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:04:47.801 22760 22760 D Capacitor: App resumed
+09-03 11:04:47.808  1081  1103 I FontLog : Pulling font file for id = 61, cache size = 7 [CONTEXT service_id=132 ]
+09-03 11:04:47.825  1081  1103 I FontLog : Received query name=Google Sans&weight=400&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:04:47.826  1081  1103 I FontLog : Query [name=Google Sans&weight=400&besteffort=false] resolved to {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.828  1081  1103 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.828  1081  1103 I FontLog : Fetch {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:04:47.836  1081  1103 I FontLog : Pulling font file for id = 62, cache size = 7 [CONTEXT service_id=132 ]
+09-03 11:04:47.872 22760 22863 I CameraManagerGlobal: Connecting to camera service
+09-03 11:04:47.878   311  3749 W ServiceManager: Permission failure: android.permission.CAMERA_OPEN_CLOSE_LISTENER from uid=10167 pid=22760
+09-03 11:04:47.904 22760 22760 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+09-03 11:04:47.904 22760 22760 I cr_PolicyProvider: #notifySettingsAvailable() 0
+09-03 11:04:47.904 22760 22760 I cr_CombinedPProvider: #onSettingsAvailable() 0
+09-03 11:04:47.904 22760 22760 I cr_CombinedPProvider: #flushPolicies()
+09-03 11:04:47.921 22760 22760 I Choreographer: Skipped 91 frames!  The application may be doing too much work on its main thread.
+09-03 11:04:47.939  1081  1103 I FontLog : Received query name=Google Sans&weight=500&besteffort=false, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:04:47.939  1081  1103 I FontLog : Query [name=Google Sans&weight=500&besteffort=false] resolved to {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:47.961 22797 22797 I CrRendererMain: type=1400 audit(0.0:1465): avc: denied { open } for path="/dev/__properties__/u:object_r:vendor_default_prop:s0" dev="tmpfs" ino=3537 scontext=u:r:isolated_app:s0:c512,c768 tcontext=u:object_r:vendor_default_prop:s0 tclass=file permissive=1
+09-03 11:04:48.060   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:48.077   242  7110 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:48.094   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:04:48.215 22760 22786 I OpenGLRenderer: Davey! duration=1776ms; Flags=1, IntendedVsync=10529313303841, Vsync=10530781045753, OldestInputEvent=9223372036854775807, NewestInputEvent=0, HandleInputStart=10530796826418, AnimationStart=10530796851501, PerformTraversalsStart=10530798282710, DrawStart=10530935973599, SyncQueued=10530947697725, SyncStart=10530948296808, IssueDrawCommandsStart=10530948436225, SwapBuffers=10531066362028, FrameCompleted=10531090716489, DequeueBufferDuration=1039500, QueueBufferDuration=630584, GpuCompleted=72904454231491229,
+09-03 11:04:48.221 22760 22825 W o.ionic.starte: Long monitor contention with owner ThreadPoolForeg (22869) at java.lang.Object libcore.content.type.MimeMap$MemoizingSupplier.get()(MimeMap.java:403) waiters=0 in java.lang.Object libcore.content.type.MimeMap$MemoizingSupplier.get() for 239ms
+09-03 11:04:48.231 22760 22821 E cr_PlatformSer-Internal: Unable to determine Safe Browsing user opt-in preference. Exception: com.google.android.gms.common.api.ApiException: 17: API: SafetyNet.API is not available on this device. Connection failed with: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:48.231 22760 22821 E cr_AwSupervisedUserDel: Unable to determine if restricted content blocking is required. Exception: com.google.android.gms.common.api.ApiException: 17: API: SafeBrowsing.API is not available on this device. Connection failed with: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:48.272   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:48.325   462   489 I ActivityTaskManager: Displayed io.ionic.starter/.MainActivity: +2s646ms
+09-03 11:04:48.360   462  7926 V WindowManager: getPackagePerformanceMode -- ComponentInfo{io.ionic.starter/io.ionic.starter.MainActivity} -- io.ionic.starter -- mode=0
+09-03 11:04:48.390  1081  1372 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+09-03 11:04:48.391  1081  1372 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+09-03 11:04:48.398  1081  1372 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+09-03 11:04:48.417  1081  1372 I FontLog : Pulling font file for id = 64, cache size = 6 [CONTEXT service_id=132 ]
+09-03 11:04:48.430  1081  1372 I FontLog : Pulling font file for id = 64, cache size = 6 [CONTEXT service_id=132 ]
+09-03 11:04:48.742   233   300 D AudioHardwareTiny: do_out_standby,out = 0xf4142720,device = 0x2
+09-03 11:04:48.748   233   300 D alsa_route: route_set_controls() set route 24
+09-03 11:04:48.749   233   300 D AudioHardwareTiny: close device
+09-03 11:04:48.751   462 22283 I system_server: oneway function results will be dropped but finished with status OK and parcel size 4
+09-03 11:04:48.797   788   788 I Binder:788_2: type=1400 audit(0.0:1468): avc: denied { read write } for name="smdtio" dev="tmpfs" ino=658 scontext=u:r:system_app:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+09-03 11:04:48.809   788   807 D serial_port: Opening serial port /dev/ttyS7 with flags 0x2
+09-03 11:04:48.810   788   807 D serial_port: open() fd = 123
+09-03 11:04:48.810   788   807 D serial_port: Configuring serial port
+09-03 11:04:48.811   788   807 D SMDTAPI : serial open success
+09-03 11:04:48.835 22760 22760 E MainActivity: DERK USB Card Reader inisialisasi sukses!
+09-03 11:04:48.850 22760 22875 I UsbHidManager: usb设备：android.hardware.usb.UsbManager@203b99d
+09-03 11:04:48.865 22760 22875 I UsbHidManager: usb设备：12
+09-03 11:04:48.869 22760 22875 I UsbHidManager: 找到设备
+09-03 11:04:48.875 22760 22875 D UsbHidManager:  UsbInterface[mId=0,mAlternateSetting=0,mName=null,mClass=3,mSubclass=0,mProtocol=0,mEndpoints=[
+09-03 11:04:48.875 22760 22875 D UsbHidManager: UsbEndpoint[mAddress=130,mAttributes=3,mMaxPacketSize=64,mInterval=1]
+09-03 11:04:48.875 22760 22875 D UsbHidManager: UsbEndpoint[mAddress=1,mAttributes=3,mMaxPacketSize=64,mInterval=1]]
+09-03 11:04:48.885     0     0 W usb 2-1.2: usbfs: process 3703 (Thread-19) did not claim interface 0 before use
+09-03 11:04:48.884 22760 22875 D UsbDeviceConnectionJNI: close
+09-03 11:04:49.442 22760 22818 D Capacitor: Handling local request: https://localhost/common.462521a78df2ead5.js
+09-03 11:04:49.452 22760 22820 D Capacitor: Handling local request: https://localhost/7720.21b4830628196df0.js
+09-03 11:04:49.565 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083769, pluginId: App, methodName: addListener
+09-03 11:04:49.566 22760 22818 D Capacitor: Handling local request: https://localhost/1703.cab5e9fc7b79c18d.js
+09-03 11:04:49.567 22760 22760 V Capacitor: callback: 9083769, pluginId: App, methodName: addListener, methodData: {"eventName":"appStateChange"}
+09-03 11:04:49.587 22760 22820 D Capacitor: Handling local request: https://localhost/5948.04de4f7a069df57b.js
+09-03 11:04:49.731 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: RUN INITIAL SOCKET
+09-03 11:04:49.756 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083770, pluginId: Preferences, methodName: get
+09-03 11:04:49.758 22760 22760 V Capacitor: callback: 9083770, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:04:49.785 22760 22821 D Capacitor: Handling local request: https://localhost/7927.0b4f4beb2bf9d78d.js
+09-03 11:04:49.785 22760 22820 D Capacitor: Handling local request: https://localhost/9364.45ccf879540ccc24.js
+09-03 11:04:49.801 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbnRlcmNvbV9pZCI6MzYsImludGVyY29tX25hbWUiOiJNYWluIERldiA0IiwicHJvamVjdF9pZCI6MjQ2LCJwcm9qZWN0X25hbWUiOiJEZXYgVGVzdGluZyBSZXNpZGVudGlhbCAoVGVzdGluZykiLCJwcm9qZWN0X2FkZHJlc3MiOiJEZXYgQ29uZG8gMjMgQUJDIFN0cmVldCBTaW5nYXBvcmUgMTIzNDU2IiwiZmFtaWx5X2lkIjoiSW50ZXJjb20tMzYiLCJwcm9qZWN0X3R5cGUiOiJSZXNpZGVudGlhbCIsImxvZ2luX2NvZGUiOiJNNDMiLCJleHAiOjMzMjkyODcyMDY3LCJyb29tIjpmYWxzZSwiaXNfZ3ltIjpmYWxzZX0.mOoW9aYEJaQ9qWyutQPVh5tZMkOFfbg-_IKDHE7Jw9Q
+09-03 11:04:49.804 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: /
+09-03 11:04:49.850 22760 22821 D Capacitor: Handling local request: https://localhost/1904.344794facd69dc7a.js
+09-03 11:04:49.862 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083771, pluginId: App, methodName: addListener
+09-03 11:04:49.862 22760 22760 V Capacitor: callback: 9083771, pluginId: App, methodName: addListener, methodData: {"eventName":"backButton"}
+09-03 11:04:49.941 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083772, pluginId: Preferences, methodName: get
+09-03 11:04:49.942 22760 22760 V Capacitor: callback: 9083772, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:04:49.973 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbnRlcmNvbV9pZCI6MzYsImludGVyY29tX25hbWUiOiJNYWluIERldiA0IiwicHJvamVjdF9pZCI6MjQ2LCJwcm9qZWN0X25hbWUiOiJEZXYgVGVzdGluZyBSZXNpZGVudGlhbCAoVGVzdGluZykiLCJwcm9qZWN0X2FkZHJlc3MiOiJEZXYgQ29uZG8gMjMgQUJDIFN0cmVldCBTaW5nYXBvcmUgMTIzNDU2IiwiZmFtaWx5X2lkIjoiSW50ZXJjb20tMzYiLCJwcm9qZWN0X3R5cGUiOiJSZXNpZGVudGlhbCIsImxvZ2luX2NvZGUiOiJNNDMiLCJleHAiOjMzMjkyODcyMDY3LCJyb29tIjpmYWxzZSwiaXNfZ3ltIjpmYWxzZX0.mOoW9aYEJaQ9qWyutQPVh5tZMkOFfbg-_IKDHE7Jw9Q
+09-03 11:04:49.974 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: /main-intercom
+09-03 11:04:50.068 22760 22820 D Capacitor: Handling local request: https://localhost/5197.aa9994ed22d81b68.js
+09-03 11:04:50.078 22760 22821 D Capacitor: Handling local request: https://localhost/441.e9cfae45601880a4.js
+09-03 11:04:50.081 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083773, pluginId: Keyboard, methodName: getResizeMode
+09-03 11:04:50.082 22760 22760 V Capacitor: callback: 9083773, pluginId: Keyboard, methodName: getResizeMode, methodData: {}
+09-03 11:04:50.083 22760 22838 D Capacitor: Sending plugin error: {"save":false,"callbackId":"9083773","pluginId":"Keyboard","methodName":"getResizeMode","success":false,"error":{"message":"not implemented","code":"UNIMPLEMENTED"}}
+09-03 11:04:50.090 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: RUN INITIAL SOCKET
+09-03 11:04:50.093 22760 22760 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: TEST INIT
+09-03 11:04:50.094 22760 22760 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: FS_INTERCOM: Web App successfully initialized with WebRTC updates!
+09-03 11:04:50.147 22760 22820 D Capacitor: Handling local request: https://localhost/2484.38c7c43d2ecdfeaf.js
+09-03 11:04:50.150 22760 22821 D Capacitor: Handling local request: https://localhost/8462.4195f373df06c935.js
+09-03 11:04:50.165 22760 22820 D Capacitor: Handling local request: https://localhost/845.2422f3e9e1549a81.js
+09-03 11:04:50.170 22760 22821 D Capacitor: Handling local request: https://localhost/1053.de2143bc865fbf2e.js
+09-03 11:04:50.189 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083774, pluginId: Preferences, methodName: get
+09-03 11:04:50.189 22760 22760 V Capacitor: callback: 9083774, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:04:50.198 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083775, pluginId: Intercom, methodName: addListener
+09-03 11:04:50.198 22760 22760 V Capacitor: callback: 9083775, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"faceDetected"}
+09-03 11:04:50.201 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083776, pluginId: Intercom, methodName: addListener
+09-03 11:04:50.201 22760 22760 V Capacitor: callback: 9083776, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"faceRecognized"}
+09-03 11:04:50.205 22760 22820 D Capacitor: Handling local request: https://localhost/assets/logoIFS.png
+09-03 11:04:50.206 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083777, pluginId: Intercom, methodName: addListener
+09-03 11:04:50.207 22760 22760 V Capacitor: callback: 9083777, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"sendToastMessage"}
+09-03 11:04:50.209 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083778, pluginId: Intercom, methodName: addListener
+09-03 11:04:50.210 22760 22760 V Capacitor: callback: 9083778, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"noFace"}
+09-03 11:04:50.212 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083779, pluginId: Intercom, methodName: addListener
+09-03 11:04:50.212 22760 22760 V Capacitor: callback: 9083779, pluginId: Intercom, methodName: addListener, methodData: {"eventName":"faceNearby"}
+09-03 11:04:50.234 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: null
+09-03 11:04:50.240 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083780, pluginId: Preferences, methodName: get
+09-03 11:04:50.240 22760 22760 V Capacitor: callback: 9083780, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:04:50.265 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083781, pluginId: Preferences, methodName: get
+09-03 11:04:50.265 22760 22760 V Capacitor: callback: 9083781, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:04:50.319 22760 22820 D Capacitor: Handling local request: https://localhost/assets/guard.png
+09-03 11:04:50.352 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: null
+09-03 11:04:50.357 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083782, pluginId: Preferences, methodName: get
+09-03 11:04:50.358 22760 22760 V Capacitor: callback: 9083782, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:04:50.361 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: Got userInfo from USER_INFO for Intercom [object Object]
+09-03 11:04:50.363 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: hellooo hereeeee ---> Intercom-36
+09-03 11:04:50.393 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083783, pluginId: Preferences, methodName: get
+09-03 11:04:50.393 22760 22760 V Capacitor: callback: 9083783, pluginId: Preferences, methodName: get, methodData: {"key":"USER_INFO"}
+09-03 11:04:50.421 22760 22820 D Capacitor: Handling local request: https://localhost/8805.81eadbecd3059c43.js
+09-03 11:04:50.423 22760 22821 D Capacitor: Handling local request: https://localhost/4591.41ea4903979ae9ad.js
+09-03 11:04:50.453 22760 22820 D Capacitor: Handling local request: https://localhost/7240.b6a47df1e8bcf1bf.js
+09-03 11:04:50.470 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: Got userInfo from USER_INFO for Intercom [object Object]
+09-03 11:04:50.475 22760 22760 I Capacitor/Console: File: https://localhost/main.d5b5068db735bc86.js - Line 1 - Msg: hellooo hereeeee ---> Intercom-36
+09-03 11:04:51.283   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:51.349 22760 22785 I o.ionic.starte: Waiting for a blocking GC ProfileSaver
+09-03 11:04:52.160   462 22283 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:04:52.161 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:52.161 22760 22834 W GoogleApiManager: The service for WV.iq2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:52.163 22760 22834 W GooglePlayServicesUtil: io.ionic.starter requires the Google Play Store, but it is missing.
+09-03 11:04:52.164 22760 22834 W GoogleApiManager: The service for WV.iq2 is not available: ConnectionResult{statusCode=SERVICE_INVALID, resolution=null, message=null, clientMethodKey=null}
+09-03 11:04:52.716 22760 22818 D Capacitor: Handling local request: https://localhost/assets/icon/favicon.png
+09-03 11:04:52.718 22760 22818 E Capacitor: Unable to open asset URL: https://localhost/assets/icon/favicon.png
+09-03 11:04:52.722 22760 22818 I chatty  : uid=10167(io.ionic.starter) ThreadPoolForeg identical 2 lines
+09-03 11:04:52.723 22760 22818 E Capacitor: Unable to open asset URL: https://localhost/assets/icon/favicon.png
+09-03 11:04:52.934 22760 22884 D ProfileInstaller: Installing profile for io.ionic.starter
+09-03 11:04:54.289   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:04:54.448     0     0 W RTW     : recv_decache: tid=0 seq=1309 frag=0
+09-03 11:04:56.081     0     0 W RTW     : rtl8723d_fill_default_txdesc(wlan0): SP Packet(0x0806) rate=0x0 SeqNum = 3131
+09-03 11:04:59.255     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:04:57.297   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:00.004   604   604 D KeyguardClockSwitch: Updating clock: 11:05 AM
+09-03 11:05:00.305   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:01.389     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:05:03.108  1081 22430 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 10605983]
+09-03 11:05:03.112  1081 22430 W WakeLock: GCM_HB_ALARM release without a matched acquire! [CONTEXT service_id=259 ]
+09-03 11:05:03.113  1081 22430 E WakeLock: GCM_HB_ALARM should be held! [CONTEXT service_id=259 ]
+09-03 11:05:03.114  1081 22430 E WakeLock: GCM_WORK should be held! [CONTEXT service_id=259 ]
+09-03 11:05:03.297  1081 21857 V NativeCrypto: Read error: ssl=0xb40000770ed17e58: I/O error during system call, Connection reset by peer
+09-03 11:05:03.299  1081 21857 E WakeLock: GCM_READ should be held! [CONTEXT service_id=259 ]
+09-03 11:05:03.300  1081 22430 V NativeCrypto: SSL shutdown failed: ssl=0xb40000770ed17e58: I/O error during system call, Broken pipe
+09-03 11:05:03.302  1081 22430 W WakeLock: GCM_HB_ALARM release without a matched acquire! [CONTEXT service_id=259 ]
+09-03 11:05:03.302  1081 22430 W WakeLock: GCM_HB_ALARM counter does not exist
+09-03 11:05:03.313  1081 22430 E WakeLock: GCM_WORK should be held! [CONTEXT service_id=259 ]
+09-03 11:05:03.313   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:03.645  1081  9296 I NetworkManagementSocketTagger: tagSocketFd(-1, 1031, -1) failed with errno-9
+09-03 11:05:04.102  1081  1081 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.libs.gmscorelogger.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+09-03 11:05:04.430  1081 21857 E WakeLock: GCM_WORK should be held! [CONTEXT service_id=259 ]
+09-03 11:05:04.431  1081 21857 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 10727306]
+09-03 11:05:04.434  1081 21857 E WakeLock: GCM_WORK should be held! [CONTEXT service_id=259 ]
+09-03 11:05:04.885  1081 22902 E WakeLock: GCM_READ should be held! [CONTEXT service_id=259 ]
+09-03 11:05:04.887  1081 22902 E WakeLock: GCM_READ should be held! [CONTEXT service_id=259 ]
+09-03 11:05:04.889  1081 22430 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 10727764]
+09-03 11:05:04.892  1081 22430 E WakeLock: GCM_CONN_ALARM should be held! [CONTEXT service_id=259 ]
+09-03 11:05:04.900  1081 22430 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 10727775]
+09-03 11:05:04.903  1081 22430 E WakeLock: GCM_WORK should be held! [CONTEXT service_id=259 ]
+09-03 11:05:06.322   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:07.347   788 22130 D SMDTAPI : serial read: 9
+09-03 11:05:07.347   788 22130 D SMDTAPI : isBinderAlive:true
+09-03 11:05:07.350     0     0 I binder  : 788:22130 transaction failed 29189/-22, size 164-0 line 3063
+09-03 11:05:07.349   788 22130 W System.err: android.os.DeadObjectException
+09-03 11:05:07.350   788 22130 W System.err:    at android.os.BinderProxy.transactNative(Native Method)
+09-03 11:05:07.350   788 22130 W System.err:    at android.os.BinderProxy.transact(BinderProxy.java:550)
+09-03 11:05:07.350   788 22130 W System.err:    at android.app.smdt.IDataReceiveObserver$Stub$Proxy.onDataReceive(IDataReceiveObserver.java:96)
+09-03 11:05:07.350   788 22130 W System.err:    at android.app.smdt.server.SmdtServiceNew$7.onDataReceive(SmdtServiceNew.java:3887)
+09-03 11:05:07.350   788 22130 W System.err:    at android_serialport_api.SerialPortUtils$ReadThread.run(SerialPortUtils.java:144)
+09-03 11:05:09.333   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:09.372   788 22278 D SMDTAPI : serial read: 9
+09-03 11:05:09.372   788 22278 D SMDTAPI : isBinderAlive:true
+09-03 11:05:09.375     0     0 I binder  : 788:22278 transaction failed 29189/-22, size 164-0 line 3063
+09-03 11:05:09.374   788 22278 W System.err: android.os.DeadObjectException
+09-03 11:05:09.374   788 22278 W System.err:    at android.os.BinderProxy.transactNative(Native Method)
+09-03 11:05:09.375   788 22278 W System.err:    at android.os.BinderProxy.transact(BinderProxy.java:550)
+09-03 11:05:09.375   788 22278 W System.err:    at android.app.smdt.IDataReceiveObserver$Stub$Proxy.onDataReceive(IDataReceiveObserver.java:96)
+09-03 11:05:09.375   788 22278 W System.err:    at android.app.smdt.server.SmdtServiceNew$7.onDataReceive(SmdtServiceNew.java:3887)
+09-03 11:05:09.375   788 22278 W System.err:    at android_serialport_api.SerialPortUtils$ReadThread.run(SerialPortUtils.java:144)
+09-03 11:05:09.648   788 22647 D SMDTAPI : serial read: 9
+09-03 11:05:09.648   788 22647 D SMDTAPI : isBinderAlive:true
+09-03 11:05:09.650   788 22647 W System.err: android.os.DeadObjectException
+09-03 11:05:09.650     0     0 I binder  : 788:22647 transaction failed 29189/-22, size 164-0 line 3063
+09-03 11:05:09.650   788 22647 W System.err:    at android.os.BinderProxy.transactNative(Native Method)
+09-03 11:05:09.650   788 22647 W System.err:    at android.os.BinderProxy.transact(BinderProxy.java:550)
+09-03 11:05:09.650   788 22647 W System.err:    at android.app.smdt.IDataReceiveObserver$Stub$Proxy.onDataReceive(IDataReceiveObserver.java:96)
+09-03 11:05:09.650   788 22647 W System.err:    at android.app.smdt.server.SmdtServiceNew$7.onDataReceive(SmdtServiceNew.java:3887)
+09-03 11:05:09.650   788 22647 W System.err:    at android_serialport_api.SerialPortUtils$ReadThread.run(SerialPortUtils.java:144)
+09-03 11:05:10.231   788 22874 D SMDTAPI : serial read: 9
+09-03 11:05:10.231   788 22874 D SMDTAPI : isBinderAlive:true
+09-03 11:05:10.388 22760 22760 D CompatibilityChangeReporter: Compat change id reported: 147798919; UID 10167; state: ENABLED
+09-03 11:05:10.419 22760 22912 I CapacitorCookies: Getting cookies at: 'https://ifs360-sg.com/api/qr'
+09-03 11:05:10.451   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:05:10.453   242   242 I chatty  : uid=1000(system) allocator@4.0-s identical 1 line
+09-03 11:05:10.454   242   242 I gralloc4: use RK_GRALLOC_USAGE_WITHIN_4G
+09-03 11:05:10.698   788 22874 D SMDTAPI : serial read: 9
+09-03 11:05:10.698   788 22874 D SMDTAPI : isBinderAlive:true
+09-03 11:05:10.972   788 22874 D SMDTAPI : serial read: 9
+09-03 11:05:10.972   788 22874 D SMDTAPI : isBinderAlive:true
+09-03 11:05:11.524  1570  1570 I Timer-1 : type=1400 audit(0.0:1471): avc: denied { lock } for path="/data/db/heystar_db" dev="mmcblk2p16" ino=3453650 scontext=u:r:system_app:s0 tcontext=u:object_r:system_data_root_file:s0 tclass=file permissive=1
+09-03 11:05:11.524  1570  1570 I Timer-1 : type=1400 audit(0.0:1472): avc: denied { getattr } for path="/data/db/heystar_db-journal" dev="mmcblk2p16" ino=3453651 scontext=u:r:system_app:s0 tcontext=u:object_r:system_data_root_file:s0 tclass=file permissive=1
+09-03 11:05:12.108 22760 22912 D IntercomPlugin: sendToastMessage(): message=Failed to open the door, is_success=false
+09-03 11:05:12.109 22760 22912 V Capacitor/IntercomPlugin: Notifying listeners for event sendToastMessage
+09-03 11:05:12.111 22760 22912 E MainActivity: Proses backend QR selesai. Response: {"jsonrpc": "2.0", "id": null, "result": {"response_code": 404, "error": "Intercom not found", "open_door": false}}
+09-03 11:05:12.131 22760 22820 D Capacitor: Handling local request: https://localhost/2415.a701a5c33b82c080.js
+09-03 11:05:12.341   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:12.405   186   505 E BufferQueueProducer: [Toast#0](id:ba0000008d,api:0,p:-1,c:186) disconnect: not connected (req=1)
+09-03 11:05:12.406   604  1033 W libEGL  : EGLNativeWindowType 0xb4000077fee91c20 disconnect failed
+09-03 11:04:52.163   462 22283 I AppsFilter: interaction: PackageSetting{dbc6bae io.ionic.starter/10167} -> PackageSetting{3d15ff0 com.android.vending/10078} BLOCKED
+09-03 11:05:12.423   462  8039 W NotificationService: Toast already killed. pkg=io.ionic.starter token=android.os.BinderProxy@4763f2d
+09-03 11:05:13.925   462   484 W WindowManager: Unable to start animation, surface is null or no children.
+09-03 11:05:15.354   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:18.455     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:05:18.363   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:19.166  1081  1081 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.libs.gmscorelogger.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+09-03 11:05:20.084 22760 22760 W o.ionic.starte: Accessing hidden method Landroid/view/MotionEvent;->getEventTimeNano()J (greylist, reflection, allowed)
+09-03 11:05:20.103 22760 22760 W o.ionic.starte: Accessing hidden method Landroid/view/MotionEvent;->getHistoricalEventTimeNano(I)J (greylist-max-o, reflection, denied)
+09-03 11:05:20.153 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083784, pluginId: Intercom, methodName: startScan
+09-03 11:05:20.154 22760 22760 V Capacitor: callback: 9083784, pluginId: Intercom, methodName: startScan, methodData: {}
+09-03 11:05:20.154 22760 22838 D IntercomPlugin: startScan() dipanggil dari Ionic JS
+09-03 11:05:20.199 22760 22927 I Sentinel Envelope: Protected with Sentinel Envelope for android native (ELF ARM and AARCH64) applications, Version 4.0.15775.60001
+09-03 11:05:20.199 22760 22927 I Sentinel Envelope: Warning::new_libfacepassandroid.so is not loaded from java code via system.loadlibrary(). Application may not work as expected.
+09-03 11:05:20.221 22760 22927 I Sentinel Envelope: Protected with Sentinel Envelope for android native (ELF ARM and AARCH64) applications, Version 4.0.15775.60001
+09-03 11:05:20.294 22760 22927 D FacePassHandler: initSDK success.
+09-03 11:05:20.454 22760 22760 I Thread-4: type=1400 audit(0.0:1473): avc: denied { read write } for name="atsh204a-enc" dev="tmpfs" ino=3759 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1 app=io.ionic.starter
+09-03 11:05:20.461 22760 22760 I Thread-4: type=1400 audit(0.0:1474): avc: denied { open } for path="/dev/atsh204a-enc" dev="tmpfs" ino=3759 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1 app=io.ionic.starter
+09-03 11:05:20.469 22760 22775 I o.ionic.starte: Background concurrent copying GC freed 90268(3941KB) AllocSpace objects, 14(280KB) LOS objects, 30% free, 55MB/79MB, paused 304us total 165.919ms
+09-03 11:05:20.461 22760 22760 I Thread-4: type=1400 audit(0.0:1475): avc: denied { ioctl } for path="/dev/atsh204a-enc" dev="tmpfs" ino=3759 ioctlcmd=0x401 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1 app=io.ionic.starter
+09-03 11:05:20.589     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:05:20.961 22760 22927 W o.ionic.starte: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (greylist, JNI, allowed)
+09-03 11:05:20.961 22760 22927 W o.ionic.starte: Accessing hidden method Landroid/app/ActivityThread;->getApplication()Landroid/app/Application; (greylist, JNI, allowed)
+09-03 11:05:20.961 22760 22760 I Thread-4: type=1400 audit(0.0:1476): avc: denied { ioctl } for path="socket:[450925]" dev="sockfs" ino=450925 ioctlcmd=0x8927 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tclass=tcp_socket permissive=1 app=io.ionic.starter
+09-03 11:05:20.969     0     0 W audit   : audit_lost=499 audit_rate_limit=5 audit_backlog_limit=64
+09-03 11:05:20.969     0     0 E audit   : rate limit exceeded
+09-03 11:05:20.964 22760 22760 I Thread-4: type=1400 audit(0.0:1477): avc: denied { read } for name="u:object_r:firstboot_prop:s0" dev="tmpfs" ino=3469 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:firstboot_prop:s0 tclass=file permissive=1 app=io.ionic.starter
+09-03 11:05:21.368   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:21.867 22760 22760 I Thread-4: type=1400 audit(0.0:1481): avc: denied { read } for name="devices" dev="sysfs" ino=13584 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1 app=io.ionic.starter
+09-03 11:05:21.875 22760 22927 E FacePassAuth: Java facepplus don't prepare >>>
+09-03 11:05:21.867 22760 22760 I Thread-4: type=1400 audit(0.0:1483): avc: denied { read } for name="idVendor" dev="sysfs" ino=29215 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1 app=io.ionic.starter
+09-03 11:05:21.876 22760 22927 D FacePassAuth: Java check check auth failed >>>
+09-03 11:05:21.880 22760 22927 E InitFacePassHandler: Exception in InitFacePassHandler: need initSDK first or auth.
+09-03 11:05:21.880 22760 22927 E InitFacePassHandler: mcv.facepass.FacePassException: need initSDK first or auth.
+09-03 11:05:21.880 22760 22927 E InitFacePassHandler:   at mcv.facepass.FacePassHandler.initHandle(FacePassHandler.java:136)
+09-03 11:05:21.880 22760 22927 E InitFacePassHandler:   at io.ionic.starter.facepass.InitFacePassHandler.lambda$init$0(InitFacePassHandler.java:64)
+09-03 11:05:21.880 22760 22927 E InitFacePassHandler:   at io.ionic.starter.facepass.InitFacePassHandler$$ExternalSyntheticLambda0.run(Unknown Source:4)
+09-03 11:05:21.880 22760 22927 E InitFacePassHandler:   at java.lang.Thread.run(Thread.java:923)
+09-03 11:05:21.887 22760 22927 D Capacitor: Sending plugin error: {"save":false,"callbackId":"9083784","pluginId":"Intercom","methodName":"startScan","success":false,"error":{"message":"Gagal inisialisasi FacePass SDK"}}
+09-03 11:05:21.867 22760 22760 I Thread-4: type=1400 audit(0.0:1484): avc: denied { open } for path="/sys/devices/platform/fd880000.usb/usb2/2-1/2-1.2/idVendor" dev="sysfs" ino=29215 scontext=u:r:untrusted_app:s0:c167,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1 app=io.ionic.starter
+09-03 11:05:21.906 22760 22760 E Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Error starting face recognition: Error: Gagal inisialisasi FacePass SDK
+09-03 11:05:23.420   462   462 W WindowManager: removeWindowToken: Attempted to remove non-existing token: android.os.Binder@b9852b2
+09-03 11:05:24.377   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:26.989     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:05:28.168     0     0 W healthd : battery l=50 v=3 t=2.6 h=2 st=3 fc=100 chg=au
+09-03 11:05:27.392   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:28.899 22760 22760 V Capacitor/Plugin: To native (Capacitor plugin): callbackId: 9083785, pluginId: Intercom, methodName: stopScan
+09-03 11:05:28.899 22760 22760 V Capacitor: callback: 9083785, pluginId: Intercom, methodName: stopScan, methodData: {}
+09-03 11:05:28.899 22760 22838 D IntercomPlugin: stopScan() dipanggil dari Ionic JS
+09-03 11:05:28.902 22760 22838 D FacePassHelper: FacePass scanning stopped
+09-03 11:05:28.946 22760 22760 I Capacitor/Console: File:  - Line 353 - Msg: undefined
+09-03 11:05:28.949 22760 22760 I Capacitor/Console: File: https://localhost/1904.344794facd69dc7a.js - Line 1 - Msg: Face recognition stopped
+09-03 11:05:29.122     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:05:30.401   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:30.963  1570  1588 I android.heysta: ThreadFlipBegin blocked for 814.885ms
+09-03 11:05:33.389     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:05:33.410   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:39.027     0     0 W RTW     : cfg80211_rtw_scan(wlan0)
+09-03 11:05:39.027     0     0 W RTW     : WARN cfg80211_rtw_scan (wlan0) : scan abort!! BusyTraffic
+09-03 11:05:36.420   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:39.032   462 22740 D WifiNl80211Manager: Scan result ready event
+09-03 11:05:39.032   462 22740 D WifiNative: Scan result ready event
+09-03 11:05:39.033   462   481 I EthernetTracker: interfaceLinkStateChanged, iface: wlan0, up: true
+09-03 11:05:39.050   462   549 E WifiVendorHal: getWifiLinkLayerStats_1_3_Internal(l.973) failed {.code = ERROR_UNKNOWN, .description = unknown error}
+09-03 11:05:39.789     0     0 W RTW     : Turbo EDCA =0x5ea42b
+09-03 11:05:42.387     0     0 W RTW     : rtl8723d_fill_default_txdesc(wlan0): SP Packet(0x0806) rate=0x0 SeqNum = 3367
+09-03 11:05:42.408     0     0 W RTW     : rtl8723d_fill_default_txdesc(wlan0): SP Packet(0x0806) rate=0x0 SeqNum = 3370
+09-03 11:05:42.408     0     0 W RTW     : rtl8723d_fill_default_txdesc(wlan0): SP Packet(0x0806) rate=0x0 SeqNum = 3371
+09-03 11:05:46.189     0     0 W RTW     : Turbo EDCA =0xa42b
+09-03 11:05:48.322     0     0 W RTW     : Turbo EDCA =0x5ea42b
+PS C:\Users\User\Documents\INTERCOM NEW DEVICE\fs_intercom_app\android\app\build\outputs\apk\debug>

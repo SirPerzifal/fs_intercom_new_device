@@ -1,0 +1,124 @@
+<div [class]="'flex flex-col ' + getFilteredClasses(customClasses)">
+  <label class="text-2xl" [class]="labelResidentClass" *ngIf="labelText"
+    ><b
+      ><u>{{ labelText }}</u></b
+    ></label
+  >
+  <label [class]="labelResidentClass" *ngIf="labelResidentText">{{
+    labelResidentText
+  }}</label>
+
+  <!-- Displayed Input -->
+  <div class="flex flex-row items-center w-full">
+    <input
+      *ngIf="type === 'month' && !isMonthPickerActive"
+      [id]="id + '-display'"
+      [class]="getFilteredCustomClasses(customInputClasses)"
+      type="text"
+      [placeholder]="''"
+      [value]="_displayValue || placeholder"
+      readonly
+      (click)="showMonthPicker()"
+      style="border: 1px solid #6b7280; cursor: pointer"
+    />
+
+    <!-- Hidden month picker -->
+    <input
+      *ngIf="type === 'month'"
+      [id]="id"
+      [class]="getFilteredCustomClasses(customInputClasses)"
+      type="month"
+      [(ngModel)]="value"
+      (change)="onMonthInputChange($event)"
+      [name]="name"
+      [readonly]="isReadonly"
+      [style.position]="!isMonthPickerActive ? 'absolute' : 'static'"
+      [style.opacity]="!isMonthPickerActive ? '0' : '1'"
+      [style.pointerEvents]="!isMonthPickerActive ? 'none' : 'auto'"
+      style="border: 1px solid #6b7280"
+    />
+    <input
+      *ngIf="type === 'time'"
+      [id]="id"
+      [class]="getFilteredCustomClasses(customInputClasses)"
+      type="time"
+      [placeholder]="''"
+      [(ngModel)]="value"
+      (keyup)="onKeyUp($event)"
+      [name]="name"
+      [readonly]="isReadonly"
+      [min]="minTime"
+      [max]="maxTime"
+      (click)="onDisplayInputClick()"
+      style="border: 1px solid #6b7280"
+    />
+    <input
+      *ngIf="
+        type !== 'date' &&
+        type !== 'time' &&
+        type !== 'month' &&
+        type !== 'textarea'
+      "
+      [id]="id"
+      [class]="getFilteredCustomClasses(customInputClasses)"
+      [type]="type"
+      [placeholder]="showPlaceholder ? placeholder : ''"
+      [(ngModel)]="value"
+      (keyup)="onKeyUp($event)"
+      [name]="name"
+      [readonly]="isReadonly"
+      [autocomplete]="autoComplete"
+      [min]="type === 'date' ? min : null"
+      [max]="type === 'date' ? max : null"
+      style="border: 1px solid #6b7280"
+    />
+    <textarea
+      [id]="id"
+      rows="4"
+      [name]="name"
+      *ngIf="type === 'textarea'"
+      [rows]="rows"
+      [class]="textAreaClass"
+      [placeholder]="showPlaceholder ? placeholder : ''"
+      (keyup)="onKeyUp($event)"
+    ></textarea>
+    <input
+      *ngIf="type === 'date'"
+      [id]="id"
+      [class]="getFilteredCustomClasses(customInputClasses)"
+      type="text"
+      [placeholder]="showPlaceholder ? placeholder : ''"
+      [(ngModel)]="value"
+      (keyup)="onKeyUp($event)"
+      [name]="name"
+      (click)="onDisplayInputClick()"
+      [min]="type === 'date' ? min : null"
+      [max]="type === 'date' ? max : null"
+      [style]="
+        'border: 1px solid #6B7280; cursor: pointer; ' +
+        (isReadonly
+          ? ' background-color: #F5F5F5; color: #7D8390; '
+          : ' background-color: white; color: black; ')
+      "
+      readonly
+    />
+    <ion-icon
+      *ngIf="type === 'date'"
+      name="calendar-clear-outline"
+      class="positioning-calendar-icon"
+    ></ion-icon>
+  </div>
+
+  <!-- Hidden Date Picker -->
+  <input
+    *ngIf="type === 'date'"
+    [id]="id + '-date-picker'"
+    type="date"
+    [min]="min"
+    [max]="type === 'date' ? max : null"
+    [ngModel]="hiddenDateValue"
+    (ngModelChange)="value = $event"
+    (change)="onDateInputChange($event)"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px"
+  />
+</div>

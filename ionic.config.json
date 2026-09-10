@@ -1,0 +1,7 @@
+{
+  "name": "focus_security",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
