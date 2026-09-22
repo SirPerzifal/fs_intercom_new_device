@@ -75,6 +75,17 @@ public class MainActivity extends BridgeActivity {
                 Log.e(TAG, ">>> [BOOT-INIT-FAIL] Megvii FacePass SDK pre-initialization failed on app launch.");
             }
         });
+
+        // Initialize Bluetooth BLE Door Access Manager
+        try {
+            String deviceSerial = getDeviceSerial();
+            io.ionic.starter.ble.BleDoorAccessManager.getInstance().init(this, deviceSerial, autoCloseDelayMs -> {
+                Log.d(TAG, "BLE unlock triggered, opening door via triggerOpenDoor");
+                triggerOpenDoor(autoCloseDelayMs);
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to initialize BleDoorAccessManager: " + e.getMessage(), e);
+        }
     }
 
     private void startLogcatLogging() {
@@ -178,6 +189,9 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        try {
+            io.ionic.starter.ble.BleDoorAccessManager.getInstance().stop();
+        } catch (Exception ignored) {}
         if (smdt != null) {
             try {
                 smdt.custom_releaseWiegandRead();
