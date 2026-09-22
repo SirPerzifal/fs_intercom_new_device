@@ -8,7 +8,10 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import mcv.facepass.FacePassException;
 import mcv.facepass.FacePassHandler;
@@ -28,34 +31,64 @@ public class InitFacePassHandler {
     }
 
     private static boolean initSDKAuth(Context context) {
+        Log.d(TAG, ">>> [CAM-AUTH-START] Verifying FacePass SDK Hardware License...");
         try {
             Context mContext = context.getApplicationContext();
             FacePassHandler.initSDK(mContext, "");
-            if (FacePassHandler.isAuthorized()) {
-                Log.d(TAG, "FacePass isAuthorized() == true");
-                return true;
+
+            // 1. Wait for FacePassHandler.isAvailable() to become true according to Megvii SDK docs (pp. 27-28)
+            Log.d(TAG, "[CAM-AUTH-WAIT] Waiting for FacePassHandler.isAvailable() to be ready...");
+            int retryAvailable = 0;
+            while (!FacePassHandler.isAvailable() && retryAvailable < 30) {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException ignored) {}
+                retryAvailable++;
             }
-            boolean authStatus = FacePassHandler.authCheck_algomall();
-            if (authStatus) {
-                Log.d(TAG, "FacePass authCheck_algomall() == true");
+            Log.d(TAG, "[CAM-AUTH-WAIT] FacePassHandler.isAvailable() status: " + FacePassHandler.isAvailable() + " (after " + (retryAvailable * 200) + "ms)");
+
+            // 2. Check authorization status once SDK is available
+            boolean authorized = FacePassHandler.isAuthorized();
+            Log.d(TAG, "[CAM-AUTH-CHECK] FacePass.isAuthorized() = " + authorized);
+            if (authorized) {
+                Log.d(TAG, ">>> [CAM-AUTH-SUCCESS] ATSH204A Hardware Chipset License Valid & Active!");
                 return true;
             }
 
-            // Single certification attempt using cert file in Download folder
-            String certPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Download" + File.separator + CERT_FILENAME;
-            File certFile = new File(certPath);
+            boolean authStatus = FacePassHandler.authCheck_algomall();
+            Log.d(TAG, "[CAM-AUTH-CHECK] FacePass.authCheck_algomall() = " + authStatus);
+            if (authStatus) {
+                Log.d(TAG, ">>> [CAM-AUTH-SUCCESS] Algomall License Valid!");
+                return true;
+            }
+
+            Log.d(TAG, "[CAM-AUTH-CHECK] Hardware Chip Authorization not valid yet. Checking cert file...");
+
+            // 3. Fallback: Check certificate file in /sdcard/Download/
+            String certDir = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "Download";
+            File certFile = new File(certDir, CERT_FILENAME);
+            Log.d(TAG, "[CAM-AUTH-CERT] Checking certificate file at: " + certFile.getAbsolutePath() + " (Exists: " + certFile.exists() + ")");
+
+            String certContent = "";
             if (certFile.exists()) {
-                String cert = readExternalCert(certFile);
-                if (!TextUtils.isEmpty(cert)) {
-                    int ret = FacePassHandler.auth_algomall(cert.trim());
-                    Log.d(TAG, "FacePass auth_algomall result: " + ret);
-                    return (ret == FacePassAuthCode.FP_AUTH_OK);
+                certContent = readExternalCert(certFile);
+            }
+
+            if (!TextUtils.isEmpty(certContent)) {
+                int ret = FacePassHandler.auth_algomall(certContent.trim());
+                Log.d(TAG, "[CAM-AUTH-CERT] auth_algomall result ret_code: " + ret);
+                boolean isSuccess = (ret == FacePassAuthCode.FP_AUTH_OK);
+                if (isSuccess) {
+                    Log.d(TAG, ">>> [CAM-AUTH-SUCCESS] Offline certificate authorization SUCCESSFUL!");
+                } else {
+                    Log.e(TAG, ">>> [CAM-AUTH-FAIL] Offline certificate authorization FAILED code: " + ret);
                 }
+                return isSuccess;
             } else {
-                Log.w(TAG, "Cert file not found at: " + certPath);
+                Log.w(TAG, "[CAM-AUTH-CERT] Cert file not found in /sdcard/Download!");
             }
         } catch (Exception e) {
-            Log.e(TAG, "Error in initSDKAuth: " + e.getMessage(), e);
+            Log.e(TAG, ">>> [CAM-AUTH-ERROR] Exception initSDKAuth: " + e.getMessage(), e);
         }
         return false;
     }
@@ -76,6 +109,8 @@ public class InitFacePassHandler {
 
     public static void init(Activity activity, IFacePassInit iFacePassInit) {
         if (mFacePassHandler != null) {
+            Log.d(TAG, "[CAM-INIT] Handler already initialized, returning existing instance.");
+            FacePassHelper.getInstance().startPeriodicFaceSync();
             iFacePassInit.result(mFacePassHandler);
             return;
         }
@@ -83,14 +118,19 @@ public class InitFacePassHandler {
         new Thread(() -> {
             try {
                 Context context = activity.getApplicationContext();
+                Log.d(TAG, ">>> [CAM-INIT-START] Starting FacePass SDK initialization in background thread...");
 
                 // 1. Authorize SDK
                 boolean isAuth = initSDKAuth(context);
-                if (!isAuth && !FacePassHandler.isAuthorized()) {
-                    Log.e(TAG, "FacePass SDK authorization failed");
+
+                if (!isAuth && !FacePassHandler.isAuthorized() && !FacePassHandler.authCheck_algomall()) {
+                    Log.e(TAG, ">>> [CAM-INIT-ERROR] FacePass SDK Authorization FAILED! Device unauthorized & license invalid.");
+                    iFacePassInit.result(null);
+                    return;
                 }
 
                 // 2. Initialize Models
+                Log.d(TAG, "[CAM-MODEL] Loading 8 AI binary models from assets...");
                 FacePassConfig config = new FacePassConfig();
                 config.poseBlurModel = FacePassModel.initModel(context.getAssets(), "attr.pose_blur.arm.190630.bin");
                 config.livenessModel = FacePassModel.initModel(context.getAssets(), "liveness.CPU.rgb.G.bin");
@@ -121,12 +161,14 @@ public class InitFacePassHandler {
                 config.fileRootPath = activity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
 
                 mFacePassHandler = new FacePassHandler();
+                Log.d(TAG, "[CAM-INIT-BUILD] Building mFacePassHandler.initHandle(config)...");
                 int ret = mFacePassHandler.initHandle(config);
                 if (ret != 0) {
-                    Log.e(TAG, "Build FacePassHandler failed, error code: " + ret);
+                    Log.e(TAG, ">>> [CAM-INIT-ERROR] Building FacePassHandler FAILED error_code: " + ret);
                     iFacePassInit.result(null);
                     return;
                 }
+                mFacePassHandler.setIRConfig(1.0, 0.0, 1.0, 0.0, 0.3);
 
                 FacePassConfig addFaceConfig = mFacePassHandler.getAddFaceConfig();
                 addFaceConfig.poseThreshold.pitch = 35f;
@@ -152,13 +194,15 @@ public class InitFacePassHandler {
                 }
                 if (!containGroup) {
                     mFacePassHandler.createLocalGroup(GROUP_NAME);
+                    Log.d(TAG, "[CAM-GROUP] Local group " + GROUP_NAME + " created.");
                 }
                 mFacePassHandler.initLocalGroup(GROUP_NAME);
 
-                Log.d(TAG, "FacePass SDK init success!");
+                Log.d(TAG, ">>> [CAM-INIT-SUCCESS] FacePass SDK Successfully Initialized Fully!");
+                FacePassHelper.getInstance().startPeriodicFaceSync();
                 iFacePassInit.result(mFacePassHandler);
             } catch (Exception e) {
-                Log.e(TAG, "Exception in InitFacePassHandler: " + e.getMessage(), e);
+                Log.e(TAG, ">>> [CAM-INIT-EXCEPTION] Exception in InitFacePassHandler: " + e.getMessage(), e);
                 iFacePassInit.result(null);
             }
         }).start();

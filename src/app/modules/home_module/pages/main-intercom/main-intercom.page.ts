@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
-import { faAsterisk, faPhone, faQrcode, faQuestion, faUserTie, faSignOut, faGear, faSync, faSmile } from '@fortawesome/free-solid-svg-icons';
+import { faAsterisk, faPhone, faQrcode, faQuestion, faUserTie, faSignOut, faGear, faSync, faSmile, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { FunctionMainService } from 'src/app/service/function/function-main.service';
@@ -136,6 +136,8 @@ export class MainIntercomPage implements OnInit {
         }
       });
     });
+
+    // Background face image sync is now handled natively in Java via ScheduledExecutorService in FacePassHelper.
   }
 
   // ADD: Face recognition variables
@@ -249,6 +251,31 @@ export class MainIntercomPage implements OnInit {
   faSignOut = faSignOut
   faGear = faGear
   faSync = faSync
+  faUsers = faUsers
+
+  showEnrolledFacesModal = false
+  enrolledFaces: { id: string; name: string }[] = []
+  enrolledFacesSearch = ''
+
+  async openEnrolledFacesModal() {
+    try {
+      this.enrolledFaces = await this.webRtc.getEnrolledFaces();
+    } catch (e) {
+      console.error(e);
+      this.enrolledFaces = [];
+    }
+    this.showEnrolledFacesModal = true;
+  }
+
+  closeEnrolledFacesModal() {
+    this.showEnrolledFacesModal = false;
+  }
+
+  get filteredEnrolledFaces() {
+    if (!this.enrolledFacesSearch) return this.enrolledFaces;
+    const q = this.enrolledFacesSearch.toLowerCase();
+    return this.enrolledFaces.filter(f => (f.name && f.name.toLowerCase().includes(q)) || (f.id && f.id.toString().includes(q)));
+  }
 
   projectInfo: any = {}
   is_gym = false
@@ -502,7 +529,6 @@ export class MainIntercomPage implements OnInit {
   showScanRecognitionModal = false
   scanModalTimeout: ReturnType<typeof setTimeout> | null = null;
 
-
   // Start face recognition scan modal
   async openScanRecognitionModal() {
     this.showScanRecognitionModal = true;
@@ -517,7 +543,6 @@ export class MainIntercomPage implements OnInit {
     try {
       await this.webRtc.startScan();
       console.log('Face recognition started');
-      this.functionMain.presentToast(this.is_en ? 'Face recognition started' : '已启动人脸识别', 'success');
     } catch (error) {
       console.error('Error starting face recognition:', error);
       this.functionMain.presentToast(this.is_en ? 'Failed to start face camera' : '启动人脸识别失败', 'danger');

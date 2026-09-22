@@ -46,6 +46,7 @@ interface IntercomPlugin {
   rebootDevice(): Promise<void>;
   refreshFaceCamera(): Promise<void>;
   restartApp(): Promise<void>;
+  getEnrolledFaces(): Promise<{ faces: { id: string; name: string }[] }>;
 }
 
 const Ringtone = registerPlugin<RingtonePlugin>('Ringtone', {
@@ -1600,5 +1601,14 @@ export class WebRtcService extends ApiService {
     Intercom.closeLed()
   }
 
+  async getEnrolledFaces(): Promise<{ id: string; name: string }[]> {
+    try {
+      const res = await Intercom.getEnrolledFaces();
+      return res && res.faces ? res.faces : [];
+    } catch (e) {
+      console.error('Error fetching enrolled faces from plugin:', e);
+      return [];
+    }
+  }
 
 }

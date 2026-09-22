@@ -118,11 +118,17 @@
       <div class="h-10"></div>
       <img alt="iFS360 logo" src="assets/logoIFS.png" class="max-h-20 max-w-44" />
       <div class="w-full flex flex-row justify-between">
-        <fa-icon [icon]="faGear" (click)="onSettingClick()"
-          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
-        </fa-icon>
+        <div class="flex flex-row space-x-6 items-center">
+          <fa-icon [icon]="faGear" (click)="onSettingClick()"
+            class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
+          </fa-icon>
+          <fa-icon [icon]="faUsers" (click)="openEnrolledFacesModal()"
+            class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer"
+            title="Registered Faces">
+          </fa-icon>
+        </div>
         <fa-icon [icon]="faSignOut" (click)="onLogoutClick()"
-          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
+          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
         </fa-icon>
       </div>
     </div>
@@ -179,11 +185,17 @@
       <div class="h-10"></div>
       <img alt="iFS360 logo" src="assets/logoIFS.png" class="max-h-20 max-w-44" />
       <div class="w-full flex flex-row justify-between">
-        <fa-icon [icon]="faGear" (click)="onSettingClick()"
-          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
-        </fa-icon>
+        <div class="flex flex-row space-x-6 items-center">
+          <fa-icon [icon]="faGear" (click)="onSettingClick()"
+            class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
+          </fa-icon>
+          <fa-icon [icon]="faUsers" (click)="openEnrolledFacesModal()"
+            class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer"
+            title="Registered Faces">
+          </fa-icon>
+        </div>
         <fa-icon [icon]="faSignOut" (click)="onLogoutClick()"
-          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)]">
+          class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
         </fa-icon>
       </div>
     </div>
@@ -227,24 +239,18 @@
             <p class="text-xl font-medium text-[var(--ion-color-primary)]">{{ faceStatus }}</p>
           </div>
 
-          <!-- Camera Reflection / Scanner Box Placeholder (Matches Native SurfaceView 360x310) -->
-          <div class="w-[360px] h-[310px] flex flex-col items-center justify-center p-2 bg-gray-50 border-2 border-dashed border-[var(--ion-color-primary)] rounded-2xl relative mx-auto overflow-hidden">
+          <!-- Camera Reflection / Scanner Box for Native Floating Camera Overlay -->
+          <div class="w-[360px] h-[310px] flex flex-col items-center justify-center p-1 bg-transparent border-2 border-[var(--ion-color-primary)] rounded-2xl relative mx-auto overflow-hidden shadow-lg">
             
-            <!-- Scanning Animation & Visual Frame -->
-            <div class="flex flex-col items-center justify-center" *ngIf="!isRecognizedSuccess">
-              <div class="relative flex justify-center items-center">
-                <fa-icon [icon]="faSmile" class="text-8xl text-[var(--ion-color-primary)] opacity-60 animate-pulse"></fa-icon>
-              </div>
-              <h3 class="font-bold text-center text-xl mt-4 text-gray-700">
-                {{ is_en ? 'Please look at the camera' : '请面向摄像头' }}
-              </h3>
-              <p class="text-sm text-gray-500 mt-1">
+            <!-- Scanning Overlay Text Banner -->
+            <div class="absolute bottom-3 left-0 right-0 text-center bg-black/60 backdrop-blur-sm py-1.5 px-3 mx-4 rounded-lg" *ngIf="!isRecognizedSuccess">
+              <p class="text-xs font-semibold text-white tracking-wide">
                 {{ is_en ? 'Position your face inside the frame' : '请将面部对准识别框' }}
               </p>
             </div>
 
             <!-- Success State -->
-            <div class="flex flex-col items-center justify-center py-2" *ngIf="isRecognizedSuccess">
+            <div class="flex flex-col items-center justify-center py-2 bg-white/90 w-full h-full rounded-xl" *ngIf="isRecognizedSuccess">
               <ion-icon name="checkmark-circle" class="text-green-500" style="font-size: 88px;"></ion-icon>
               <h3 class="font-bold text-center text-2xl mt-2 text-green-600">
                 {{ is_en ? 'Recognition Successful!' : '识别成功！' }}
@@ -325,6 +331,49 @@
               (click)="openSettingSwitch()">{{is_en ? 'Open Settings' : '打开设置'}}</button>
             <!-- <button class="h-20 w-full bg-red-600 text-lg font-bold rounded text-white"
               (click)="rebootDevice()">{{is_en ? 'Reboot Device' : '重启设备'}}</button> -->
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Enrolled Faces Wizard Modal -->
+  <ion-modal id="enrolled-faces-modal" [isOpen]="showEnrolledFacesModal" (didDismiss)="closeEnrolledFacesModal()">
+    <ng-template>
+      <div class="p-6 w-full flex flex-col justify-between h-full bg-white rounded-lg">
+        <div class="flex flex-row justify-between items-center pb-4 border-b">
+          <h2 class="text-2xl font-bold text-[var(--ion-color-primary)]">
+            {{ is_en ? 'Registered Faces List' : '已注册人脸列表' }} ({{ enrolledFaces.length }})
+          </h2>
+          <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 font-bold rounded-lg text-lg text-gray-700" (click)="closeEnrolledFacesModal()">
+            {{ is_en ? 'Close' : '关闭' }}
+          </button>
+        </div>
+
+        <div class="py-4">
+          <input type="text" [(ngModel)]="enrolledFacesSearch" 
+            [placeholder]="is_en ? 'Search by ID or Name...' : '按 ID 或姓名搜索...'" 
+            class="w-full border p-3 rounded-lg text-xl outline-none border-gray-300 focus:border-[var(--ion-color-primary)]" />
+        </div>
+
+        <div class="flex-1 overflow-y-auto space-y-2 py-2 pr-2">
+          <div *ngIf="filteredEnrolledFaces.length === 0" class="text-center text-gray-500 text-xl py-8">
+            {{ is_en ? 'No registered faces found.' : '未找到已注册人脸。' }}
+          </div>
+          <div *ngFor="let item of filteredEnrolledFaces; let i = index" 
+            class="flex flex-row justify-between items-center p-4 bg-gray-50 border rounded-xl hover:bg-green-50">
+            <div class="flex flex-row items-center space-x-4">
+              <span class="w-10 h-10 rounded-full bg-[var(--ion-color-primary)] text-white font-bold flex items-center justify-center text-lg">
+                {{ i + 1 }}
+              </span>
+              <div class="flex flex-col">
+                <span class="text-xl font-bold text-gray-800">{{ item.name }}</span>
+                <span class="text-sm text-gray-500">ID: {{ item.id }}</span>
+              </div>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 font-semibold rounded-full text-sm">
+              Enrolled
+            </span>
           </div>
         </div>
       </div>

@@ -32,17 +32,20 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void openGateNative(PluginCall call) {
-        Log.d(TAG, "openGateNative() dipanggil dari JS");
+        Log.d(TAG, "openGateNative() called from JS");
         try {
+            long duration = 5000L;
+            if (call.hasOption("duration")) {
+                duration = call.getLong("duration", 5000L);
+            }
+            long finalDuration = duration > 0 ? duration : 5000L;
             DMAccessUtil.getInstance().openDoor();
-            DMAccessUtil.getInstance().closeRedLed();
-            DMAccessUtil.getInstance().closeWhiteLed();
-            DMAccessUtil.getInstance().openGreenLed();
+            DMAccessUtil.getInstance().openGreenLed(finalDuration);
 
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 DMAccessUtil.getInstance().closeDoor();
                 DMAccessUtil.getInstance().closeAllLed();
-            }, 5000);
+            }, finalDuration);
 
             call.resolve();
         } catch (Exception e) {
@@ -54,7 +57,11 @@ public class IntercomPlugin extends Plugin {
     @PluginMethod
     public void openGreenLed(PluginCall call) {
         try {
-            DMAccessUtil.getInstance().openGreenLed();
+            long duration = 3000L;
+            if (call.hasOption("duration")) {
+                duration = call.getLong("duration", 3000L);
+            }
+            DMAccessUtil.getInstance().openGreenLed(duration);
             call.resolve();
         } catch (Exception e) {
             call.reject("Error: " + e.getMessage());
@@ -64,7 +71,11 @@ public class IntercomPlugin extends Plugin {
     @PluginMethod
     public void openRedLed(PluginCall call) {
         try {
-            DMAccessUtil.getInstance().openRedLed();
+            long duration = 2000L;
+            if (call.hasOption("duration")) {
+                duration = call.getLong("duration", 2000L);
+            }
+            DMAccessUtil.getInstance().openRedLed(duration);
             call.resolve();
         } catch (Exception e) {
             call.reject("Error: " + e.getMessage());
@@ -84,7 +95,7 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void startScan(PluginCall call) {
-        Log.d(TAG, "startScan() dipanggil dari Ionic JS");
+        Log.d(TAG, "startScan() called from Ionic JS");
         if (getActivity() != null) {
             getActivity().runOnUiThread(() -> {
                 try {
@@ -92,13 +103,13 @@ public class IntercomPlugin extends Plugin {
                         if (handler != null) {
                             io.ionic.starter.facepass.FacePassHelper.getInstance().setPlugin(this);
                             io.ionic.starter.facepass.FacePassHelper.getInstance().startScan();
+                            io.ionic.starter.facepass.FloatingCameraOverlay.start(getContext());
 
                             JSObject ret = new JSObject();
                             ret.put("status", "started");
-                            notifyListeners("scanStarted", ret);
                             call.resolve(ret);
                         } else {
-                            call.reject("Gagal inisialisasi FacePass SDK");
+                            call.reject("Failed to initialize FacePass SDK");
                         }
                     });
                 } catch (Exception e) {
@@ -113,8 +124,9 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void stopScan(PluginCall call) {
-        Log.d(TAG, "stopScan() dipanggil dari Ionic JS");
+        Log.d(TAG, "stopScan() called from Ionic JS");
         io.ionic.starter.facepass.FacePassHelper.getInstance().stopScan();
+        io.ionic.starter.facepass.FloatingCameraOverlay.stop(getContext());
         call.resolve();
     }
 
@@ -130,7 +142,39 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void fetchDataImages(PluginCall call) {
-        call.resolve();
+        Log.d(TAG, "fetchDataImages() plugin method triggered from Ionic JS");
+        new Thread(() -> {
+            try {
+                io.ionic.starter.facepass.FacePassHelper.getInstance().syncFacesFromBackend();
+                JSObject ret = new JSObject();
+                ret.put("status", "completed");
+                call.resolve(ret);
+            } catch (Exception e) {
+                Log.e(TAG, "Error in fetchDataImages: " + e.getMessage(), e);
+                call.reject("Error in fetchDataImages: " + e.getMessage());
+            }
+        }).start();
+    }
+
+    @PluginMethod
+    public void getEnrolledFaces(PluginCall call) {
+        try {
+            org.json.JSONArray faces = io.ionic.starter.facepass.FacePassHelper.getInstance().getEnrolledFaces();
+            com.getcapacitor.JSObject ret = new com.getcapacitor.JSObject();
+            com.getcapacitor.JSArray jsArray = new com.getcapacitor.JSArray();
+            for (int i = 0; i < faces.length(); i++) {
+                org.json.JSONObject obj = faces.getJSONObject(i);
+                com.getcapacitor.JSObject faceItem = new com.getcapacitor.JSObject();
+                faceItem.put("id", obj.optString("id"));
+                faceItem.put("name", obj.optString("name"));
+                jsArray.put(faceItem);
+            }
+            ret.put("faces", jsArray);
+            call.resolve(ret);
+        } catch (Exception e) {
+            Log.e(TAG, "Error in getEnrolledFaces: " + e.getMessage(), e);
+            call.reject("Error in getEnrolledFaces: " + e.getMessage());
+        }
     }
 
     @PluginMethod

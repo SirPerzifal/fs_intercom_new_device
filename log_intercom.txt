@@ -1,0 +1,406 @@
+--------- beginning of main
+09-18 11:24:25.033 D/MainActivity(25304): [LOGCAT-INIT] Automated logcat recording started to /sdcard/log_intercom.txt
+09-18 11:24:25.241 D/InitFacePassHandler(25304): [CAM-AUTH-WAIT] Waiting for FacePassHandler.isAvailable() to be ready...
+09-18 11:24:25.787 D/InitFacePassHandler(25304): [CAM-AUTH-WAIT] FacePassHandler.isAvailable() status: true (after 0ms)
+09-18 11:24:26.045 D/InitFacePassHandler(25304): [CAM-AUTH-CHECK] FacePass.isAuthorized() = true
+09-18 11:24:26.045 D/InitFacePassHandler(25304): >>> [CAM-AUTH-SUCCESS] ATSH204A Hardware Chipset License Valid & Active!
+09-18 11:24:26.045 D/InitFacePassHandler(25304): [CAM-MODEL] Loading 8 AI binary models from assets...
+09-18 11:24:26.176 D/MainActivity(25304): [QR-INIT] QR Code Scanner (/dev/ttyS7) setup successfully installed.
+09-18 11:24:26.180 D/MainActivity(25304): [CARD-INIT] Wiegand Card Reader setup successfully installed.
+09-18 11:24:26.311 D/InitFacePassHandler(25304): [CAM-INIT-BUILD] Building mFacePassHandler.initHandle(config)...
+09-18 11:24:27.685 D/MainActivity(25304): [CARD-INIT] DERK USB Card Reader setup successfully installed.
+09-18 11:24:28.869 D/InitFacePassHandler(25304): [CAM-GROUP] Local group facex_face created.
+09-18 11:24:28.871 D/InitFacePassHandler(25304): >>> [CAM-INIT-SUCCESS] FacePass SDK Successfully Initialized Fully!
+09-18 11:24:28.876 E/FacePassHelper(25304): >>> [GET-DEVICE-SERIAL] android.os.Build.SERIAL = 3b99b8b3095f1d99
+09-18 11:24:28.876 E/FacePassHelper(25304): >>> [FACE-SYNC-INIT] STARTING PERIODIC FACE SYNC FOR DEVICE SERIAL: 3b99b8b3095f1d99
+09-18 11:24:28.877 D/FacePassHelper(25304): >>> [FACE-SYNC-INIT] Native Java periodic face sync scheduled every 5 minutes!
+09-18 11:24:28.877 D/MainActivity(25304): >>> [BOOT-INIT-SUCCESS] Megvii FacePass SDK pre-initialized successfully on app launch!
+09-18 11:24:28.878 E/FacePassHelper(25304): >>> [GET-DEVICE-SERIAL] android.os.Build.SERIAL = 3b99b8b3095f1d99
+09-18 11:24:28.878 E/FacePassHelper(25304): >>> [DEVICE-SERIAL-INFO] DEVICE SERIAL NUMBER: 3b99b8b3095f1d99
+09-18 11:24:28.878 D/FacePassHelper(25304): >>> [FACE-SYNC-START] Fetching registered face images from backend [METHOD: GET] (URL: https://ifs360-sg.com/api/image-info?serial_number=3b99b8b3095f1d99) for serial: 3b99b8b3095f1d99
+09-18 11:24:30.176 D/MainActivity(25304): [CARD-INIT] DERK USB Card Reader setup successfully installed.
+09-18 11:24:48.222 D/FacePassHelper(25304): >>> [FACE-SYNC-RESPONSE] HTTP Code: 200 | Raw Body: {"result": [{"id": 2665, "name": "Jannes Residential", "family_name": "Jannes Residential", "image": "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
+09-18 11:24:48.239 D/FacePassHelper(25304): >>> [FACE-SYNC-PARSE-SUCCESS] Found 10 face record(s) to process.
+09-18 11:24:48.240 D/FacePassHelper(25304): >>> [FACE-ITEM #1] Processing ID: 2665 (Jannes Residential) | Has URL: false | Has Base64: true
+09-18 11:24:48.240 D/FacePassHelper(25304): >>> [FACE-ITEM #1] Decoding Base64 data (length: 51960)...
+09-18 11:24:48.253 D/FacePassHelper(25304): >>> [FACE-ITEM #1] Bitmap decoded successfully (480x640). Enrolling into FacePass SDK...
+09-18 11:24:48.994 D/FacePassHelper(25304): >>> [FACE-ENROLL-SUCCESS] Enrolled faceToken: Df_1Qq-hE9gJPMAVPQewuw==, bindGroup result: true
+09-18 11:24:48.996 D/FacePassHelper(25304): >>> [FACE-ITEM #1] Successfully enrolled face ID: 2665 (Jannes Residential)
+09-18 11:24:48.996 D/FacePassHelper(25304): >>> [FACE-ITEM #2] Processing ID: 2666 (Widy) | Has URL: false | Has Base64: true
+09-18 11:24:48.997 D/FacePassHelper(25304): >>> [FACE-ITEM #2] Decoding Base64 data (length: 71024)...
+09-18 11:24:49.011 D/FacePassHelper(25304): >>> [FACE-ITEM #2] Bitmap decoded successfully (632x620). Enrolling into FacePass SDK...
+09-18 11:24:49.087 E/FacePassHelper(25304): >>> [FACE-ENROLL-FAIL] addFace failed with error code: 1
+09-18 11:24:49.088 E/FacePassHelper(25304): >>> [FACE-ITEM #2] Failed to enroll face ID: 2666 into FacePass SDK!
+09-18 11:24:49.088 D/FacePassHelper(25304): >>> [FACE-ITEM #3] Processing ID: 2672 (Veeknesh) | Has URL: false | Has Base64: true
+09-18 11:24:49.088 D/FacePassHelper(25304): >>> [FACE-ITEM #3] Decoding Base64 data (length: 80216)...
+09-18 11:24:49.102 D/FacePassHelper(25304): >>> [FACE-ITEM #3] Bitmap decoded successfully (600x800). Enrolling into FacePass SDK...
+09-18 11:24:49.469 D/FacePassHelper(25304): >>> [FACE-ENROLL-SUCCESS] Enrolled faceToken: qVLpIAjYycCeQdNCFrwOvQ==, bindGroup result: true
+09-18 11:24:49.469 D/FacePassHelper(25304): >>> [FACE-ITEM #3] Successfully enrolled face ID: 2672 (Veeknesh)
+09-18 11:24:49.469 D/FacePassHelper(25304): >>> [FACE-ITEM #4] Processing ID: 2679 (Zafir) | Has URL: false | Has Base64: true
+09-18 11:24:49.469 D/FacePassHelper(25304): >>> [FACE-ITEM #4] Decoding Base64 data (length: 50788)...
+09-18 11:24:49.479 D/FacePassHelper(25304): >>> [FACE-ITEM #4] Bitmap decoded successfully (800x450). Enrolling into FacePass SDK...
+09-18 11:24:49.606 E/FacePassHelper(25304): >>> [FACE-ENROLL-FAIL] addFace failed with error code: 1
+09-18 11:24:49.607 E/FacePassHelper(25304): >>> [FACE-ITEM #4] Failed to enroll face ID: 2679 into FacePass SDK!
+09-18 11:24:49.607 D/FacePassHelper(25304): >>> [FACE-ITEM #5] Processing ID: 2851 (Ash Kaur ) | Has URL: false | Has Base64: true
+09-18 11:24:49.607 D/FacePassHelper(25304): >>> [FACE-ITEM #5] Decoding Base64 data (length: 60736)...
+09-18 11:24:49.643 D/FacePassHelper(25304): >>> [FACE-ITEM #5] Bitmap decoded successfully (600x800). Enrolling into FacePass SDK...
+09-18 11:24:50.013 D/FacePassHelper(25304): >>> [FACE-ENROLL-SUCCESS] Enrolled faceToken: 9BdRyAskLF9o8ppAw9w-vA==, bindGroup result: true
+09-18 11:24:50.013 D/FacePassHelper(25304): >>> [FACE-ITEM #5] Successfully enrolled face ID: 2851 (Ash Kaur )
+09-18 11:24:50.013 D/FacePassHelper(25304): >>> [FACE-ITEM #6] Processing ID: 2864 (Jannes Second Acc) | Has URL: false | Has Base64: true
+09-18 11:24:50.013 D/FacePassHelper(25304): >>> [FACE-ITEM #6] Decoding Base64 data (length: 67888)...
+09-18 11:24:50.023 D/FacePassHelper(25304): >>> [FACE-ITEM #6] Bitmap decoded successfully (800x450). Enrolling into FacePass SDK...
+09-18 11:24:50.101 E/FacePassHelper(25304): >>> [FACE-ENROLL-FAIL] addFace failed with error code: 1
+09-18 11:24:50.101 E/FacePassHelper(25304): >>> [FACE-ITEM #6] Failed to enroll face ID: 2864 into FacePass SDK!
+09-18 11:24:50.101 D/FacePassHelper(25304): >>> [FACE-ITEM #7] Processing ID: 2967 (iOS Testing Account) | Has URL: false | Has Base64: true
+09-18 11:24:50.101 D/FacePassHelper(25304): >>> [FACE-ITEM #7] Decoding Base64 data (length: 84648)...
+09-18 11:24:50.114 D/FacePassHelper(25304): >>> [FACE-ITEM #7] Bitmap decoded successfully (600x800). Enrolling into FacePass SDK...
+09-18 11:24:50.420 D/FacePassHelper(25304): >>> [FACE-ENROLL-SUCCESS] Enrolled faceToken: zoOR28s3EfFEvfDGFrnOHw==, bindGroup result: true
+09-18 11:24:50.420 D/FacePassHelper(25304): >>> [FACE-ITEM #7] Successfully enrolled face ID: 2967 (iOS Testing Account)
+09-18 11:24:50.420 D/FacePassHelper(25304): >>> [FACE-ITEM #8] Processing ID: 2979 (Secondary Account For iOS) | Has URL: false | Has Base64: true
+09-18 11:24:50.420 D/FacePassHelper(25304): >>> [FACE-ITEM #8] Decoding Base64 data (length: 63240)...
+09-18 11:24:50.429 D/FacePassHelper(25304): >>> [FACE-ITEM #8] Bitmap decoded successfully (377x800). Enrolling into FacePass SDK...
+09-18 11:24:50.516 E/FacePassHelper(25304): >>> [FACE-ENROLL-FAIL] addFace failed with error code: 1
+09-18 11:24:50.516 E/FacePassHelper(25304): >>> [FACE-ITEM #8] Failed to enroll face ID: 2979 into FacePass SDK!
+09-18 11:24:50.516 D/FacePassHelper(25304): >>> [FACE-ITEM #9] Processing ID: 2980 (Member Account For iOS) | Has URL: false | Has Base64: true
+09-18 11:24:50.517 D/FacePassHelper(25304): >>> [FACE-ITEM #9] Decoding Base64 data (length: 61608)...
+09-18 11:24:50.526 D/FacePassHelper(25304): >>> [FACE-ITEM #9] Bitmap decoded successfully (371x800). Enrolling into FacePass SDK...
+09-18 11:24:50.616 E/FacePassHelper(25304): >>> [FACE-ENROLL-FAIL] addFace failed with error code: 1
+09-18 11:24:50.616 E/FacePassHelper(25304): >>> [FACE-ITEM #9] Failed to enroll face ID: 2980 into FacePass SDK!
+09-18 11:24:50.617 D/FacePassHelper(25304): >>> [FACE-ITEM #10] Processing ID: 2981 (Helper Account for iOS) | Has URL: false | Has Base64: true
+09-18 11:24:50.617 D/FacePassHelper(25304): >>> [FACE-ITEM #10] Decoding Base64 data (length: 87548)...
+09-18 11:24:50.629 D/FacePassHelper(25304): >>> [FACE-ITEM #10] Bitmap decoded successfully (800x531). Enrolling into FacePass SDK...
+09-18 11:24:50.715 E/FacePassHelper(25304): >>> [FACE-ENROLL-FAIL] addFace failed with error code: 1
+09-18 11:24:50.715 E/FacePassHelper(25304): >>> [FACE-ITEM #10] Failed to enroll face ID: 2981 into FacePass SDK!
+09-18 11:24:50.715 D/FacePassHelper(25304): >>> [FACE-SYNC-COMPLETE] Successfully synced & enrolled 4 / 10 face images for Serial: 3b99b8b3095f1d99
+09-18 11:27:27.910 E/MainActivity(25304): >>> [CARD-SCANNER] Source: DERK USB | Card UID: 44c00002
+09-18 11:27:27.911 D/MainActivity(25304): >>> [CARD-SCANNER] Dispatching Card UID 44c00002 to backend...
+09-18 11:27:27.914 E/MainActivity(25304): >>> [CARD-REQUEST] URL: https://ifs360-sg.com/api/card | Params: card_num=44c00002, serial_number=3b99b8b3095f1d99
+09-18 11:27:36.661 D/IntercomPlugin(25304): sendToastMessage(): message=Successfully open the door, is_success=true
+09-18 11:27:36.665 E/MainActivity(25304): >>> [CARD-RESPONSE-SUCCESS] Response: {"jsonrpc": "2.0", "id": null, "result": {"response_code": 200, "open_door": true, "seconds_closing_door": 5000}}
+09-18 11:27:36.702 D/DMAccessUtil(25304): Door opened (relay ON)
+09-18 11:27:36.707 D/DMAccessUtil(25304): Green LED ON (auto-close in 5000000ms)
+09-18 11:27:54.013 D/IntercomPlugin(25304): startScan() called from Ionic JS
+09-18 11:27:54.015 D/InitFacePassHandler(25304): [CAM-INIT] Handler already initialized, returning existing instance.
+09-18 11:27:54.015 D/FacePassHelper(25304): [FACE-SYNC-INIT] Native Java periodic face sync already running.
+09-18 11:27:54.015 D/FacePassHelper(25304): >>> [CAM-SCANNING-STARTED] Face recognition scanning session started.
+09-18 11:27:54.018 D/FloatingCameraOverlay(25304): >>> [OVERLAY-START-CMD] start() command called with Context: io.ionic.starter.MainActivity
+09-18 11:27:54.022 D/FloatingCameraOverlay(25304): >>> [OVERLAY-START-CMD] startForegroundService executed.
+09-18 11:27:54.029 D/FloatingCameraOverlay(25304): >>> [OVERLAY-ONCREATE] FloatingCameraOverlay service onCreate triggered
+09-18 11:27:54.029 D/FloatingCameraOverlay(25304): >>> [OVERLAY-NOTIF] Creating NotificationChannel 'camera_channel'...
+09-18 11:27:54.033 D/FloatingCameraOverlay(25304): >>> [OVERLAY-NOTIF] NotificationChannel created successfully.
+09-18 11:27:54.050 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FOREGROUND] Service promoted to Foreground Service with notification ID 1
+09-18 11:27:54.054 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACEVIEW] SurfaceView added to FrameLayout (360x310, un-mirrored scaleX=-1.0f)
+09-18 11:27:54.056 D/FloatingCameraOverlay(25304): >>> [OVERLAY-WINDOW-PARAMS] Creating LayoutParams (360x310, type=2038)
+09-18 11:27:54.483 D/FloatingCameraOverlay(25304): >>> [OVERLAY-WINDOW-ADDED] Floating Window Overlay added to WindowManager after 300ms animation delay!
+09-18 11:27:54.513 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-CREATED] SurfaceView surface created! Holder is valid: true
+09-18 11:27:54.513 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-OPEN] Attempting to open Camera 0 (Primary RGB Camera)...
+09-18 11:27:54.637 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-OPEN] Successfully opened Camera 0 (RGB)
+09-18 11:27:54.638 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-PARAMS] Configuring Camera parameters: previewSize=640x480, rotation=90
+09-18 11:27:54.640 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-PARAMS] Camera parameters applied successfully.
+09-18 11:27:54.640 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-DISPLAY] setPreviewDisplay(holder) configured.
+09-18 11:27:55.750 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-PREVIEW-START] Camera preview started on SurfaceView overlay!
+09-18 11:27:55.751 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-CHANGED] Surface changed: format=4, width=360, height=310
+09-18 11:27:55.801 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] First camera frame received! Data size: 460800 bytes
+09-18 11:27:55.801 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Camera stream connected & actively scanning faces! Resolution: 640x480
+09-18 11:27:56.012 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #2
+09-18 11:27:56.222 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:56.277 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #3
+09-18 11:27:56.465 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:56.521 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #4
+09-18 11:27:56.711 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:56.760 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #5
+09-18 11:27:56.949 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:56.997 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #6
+09-18 11:27:57.186 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:57.232 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #7
+09-18 11:27:57.422 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:57.471 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #8
+09-18 11:27:57.665 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:57.715 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #9
+09-18 11:27:57.904 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:27:57.951 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #10
+09-18 11:27:58.142 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 2
+09-18 11:27:58.190 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #11
+09-18 11:27:58.288 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #12
+09-18 11:27:58.384 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #13
+09-18 11:27:58.483 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #14
+09-18 11:27:58.593 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #15
+09-18 11:27:58.695 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #16
+09-18 11:27:58.780 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #17
+09-18 11:27:58.782 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #30 (data length: 460800 bytes)
+09-18 11:27:58.877 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #18
+09-18 11:27:58.971 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #19
+09-18 11:27:59.078 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #20
+09-18 11:27:59.191 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #21
+09-18 11:27:59.286 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #22
+09-18 11:27:59.367 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #23
+09-18 11:27:59.471 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #24
+09-18 11:27:59.564 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #25
+09-18 11:27:59.658 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #26
+09-18 11:27:59.758 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #27
+09-18 11:27:59.812 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #60 (data length: 460800 bytes)
+09-18 11:27:59.857 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #28
+09-18 11:27:59.963 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #29
+09-18 11:28:00.012 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #30 (640x480)...
+09-18 11:28:00.056 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #30
+09-18 11:28:00.152 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #31
+09-18 11:28:00.264 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #32
+09-18 11:28:00.349 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #33
+09-18 11:28:00.445 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #34
+09-18 11:28:00.541 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #35
+09-18 11:28:00.648 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #36
+09-18 11:28:00.750 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #37
+09-18 11:28:00.846 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #38
+09-18 11:28:00.848 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #90 (data length: 460800 bytes)
+09-18 11:28:00.941 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #39
+09-18 11:28:01.042 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #40
+09-18 11:28:01.139 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #41
+09-18 11:28:01.232 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #42
+09-18 11:28:01.330 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #43
+09-18 11:28:01.425 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #44
+09-18 11:28:01.526 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #45
+09-18 11:28:01.625 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #46
+09-18 11:28:01.726 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #47
+09-18 11:28:01.823 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #48
+09-18 11:28:01.825 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #120 (data length: 460800 bytes)
+09-18 11:28:01.919 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #49
+09-18 11:28:02.019 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #50
+09-18 11:28:02.114 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #51
+09-18 11:28:02.229 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #52
+09-18 11:28:02.320 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #53
+09-18 11:28:02.412 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #54
+09-18 11:28:02.513 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #55
+09-18 11:28:02.609 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #56
+09-18 11:28:02.713 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #57
+09-18 11:28:02.812 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #58
+09-18 11:28:02.814 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #150 (data length: 460800 bytes)
+09-18 11:28:02.905 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #59
+09-18 11:28:02.956 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #60 (640x480)...
+09-18 11:28:03.002 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #60
+09-18 11:28:03.108 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #61
+09-18 11:28:03.197 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #62
+09-18 11:28:03.295 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #63
+09-18 11:28:03.394 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #64
+09-18 11:28:03.489 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #65
+09-18 11:28:03.592 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #66
+09-18 11:28:03.708 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #67
+09-18 11:28:03.786 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #68
+09-18 11:28:03.787 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #180 (data length: 460800 bytes)
+09-18 11:28:03.881 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #69
+09-18 11:28:03.995 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #70
+09-18 11:28:04.086 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #71
+09-18 11:28:04.186 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #72
+09-18 11:28:04.279 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #73
+09-18 11:28:04.374 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #74
+09-18 11:28:04.476 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #75
+09-18 11:28:04.570 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #76
+09-18 11:28:04.669 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #77
+09-18 11:28:04.774 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #78
+09-18 11:28:04.776 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #210 (data length: 460800 bytes)
+09-18 11:28:04.869 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #79
+09-18 11:28:04.972 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #80
+09-18 11:28:05.063 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #81
+09-18 11:28:05.260 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #83
+09-18 11:28:05.745 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #240 (data length: 460800 bytes)
+09-18 11:28:05.904 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #90 (640x480)...
+09-18 11:28:05.941 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #90 (actively searching...)
+09-18 11:28:06.730 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #270 (data length: 460800 bytes)
+09-18 11:28:07.422 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #105 (actively searching...)
+09-18 11:28:07.713 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #300 (data length: 460800 bytes)
+09-18 11:28:08.705 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #330 (data length: 460800 bytes)
+09-18 11:28:08.857 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #120 (640x480)...
+09-18 11:28:08.898 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #120 (actively searching...)
+09-18 11:28:09.684 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #360 (data length: 460800 bytes)
+09-18 11:28:10.363 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #135 (actively searching...)
+09-18 11:28:10.681 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #390 (data length: 460800 bytes)
+09-18 11:28:11.548 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #147
+09-18 11:28:11.659 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #420 (data length: 460800 bytes)
+09-18 11:28:11.799 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #150 (640x480)...
+09-18 11:28:11.840 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #150 (actively searching...)
+09-18 11:28:12.133 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #153
+09-18 11:28:12.626 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #450 (data length: 460800 bytes)
+09-18 11:28:13.311 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #165 (actively searching...)
+09-18 11:28:13.616 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #480 (data length: 460800 bytes)
+09-18 11:28:14.585 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #510 (data length: 460800 bytes)
+09-18 11:28:14.744 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #180 (640x480)...
+09-18 11:28:14.782 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #180 (actively searching...)
+09-18 11:28:15.582 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #540 (data length: 460800 bytes)
+09-18 11:28:16.267 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #195 (actively searching...)
+09-18 11:28:16.561 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #570 (data length: 460800 bytes)
+09-18 11:28:17.533 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #600 (data length: 460800 bytes)
+09-18 11:28:17.692 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #210 (640x480)...
+09-18 11:28:17.730 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #210 (actively searching...)
+09-18 11:28:18.518 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #630 (data length: 460800 bytes)
+09-18 11:28:18.816 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #221
+09-18 11:28:19.013 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:19.058 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #222
+09-18 11:28:19.251 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:19.298 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #223
+09-18 11:28:19.485 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:19.489 D/IntercomPlugin(25304): stopScan() called from Ionic JS
+09-18 11:28:19.489 D/FacePassHelper(25304): >>> [CAM-SCANNING-STOPPED] Face recognition scanning session stopped.
+09-18 11:28:19.489 D/FloatingCameraOverlay(25304): >>> [OVERLAY-STOP-CMD] stop() command called.
+09-18 11:28:19.494 D/FloatingCameraOverlay(25304): >>> [OVERLAY-ONDESTROY] FloatingCameraOverlay onDestroy called.
+09-18 11:28:19.500 D/FloatingCameraOverlay(25304): >>> [OVERLAY-STOP-CMD] stopService executed.
+09-18 11:28:19.562 D/FloatingCameraOverlay(25304): >>> [OVERLAY-ONDESTROY] Floating Window Overlay removed from WindowManager.
+09-18 11:28:19.575 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-DESTROYED] SurfaceView surface destroyed. Releasing camera resources...
+09-18 11:28:19.779 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-DESTROYED] Camera preview stopped and camera released.
+09-18 11:28:21.069 D/IntercomPlugin(25304): startScan() called from Ionic JS
+09-18 11:28:21.070 D/InitFacePassHandler(25304): [CAM-INIT] Handler already initialized, returning existing instance.
+09-18 11:28:21.071 D/FacePassHelper(25304): [FACE-SYNC-INIT] Native Java periodic face sync already running.
+09-18 11:28:21.071 D/FacePassHelper(25304): >>> [CAM-SCANNING-STARTED] Face recognition scanning session started.
+09-18 11:28:21.071 D/FloatingCameraOverlay(25304): >>> [OVERLAY-START-CMD] start() command called with Context: io.ionic.starter.MainActivity
+09-18 11:28:21.075 D/FloatingCameraOverlay(25304): >>> [OVERLAY-START-CMD] startForegroundService executed.
+09-18 11:28:21.078 D/FloatingCameraOverlay(25304): >>> [OVERLAY-ONCREATE] FloatingCameraOverlay service onCreate triggered
+09-18 11:28:21.078 D/FloatingCameraOverlay(25304): >>> [OVERLAY-NOTIF] Creating NotificationChannel 'camera_channel'...
+09-18 11:28:21.080 D/FloatingCameraOverlay(25304): >>> [OVERLAY-NOTIF] NotificationChannel created successfully.
+09-18 11:28:21.085 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FOREGROUND] Service promoted to Foreground Service with notification ID 1
+09-18 11:28:21.088 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACEVIEW] SurfaceView added to FrameLayout (360x310, un-mirrored scaleX=-1.0f)
+09-18 11:28:21.088 D/FloatingCameraOverlay(25304): >>> [OVERLAY-WINDOW-PARAMS] Creating LayoutParams (360x310, type=2038)
+09-18 11:28:21.414 D/FloatingCameraOverlay(25304): >>> [OVERLAY-WINDOW-ADDED] Floating Window Overlay added to WindowManager after 300ms animation delay!
+09-18 11:28:21.438 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-CREATED] SurfaceView surface created! Holder is valid: true
+09-18 11:28:21.438 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-OPEN] Attempting to open Camera 0 (Primary RGB Camera)...
+09-18 11:28:21.474 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-OPEN] Successfully opened Camera 0 (RGB)
+09-18 11:28:21.475 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-PARAMS] Configuring Camera parameters: previewSize=640x480, rotation=90
+09-18 11:28:21.477 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-PARAMS] Camera parameters applied successfully.
+09-18 11:28:21.477 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-DISPLAY] setPreviewDisplay(holder) configured.
+09-18 11:28:21.935 D/FloatingCameraOverlay(25304): >>> [OVERLAY-CAM-PREVIEW-START] Camera preview started on SurfaceView overlay!
+09-18 11:28:21.935 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-CHANGED] Surface changed: format=4, width=360, height=310
+09-18 11:28:21.968 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] First camera frame received! Data size: 460800 bytes
+09-18 11:28:21.968 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Camera stream connected & actively scanning faces! Resolution: 640x480
+09-18 11:28:22.019 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #1
+09-18 11:28:22.223 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:22.276 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #2
+09-18 11:28:22.472 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:22.525 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #3
+09-18 11:28:22.717 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:22.767 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #4
+09-18 11:28:22.958 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:23.004 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #5
+09-18 11:28:23.196 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:23.242 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #6
+09-18 11:28:23.436 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 2
+09-18 11:28:23.483 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #7
+09-18 11:28:23.563 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #8
+09-18 11:28:23.665 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #9
+09-18 11:28:23.773 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #10
+09-18 11:28:23.860 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #11
+09-18 11:28:23.961 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #12
+09-18 11:28:24.055 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #13
+09-18 11:28:24.155 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #14
+09-18 11:28:24.208 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #30 (data length: 460800 bytes)
+09-18 11:28:24.249 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #15 (actively searching...)
+09-18 11:28:25.195 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #60 (data length: 460800 bytes)
+09-18 11:28:25.684 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #30 (640x480)...
+09-18 11:28:25.728 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #30 (actively searching...)
+09-18 11:28:26.172 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #90 (data length: 460800 bytes)
+09-18 11:28:27.156 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #120 (data length: 460800 bytes)
+09-18 11:28:27.193 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #45 (actively searching...)
+09-18 11:28:28.140 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #150 (data length: 460800 bytes)
+09-18 11:28:28.627 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #60 (640x480)...
+09-18 11:28:28.666 D/FacePassHelper(25304): >>> [CAM-NO-FACE] 0 faces detected at frame #60 (actively searching...)
+09-18 11:28:29.120 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #180 (data length: 460800 bytes)
+09-18 11:28:29.767 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #71
+09-18 11:28:29.866 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #72
+09-18 11:28:30.065 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:30.110 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #73
+09-18 11:28:30.300 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:30.345 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #74
+09-18 11:28:30.534 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:30.580 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #75
+09-18 11:28:30.772 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:30.817 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #76
+09-18 11:28:31.005 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:31.051 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #77
+09-18 11:28:31.239 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:31.285 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #78
+09-18 11:28:31.473 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:31.519 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #79
+09-18 11:28:31.722 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 1
+09-18 11:28:31.767 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #80
+09-18 11:28:31.958 D/FacePassHelper(25304): [CAM-RECOGNIZED-FAIL] Face detected but match status: 2
+09-18 11:28:31.961 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #210 (data length: 460800 bytes)
+09-18 11:28:32.004 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #81
+09-18 11:28:32.111 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #82
+09-18 11:28:32.225 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #83
+09-18 11:28:32.311 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #84
+09-18 11:28:32.406 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #85
+09-18 11:28:32.502 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #86
+09-18 11:28:32.616 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #87
+09-18 11:28:32.701 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #88
+09-18 11:28:32.799 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #89
+09-18 11:28:32.852 D/FacePassHelper(25304): >>> [CAM-SCANNING-IN-PROGRESS] Actively scanning frame #90 (640x480)...
+09-18 11:28:32.894 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #90
+09-18 11:28:32.951 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #240 (data length: 460800 bytes)
+09-18 11:28:32.998 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #91
+09-18 11:28:33.105 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #92
+09-18 11:28:33.191 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #93
+09-18 11:28:33.292 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #94
+09-18 11:28:33.387 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #95
+09-18 11:28:33.490 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #96
+09-18 11:28:33.602 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #97
+09-18 11:28:33.684 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #98
+09-18 11:28:33.783 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #99
+09-18 11:28:33.887 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #100
+09-18 11:28:33.936 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #270 (data length: 460800 bytes)
+09-18 11:28:33.980 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #101
+09-18 11:28:34.081 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #102
+09-18 11:28:34.179 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #103
+09-18 11:28:34.271 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #104
+09-18 11:28:34.371 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #105
+09-18 11:28:34.467 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #106
+09-18 11:28:34.567 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #107
+09-18 11:28:34.664 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #108
+09-18 11:28:34.762 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #109
+09-18 11:28:34.879 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #110
+09-18 11:28:34.915 D/FloatingCameraOverlay(25304): >>> [OVERLAY-FRAME-STREAM] Received frame #300 (data length: 460800 bytes)
+09-18 11:28:34.968 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #111
+09-18 11:28:35.064 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #112
+09-18 11:28:35.156 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #113
+09-18 11:28:35.261 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #114
+09-18 11:28:35.352 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #115
+09-18 11:28:35.454 D/FacePassHelper(25304): >>> [CAM-DETECT-FACE] 1 face(s) detected at frame #116
+09-18 11:28:35.479 D/IntercomPlugin(25304): stopScan() called from Ionic JS
+09-18 11:28:35.479 D/FacePassHelper(25304): >>> [CAM-SCANNING-STOPPED] Face recognition scanning session stopped.
+09-18 11:28:35.479 D/FloatingCameraOverlay(25304): >>> [OVERLAY-STOP-CMD] stop() command called.
+09-18 11:28:35.486 D/FloatingCameraOverlay(25304): >>> [OVERLAY-STOP-CMD] stopService executed.
+09-18 11:28:35.510 D/FloatingCameraOverlay(25304): >>> [OVERLAY-ONDESTROY] FloatingCameraOverlay onDestroy called.
+09-18 11:28:35.561 D/FloatingCameraOverlay(25304): >>> [OVERLAY-ONDESTROY] Floating Window Overlay removed from WindowManager.
+09-18 11:28:35.574 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-DESTROYED] SurfaceView surface destroyed. Releasing camera resources...
+09-18 11:28:35.780 D/FloatingCameraOverlay(25304): >>> [OVERLAY-SURFACE-DESTROYED] Camera preview stopped and camera released.
+09-18 11:29:28.878 E/FacePassHelper(25304): >>> [GET-DEVICE-SERIAL] android.os.Build.SERIAL = 3b99b8b3095f1d99
+09-18 11:29:28.878 E/FacePassHelper(25304): >>> [DEVICE-SERIAL-INFO] DEVICE SERIAL NUMBER: 3b99b8b3095f1d99
+09-18 11:29:28.879 D/FacePassHelper(25304): >>> [FACE-SYNC-START] Fetching registered face images from backend [METHOD: GET] (URL: https://ifs360-sg.com/api/image-info?serial_number=3b99b8b3095f1d99) for serial: 3b99b8b3095f1d99
+09-18 11:29:38.924 E/FacePassHelper(25304): >>> [FACE-SYNC-ERROR] URL: https://ifs360-sg.com/api/image-info?serial_number=3b99b8b3095f1d99 | Exception syncing faces: failed to connect to ifs360-sg.com/52.77.67.229 (port 443) from /192.168.1.56 (port 58638) after 10000ms
+09-18 11:29:38.924 E/FacePassHelper(25304): java.net.SocketTimeoutException: failed to connect to ifs360-sg.com/52.77.67.229 (port 443) from /192.168.1.56 (port 58638) after 10000ms
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at libcore.io.IoBridge.connectErrno(IoBridge.java:190)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at libcore.io.IoBridge.connect(IoBridge.java:134)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:142)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:390)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:230)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:212)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:436)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.net.Socket.connect(Socket.java:621)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.Platform.connectSocket(Platform.java:182)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.io.RealConnection.connectSocket(RealConnection.java:145)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.io.RealConnection.connect(RealConnection.java:116)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.http.StreamAllocation.findConnection(StreamAllocation.java:186)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.http.StreamAllocation.findHealthyConnection(StreamAllocation.java:128)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.http.StreamAllocation.newStream(StreamAllocation.java:97)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.http.HttpEngine.connect(HttpEngine.java:289)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.http.HttpEngine.sendRequest(HttpEngine.java:232)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.execute(HttpURLConnectionImpl.java:465)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getResponse(HttpURLConnectionImpl.java:411)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getResponseCode(HttpURLConnectionImpl.java:542)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getResponseCode(DelegatingHttpsURLConnection.java:106)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:30)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at io.ionic.starter.facepass.FacePassHelper.syncFacesFromBackend(FacePassHelper.java:248)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at io.ionic.starter.facepass.FacePassHelper.lambda$startPeriodicFaceSync$3(FacePassHelper.java:373)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at io.ionic.starter.facepass.FacePassHelper.$r8$lambda$A8AX98nNm5QEncHX3dHb8ts6KZs(Unknown Source:0)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at io.ionic.starter.facepass.FacePassHelper$$ExternalSyntheticLambda3.run(Unknown Source:2)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:307)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:302)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+09-18 11:29:38.924 E/FacePassHelper(25304): 	at java.lang.Thread.run(Thread.java:923)

@@ -10,6 +10,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
+        android:largeHeap="true"
         android:testOnly="false">
 
         <!-- Your main activity with proper configuration -->
@@ -38,25 +40,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <!-- <service
-          android:name=".ScheduledImageService"
-          android:exported="false" />
-
-        <receiver
-          android:name=".ScheduledImageService$ImageFetchReceiver"
-          android:exported="false" />
 
         <service
-            android:name=".FloatingCameraOverlay"
+            android:name="io.ionic.starter.facepass.FloatingCameraOverlay"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="camera" />
-        <service
-            android:name="com.thinmoo.serial.ACReadCardService"
-            android:enabled="true"
-            android:exported="false" /> -->
 
     </application>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -49,10 +50,6 @@ public class MainActivity extends BridgeActivity {
     private final ByteArrayOutputStream qrStreamBuffer = new ByteArrayOutputStream();
     private final Handler qrPacketHandler = new Handler(Looper.getMainLooper());
 
-    // USB HID Keyboard Buffer (Fallback jika Card Reader tipe USB Keyboard)
-    private final StringBuilder keyInputBuffer = new StringBuilder();
-    private final Handler keyInputHandler = new Handler(Looper.getMainLooper());
-
     // =========================================================================
     // ⚙️ LIFECYCLE METHOD (onCreate, onResume, onPause, onDestroy)
     // =========================================================================
@@ -66,24 +63,103 @@ public class MainActivity extends BridgeActivity {
         // Inisialisasi SDK SMDT Hardware
         DMAccessUtil.getInstance().init(this);
         smdt = SmdtManagerNew.getInstance(this);
+
+        checkAndRequestFacePermissions();
+        startLogcatLogging();
+
+        // 🚀 Pre-initialize Megvii FacePass SDK saat Intercom menyala/booting
+        io.ionic.starter.facepass.InitFacePassHandler.init(this, handler -> {
+            if (handler != null) {
+                Log.d(TAG, ">>> [BOOT-INIT-SUCCESS] Megvii FacePass SDK pre-initialized successfully on app launch!");
+            } else {
+                Log.e(TAG, ">>> [BOOT-INIT-FAIL] Megvii FacePass SDK pre-initialization failed on app launch.");
+            }
+        });
+    }
+
+    private void startLogcatLogging() {
+        new Thread(() -> {
+            try {
+                // Clear logcat buffer terlebih dahulu
+                Runtime.getRuntime().exec("logcat -c");
+
+                // Merekam logcat khusus tag penting ke /sdcard/log_intercom.txt
+                String logCommand = "logcat -v time -f /sdcard/log_intercom.txt -r 51200 -n 3 " +
+                        "FacePassHelper:V InitFacePassHandler:V MainActivity:V IntercomPlugin:V " +
+                        "FloatingCameraOverlay:V MegviiFacepass:V SmdtManagerNew:V DMAccessUtil:V *:S";
+
+                Runtime.getRuntime().exec(logCommand);
+                Log.d(TAG, "[LOGCAT-INIT] Automated logcat recording started to /sdcard/log_intercom.txt");
+            } catch (Exception e) {
+                Log.e(TAG, "[LOGCAT-ERROR] Failed to start logcat recording: " + e.getMessage(), e);
+            }
+        }).start();
+    }
+
+    private void checkAndRequestFacePermissions() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            String[] permissions = new String[] {
+                    android.Manifest.permission.CAMERA,
+                    android.Manifest.permission.READ_PHONE_STATE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            };
+            boolean needRequest = false;
+            for (String p : permissions) {
+                if (checkSelfPermission(p) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    needRequest = true;
+                    break;
+                }
+            }
+            if (needRequest) {
+                requestPermissions(permissions, 1001);
+            }
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            if (!android.os.Environment.isExternalStorageManager()) {
+                try {
+                    android.content.Intent intent = new android.content.Intent(
+                            android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                    intent.addCategory("android.intent.category.DEFAULT");
+                    intent.setData(android.net.Uri.parse("package:" + getPackageName()));
+                    startActivity(intent);
+                } catch (Exception ignored) {
+                }
+            }
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            try {
-                if (smdt != null) {
-                    smdt.dev_setUsbPower(1, 1, true);
-                    smdt.dev_setUsbPower(2, 1, true);
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "Error set USB Power: " + e.getMessage());
+        // Turn USB power ON immediately when activity resumes
+        try {
+            if (smdt != null) {
+                smdt.dev_setUsbPower(1, 1, true);
+                smdt.dev_setUsbPower(2, 1, true);
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Error set USB Power: " + e.getMessage());
+        }
+
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        // Fast setup for UART QR & Wiegand (1000ms)
+        handler.postDelayed(() -> {
             setupQrCodeScanner();
-            setupDerkUsbCardReader();
             setupWiegandCardReader();
         }, 1000);
+
+        // Staggered setup for DERK USB Card Reader (2500ms) to allow USB bus
+        // enumeration on cold boot
+        handler.postDelayed(() -> {
+            setupDerkUsbCardReader();
+        }, 2500);
+
+        // Fallback safety retry for DERK USB Card Reader at 5000ms on cold boot
+        handler.postDelayed(() -> {
+            setupDerkUsbCardReader();
+        }, 5000);
     }
 
     @Override
@@ -120,9 +196,16 @@ public class MainActivity extends BridgeActivity {
         if (smdt == null)
             return;
         try {
+            // Close any existing open UART handle before opening
+            try {
+                smdt.dev_closeUart(QR_UART_PORT);
+            } catch (Exception ignored) {
+            }
+
             int result = smdt.dev_openUart(QR_UART_PORT, QR_BAUD_RATE, 8, 1, 0, 0);
             if (result == 0) {
                 receiveQrUart();
+                Log.d(TAG, "[QR-INIT] QR Code Scanner (" + QR_UART_PORT + ") setup successfully installed.");
             } else {
                 Log.e(TAG, "Gagal buka port QR: " + QR_UART_PORT + " (code: " + result + ")");
             }
@@ -182,6 +265,7 @@ public class MainActivity extends BridgeActivity {
             }
 
             final String finalResult = qrText;
+            Log.e(TAG, ">>> [QR-SCANNER] Scanned Code: " + finalResult);
             runOnUiThread(
                     () -> Toast.makeText(MainActivity.this, "[TEST] QR Code: " + finalResult, Toast.LENGTH_SHORT)
                             .show());
@@ -195,8 +279,26 @@ public class MainActivity extends BridgeActivity {
     };
 
     // =========================================================================
-    // 💳 DERK USB CARD READER (DKCloudID SDK - Perangkat Utam)
+    // 💳 UNIFIED CARD READER PROCESSOR & LOGGING
     // =========================================================================
+
+    private void onCardScanned(String cardUid, String sourceTag) {
+        if (TextUtils.isEmpty(cardUid))
+            return;
+
+        Log.e(TAG, ">>> [CARD-SCANNER] Source: " + sourceTag + " | Card UID: " + cardUid);
+        runOnUiThread(() -> Toast
+                .makeText(MainActivity.this, "[CARD] (" + sourceTag + ") UID: " + cardUid, Toast.LENGTH_SHORT).show());
+
+        long now = System.currentTimeMillis();
+        if (now - lastCardSendTime > 3000) {
+            lastCardSendTime = now;
+            Log.d(TAG, ">>> [CARD-SCANNER] Dispatching Card UID " + cardUid + " to backend...");
+            sendCardToBackend(cardUid);
+        } else {
+            Log.d(TAG, ">>> [CARD-SCANNER] Card UID ignored (3s cooldown active)");
+        }
+    }
 
     private void setupDerkUsbCardReader() {
         try {
@@ -209,9 +311,9 @@ public class MainActivity extends BridgeActivity {
             }
             usbNfcDevice = new UsbNfcDevice(MainActivity.this);
             usbNfcDevice.setCallBack(deviceManagerCallback);
-            Log.e(TAG, "DERK USB Card Reader setup berhasil dipasang!");
+            Log.d(TAG, "[CARD-INIT] DERK USB Card Reader setup successfully installed.");
         } catch (Exception e) {
-            Log.e(TAG, "Exception setup DERK USB Card Reader: " + e.getMessage());
+            Log.e(TAG, "[CARD-INIT-ERROR] Exception setting up DERK USB Card Reader: " + e.getMessage(), e);
         }
     }
 
@@ -223,22 +325,9 @@ public class MainActivity extends BridgeActivity {
                 return;
 
             String cardUid = StringTool.byteHexToSting(bytCardSn);
-            Log.e(TAG, ">>> [DERK USB CARD TAP] UID: " + cardUid);
-
-            runOnUiThread(
-                    () -> Toast.makeText(MainActivity.this, "[TEST] Card: " + cardUid, Toast.LENGTH_SHORT).show());
-
-            long now = System.currentTimeMillis();
-            if (now - lastCardSendTime > 3000) {
-                lastCardSendTime = now;
-                sendCardToBackend(cardUid);
-            }
+            onCardScanned(cardUid, "DERK USB");
         }
     };
-
-    // =========================================================================
-    // 💳 WIEGAND CARD READER & USB KEYBOARD FALLBACK
-    // =========================================================================
 
     private void setupWiegandCardReader() {
         if (smdt == null)
@@ -250,21 +339,21 @@ public class MainActivity extends BridgeActivity {
                 public void onReadData(String data) throws RemoteException {
                     if (TextUtils.isEmpty(data))
                         return;
-                    Log.e(TAG, "Kartu Wiegand: " + data);
-                    runOnUiThread(() -> Toast
-                            .makeText(MainActivity.this, "[TEST] Wiegand Card: " + data, Toast.LENGTH_SHORT).show());
-
-                    long now = System.currentTimeMillis();
-                    if (now - lastCardSendTime > 3000) {
-                        lastCardSendTime = now;
-                        sendCardToBackend(data);
-                    }
+                    onCardScanned(data, "WIEGAND");
                 }
             });
+            Log.d(TAG, "[CARD-INIT] Wiegand Card Reader setup successfully installed.");
         } catch (Exception e) {
-            Log.e(TAG, "Exception setup Wiegand: " + e.getMessage());
+            Log.e(TAG, "[CARD-INIT-ERROR] Exception setting up Wiegand: " + e.getMessage(), e);
         }
     }
+
+    // =========================================================================
+    // 💳 USB HID KEYBOARD CARD READER (dispatchKeyEvent)
+    // =========================================================================
+
+    private final StringBuilder keyInputBuffer = new StringBuilder();
+    private final Handler keyInputHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public boolean dispatchKeyEvent(android.view.KeyEvent event) {
@@ -299,14 +388,7 @@ public class MainActivity extends BridgeActivity {
                 keyInputBuffer.setLength(0);
             }
             if (!TextUtils.isEmpty(cardData)) {
-                Log.e(TAG, ">>> [USB HID CARD TAP] Data: " + cardData);
-                runOnUiThread(
-                        () -> Toast.makeText(MainActivity.this, "USB Card: " + cardData, Toast.LENGTH_SHORT).show());
-                long now = System.currentTimeMillis();
-                if (now - lastCardSendTime > 3000) {
-                    lastCardSendTime = now;
-                    sendCardToBackend(cardData);
-                }
+                onCardScanned(cardData, "USB HID");
             }
         }
     };
@@ -317,8 +399,11 @@ public class MainActivity extends BridgeActivity {
 
     private void sendQrCodeToBackend(String qrCode) {
         new Thread(() -> {
+            String targetUrl = "https://ifs360-sg.com/api/qr";
+            String deviceSerial = getDeviceSerial();
+            Log.e(TAG, ">>> [QR-REQUEST] URL: " + targetUrl + " | Params: qr_code=" + qrCode + ", serial_number=" + deviceSerial);
             try {
-                URL url = new URL("https://ifs360-sg.com/api/qr");
+                URL url = new URL(targetUrl);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -330,7 +415,7 @@ public class MainActivity extends BridgeActivity {
                         + "\"jsonrpc\": \"2.0\","
                         + "\"params\": {"
                         + "\"qr_code\": \"" + qrCode + "\","
-                        + "\"serial_number\": \"" + getDeviceSerial() + "\""
+                        + "\"serial_number\": \"" + deviceSerial + "\""
                         + "}"
                         + "}";
 
@@ -338,14 +423,20 @@ public class MainActivity extends BridgeActivity {
                     os.write(jsonInput.getBytes("utf-8"));
                 }
 
-                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                int responseCode = conn.getResponseCode();
+                InputStream is = (responseCode >= 200 && responseCode < 300) ? conn.getInputStream() : conn.getErrorStream();
+                String responseText = "";
+                if (is != null) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
                     StringBuilder sb = new StringBuilder();
                     String line;
                     while ((line = br.readLine()) != null)
                         sb.append(line);
+                    responseText = sb.toString();
+                }
 
-                    JSONObject root = new JSONObject(sb.toString());
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    JSONObject root = new JSONObject(responseText);
                     JSONObject result = root.optJSONObject("result");
                     String errorMessage = result != null ? result.optString("message", "") : "";
                     if (result != null && result.optBoolean("open_door", false)) {
@@ -360,15 +451,15 @@ public class MainActivity extends BridgeActivity {
                         }
                         temporaryRedLed();
                     }
-                    Log.e(TAG, "Proses backend QR selesai. Response: " + sb.toString());
+                    Log.e(TAG, ">>> [QR-RESPONSE-SUCCESS] Response: " + responseText);
                 } else {
                     temporaryRedLed();
                     plugin.sendToastMessage("Failed to open the door", false);
-                    Log.e(TAG, "Proses backend QR gagal, HTTP code: " + conn.getResponseCode());
+                    Log.e(TAG, ">>> [QR-RESPONSE-FAIL] HTTP Code: " + responseCode + " | Response: " + responseText);
                 }
                 conn.disconnect();
             } catch (Exception e) {
-                Log.e(TAG, "Error kirim QR ke backend: " + e.getMessage());
+                Log.e(TAG, ">>> [QR-RESPONSE-ERROR] Exception: " + e.getMessage());
                 plugin.sendToastMessage("Failed to open the door", false);
                 temporaryRedLed();
             }
@@ -377,8 +468,11 @@ public class MainActivity extends BridgeActivity {
 
     private void sendCardToBackend(String cardNum) {
         new Thread(() -> {
+            String targetUrl = "https://ifs360-sg.com/api/card";
+            String deviceSerial = getDeviceSerial();
+            Log.e(TAG, ">>> [CARD-REQUEST] URL: " + targetUrl + " | Params: card_num=" + cardNum + ", serial_number=" + deviceSerial);
             try {
-                URL url = new URL("https://ifs360-sg.com/api/card");
+                URL url = new URL(targetUrl);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -390,7 +484,7 @@ public class MainActivity extends BridgeActivity {
                         + "\"jsonrpc\": \"2.0\","
                         + "\"params\": {"
                         + "\"card_num\": \"" + cardNum + "\","
-                        + "\"serial_number\": \"" + getDeviceSerial() + "\""
+                        + "\"serial_number\": \"" + deviceSerial + "\""
                         + "}"
                         + "}";
 
@@ -398,14 +492,20 @@ public class MainActivity extends BridgeActivity {
                     os.write(jsonInput.getBytes("utf-8"));
                 }
 
-                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                int responseCode = conn.getResponseCode();
+                InputStream is = (responseCode >= 200 && responseCode < 300) ? conn.getInputStream() : conn.getErrorStream();
+                String responseText = "";
+                if (is != null) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is, "utf-8"));
                     StringBuilder sb = new StringBuilder();
                     String line;
                     while ((line = br.readLine()) != null)
                         sb.append(line);
+                    responseText = sb.toString();
+                }
 
-                    JSONObject root = new JSONObject(sb.toString());
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    JSONObject root = new JSONObject(responseText);
                     JSONObject result = root.optJSONObject("result");
                     String errorMessage = result != null ? result.optString("message", "") : "";
 
@@ -421,15 +521,15 @@ public class MainActivity extends BridgeActivity {
                         }
                         temporaryRedLed();
                     }
-                    Log.e(TAG, "Proses backend Card selesai. Response: " + sb.toString());
+                    Log.e(TAG, ">>> [CARD-RESPONSE-SUCCESS] Response: " + responseText);
                 } else {
                     temporaryRedLed();
-                    Log.e(TAG, "Proses backend Card gagal, HTTP code: " + conn.getResponseCode());
+                    Log.e(TAG, ">>> [CARD-RESPONSE-FAIL] HTTP Code: " + responseCode + " | Response: " + responseText);
                     plugin.sendToastMessage("Failed to open the door", false);
                 }
                 conn.disconnect();
             } catch (Exception e) {
-                Log.e(TAG, "Error kirim Kartu ke backend: " + e.getMessage());
+                Log.e(TAG, ">>> [CARD-RESPONSE-ERROR] Exception: " + e.getMessage());
                 plugin.sendToastMessage("Failed to open the door", false);
                 temporaryRedLed();
             }
@@ -441,25 +541,33 @@ public class MainActivity extends BridgeActivity {
     // =========================================================================
 
     private void triggerOpenDoor(long autoCloseDelayMs) {
+        long effectiveDelay = autoCloseDelayMs > 0 ? autoCloseDelayMs : 3000L;
         new Handler(Looper.getMainLooper()).post(() -> {
             DMAccessUtil.getInstance().openDoor();
-            DMAccessUtil.getInstance().closeRedLed();
-            DMAccessUtil.getInstance().closeWhiteLed();
-            DMAccessUtil.getInstance().openGreenLed();
+            temporaryGreenLed();
 
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 DMAccessUtil.getInstance().closeDoor();
                 DMAccessUtil.getInstance().closeAllLed();
-            }, autoCloseDelayMs);
+            }, effectiveDelay);
+        });
+    }
+
+    private void temporaryGreenLed() {
+        new Handler(Looper.getMainLooper()).post(() -> {
+            DMAccessUtil.getInstance().openGreenLed(2000L);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                DMAccessUtil.getInstance().closeGreenLed();
+            }, 2000L);
         });
     }
 
     private void temporaryRedLed() {
         new Handler(Looper.getMainLooper()).post(() -> {
-            DMAccessUtil.getInstance().openRedLed();
+            DMAccessUtil.getInstance().openRedLed(1000L);
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 DMAccessUtil.getInstance().closeRedLed();
-            }, 1000);
+            }, 1000L);
         });
     }
 

@@ -1,6 +1,8 @@
 package io.ionic.starter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.app.smdt.SmdtManagerNew;
 
@@ -8,6 +10,9 @@ public class DMAccessUtil {
     private static final String TAG = "DMAccessUtil";
     private static volatile DMAccessUtil instance;
     private SmdtManagerNew smdt;
+
+    private final Handler ledHandler = new Handler(Looper.getMainLooper());
+    private final Runnable autoCloseLedRunnable = this::closeAllLed;
 
     private DMAccessUtil() {}
 
@@ -33,12 +38,10 @@ public class DMAccessUtil {
 
     /**
      * Buka pintu relay.
-     * mode: 0 = Normal Closed, 1 = Normal Open, 2 = Toggle
-     * delaySeconds: waktu auto-close (detik)
+     * mode: 1 = Normal Open, delaySeconds: waktu auto-close (detik)
      */
     public void openDoor() {
         if (smdt == null) return;
-        // Set mode dan delay auto-close 5 detik (sesuai demo vendor)
         smdt.custom_setRelayIoMode(1, 5);
         smdt.custom_setRelayIoEnable(true);
         Log.d(TAG, "Door opened (relay ON)");
@@ -54,34 +57,67 @@ public class DMAccessUtil {
     // 💡 KONTROL LAMPU LED
     // ========================
 
-    public void openGreenLed() {
-        if (smdt != null) smdt.dev_setLedLighted("LED_GREEN", true);
+    public synchronized void openGreenLed(long autoCloseMs) {
+        if (smdt != null) {
+            smdt.dev_setLedLighted("LED_RED", false);
+            smdt.dev_setLedLighted("LED_WHITE", false);
+            smdt.dev_setLedLighted("LED_GREEN", true);
+        }
+        ledHandler.removeCallbacks(autoCloseLedRunnable);
+        long delay = autoCloseMs > 0 ? autoCloseMs : 3000L;
+        ledHandler.postDelayed(autoCloseLedRunnable, delay);
+        Log.d(TAG, "Green LED ON (auto-close in " + delay + "ms)");
     }
 
-    public void closeGreenLed() {
+    public void openGreenLed() {
+        openGreenLed(3000L); // Default 3 detik auto-close
+    }
+
+    public synchronized void closeGreenLed() {
+        ledHandler.removeCallbacks(autoCloseLedRunnable);
         if (smdt != null) smdt.dev_setLedLighted("LED_GREEN", false);
+        Log.d(TAG, "Green LED OFF");
+    }
+
+    public synchronized void openRedLed(long autoCloseMs) {
+        if (smdt != null) {
+            smdt.dev_setLedLighted("LED_GREEN", false);
+            smdt.dev_setLedLighted("LED_WHITE", false);
+            smdt.dev_setLedLighted("LED_RED", true);
+        }
+        ledHandler.removeCallbacks(autoCloseLedRunnable);
+        long delay = autoCloseMs > 0 ? autoCloseMs : 2000L;
+        ledHandler.postDelayed(autoCloseLedRunnable, delay);
+        Log.d(TAG, "Red LED ON (auto-close in " + delay + "ms)");
     }
 
     public void openRedLed() {
-        if (smdt != null) smdt.dev_setLedLighted("LED_RED", true);
+        openRedLed(2000L); // Default 2 detik auto-close
     }
 
-    public void closeRedLed() {
+    public synchronized void closeRedLed() {
         if (smdt != null) smdt.dev_setLedLighted("LED_RED", false);
+        Log.d(TAG, "Red LED OFF");
     }
 
-    public void openWhiteLed() {
+    public synchronized void openWhiteLed() {
         if (smdt != null) smdt.dev_setLedLighted("LED_WHITE", true);
+        Log.d(TAG, "White LED ON");
     }
 
-    public void closeWhiteLed() {
+    public synchronized void closeWhiteLed() {
         if (smdt != null) smdt.dev_setLedLighted("LED_WHITE", false);
+        Log.d(TAG, "White LED OFF");
     }
 
-    public void closeAllLed() {
-        closeRedLed();
-        closeGreenLed();
-        closeWhiteLed();
+    public synchronized void closeAllLed() {
+        ledHandler.removeCallbacks(autoCloseLedRunnable);
+        if (smdt != null) {
+            smdt.dev_setLedLighted("LED_WHITE", false);
+            smdt.dev_setLedLighted("LED_RED", false);
+            smdt.dev_setLedLighted("LED_GREEN", false);
+        }
+        Log.d(TAG, "All LEDs OFF");
     }
 
     // ========================
