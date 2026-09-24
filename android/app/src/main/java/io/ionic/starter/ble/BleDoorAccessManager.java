@@ -183,23 +183,20 @@ public class BleDoorAccessManager {
                 .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
                 .build();
 
+        // Primary Advertisement (must be <= 31 bytes)
+        // 16 bytes UUID + 2 bytes header = 18 bytes.
         AdvertiseData data = new AdvertiseData.Builder()
                 .setIncludeDeviceName(false)
                 .addServiceUuid(new ParcelUuid(SERVICE_UUID))
                 .build();
 
-        // Scan response contains device serial data for matching
-        byte[] serialBytes = deviceSerialNumber.getBytes(StandardCharsets.UTF_8);
-        AdvertiseData.Builder scanResponseBuilder = new AdvertiseData.Builder()
-                .setIncludeDeviceName(true);
-
-        if (serialBytes.length > 0 && serialBytes.length <= 20) {
-            // Manufacturer ID 0x0536 (IFS)
-            scanResponseBuilder.addManufacturerData(0x0536, serialBytes);
-        }
+        // Scan response contains only device name (under 20 bytes, safely <= 31 bytes)
+        AdvertiseData scanResponse = new AdvertiseData.Builder()
+                .setIncludeDeviceName(true)
+                .build();
 
         try {
-            advertiser.startAdvertising(settings, data, scanResponseBuilder.build(), advertiseCallback);
+            advertiser.startAdvertising(settings, data, scanResponse, advertiseCallback);
             Log.i(TAG, "BLE Advertising started for IFS360 Door Service.");
         } catch (Exception e) {
             Log.e(TAG, "Failed to start BLE advertising: " + e.getMessage(), e);
@@ -209,12 +206,59 @@ public class BleDoorAccessManager {
     private final AdvertiseCallback advertiseCallback = new AdvertiseCallback() {
         @Override
         public void onStartSuccess(AdvertiseSettings settingsInEffect) {
-            Log.d(TAG, "BLE Advertising started successfully.");
+            Log.i(TAG, ">>> [BLE-ADV-SUCCESS] BLE Advertising started successfully!");
         }
 
         @Override
         public void onStartFailure(int errorCode) {
-            Log.e(TAG, "BLE Advertising failed with error code: " + errorCode);
+            String errorName = "UNKNOWN (" + errorCode + ")";
+            switch (errorCode) {
+                case ADVERTISE_FAILED_DATA_TOO_LARGE:
+                    errorName = "ADVERTISE_FAILED_DATA_TOO_LARGE (1)";
+                    break;
+                case ADVERTISE_FAILED_TOO_MANY_ADVERTISERS:
+                    errorName = "ADVERTISE_FAILED_TOO_MANY_ADVERTISERS (2)";
+                    break;
+                case ADVERTISE_FAILED_ALREADY_STARTED:
+                    errorName = "ADVERTISE_FAILED_ALREADY_STARTED (3)";
+                    break;
+                case ADVERTISE_FAILED_INTERNAL_ERROR:
+                    errorName = "ADVERTISE_FAILED_INTERNAL_ERROR (4)";
+                    break;
+                case ADVERTISE_FAILED_FEATURE_UNSUPPORTED:
+                    errorName = "ADVERTISE_FAILED_FEATURE_UNSUPPORTED (5)";
+                    break;
+            }
+            Log.e(TAG, ">>> [BLE-ADV-FAIL] BLE Advertising failed: " + errorName);
+
+            if (errorCode == ADVERTISE_FAILED_DATA_TOO_LARGE && advertiser != null) {
+                try {
+                    AdvertiseSettings minimalSettings = new AdvertiseSettings.Builder()
+                            .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
+                            .setConnectable(true)
+                            .setTimeout(0)
+                            .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
+                            .build();
+
+                    AdvertiseData minimalData = new AdvertiseData.Builder()
+                            .setIncludeDeviceName(false)
+                            .addServiceUuid(new ParcelUuid(SERVICE_UUID))
+                            .build();
+
+                    advertiser.startAdvertising(minimalSettings, minimalData, null, new AdvertiseCallback() {
+                        @Override
+                        public void onStartSuccess(AdvertiseSettings s) {
+                            Log.i(TAG, ">>> [BLE-ADV-SUCCESS] Fallback minimal advertising started successfully!");
+                        }
+                        @Override
+                        public void onStartFailure(int err) {
+                            Log.e(TAG, ">>> [BLE-ADV-FAIL] Fallback advertising failed: " + err);
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e(TAG, "Fallback advertising exception: " + e.getMessage());
+                }
+            }
         }
     };
 
