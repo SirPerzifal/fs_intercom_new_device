@@ -541,7 +541,12 @@ export class WebRtcService extends ApiService {
   }
 
   async handleCloseGate(data: any) {
-    await Intercom.closeGateNative();
+    try {
+      await Intercom.closeGateNative();
+      this.presentToast('Gate closed', 'success');
+    } catch (error) {
+      this.presentToast(('Error on closing gate' + String(error)), 'danger');
+    }
   }
 
   async fetchDataImages() {
@@ -1413,6 +1418,8 @@ export class WebRtcService extends ApiService {
   }
 
   async endCall() {
+    await this.stopOutgoingRingtone();
+    await this.stopRingtone();
     console.log("END CALL CALLED ===================???")
     if (this.localStream) {
       this.localStream.getTracks().forEach(track => track.stop());
@@ -1438,6 +1445,8 @@ export class WebRtcService extends ApiService {
   }
 
   async handleEndCall() {
+    await this.stopOutgoingRingtone();
+    await this.stopRingtone();
     console.log("END CALL CALLED ===================??? hereee")
     if (this.localStream) {
       this.localStream.getTracks().forEach(track => track.stop());
