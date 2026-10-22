@@ -30,7 +30,7 @@ interface RingtonePlugin {
 interface IntercomPlugin {
   openGateNative(): Promise<void>;
   closeGateNative(): Promise<void>;
-  fetchDataImages(options: { id: string }): Promise<void>;
+  fetchDataImages(options: { id?: string; hard_limit?: number }): Promise<{ status?: string; count?: number }>;
   startScan(): Promise<void>;
   stopScan(): Promise<void>;
   TestScan(): Promise<void>;
@@ -47,6 +47,8 @@ interface IntercomPlugin {
   refreshFaceCamera(): Promise<void>;
   restartApp(): Promise<void>;
   getEnrolledFaces(): Promise<{ faces: { id: string; name: string }[] }>;
+  reinitializeQrScanner(): Promise<{ success: boolean }>;
+  reinitializeCardReader(): Promise<{ success: boolean }>;
 }
 
 const Ringtone = registerPlugin<RingtonePlugin>('Ringtone', {
@@ -111,6 +113,7 @@ export class WebRtcService extends ApiService {
   audioStatus = new BehaviorSubject<string>('');
   callActionStatus = new BehaviorSubject<string>('');
   private loadingElement: HTMLIonLoadingElement | null = null;
+  private isLoadingPresenting = false;
 
   constructor(http: HttpClient, private storage: StorageService, private toastController: ToastController, private modalController: ModalController,
     private router: Router, private platform: Platform, private alertController: AlertController, private mainVms: MainVmsService, private loadingController: LoadingController) {
@@ -165,9 +168,13 @@ export class WebRtcService extends ApiService {
       });
 
       await modal.present();
+
+      // Tutup loading tepat setelah modal baru sudah muncul di layar (menghilangkan jeda kosong)
+      await this.dismissLoading();
     } catch (e) {
       console.error('Gagal membuka modal:', e);
       this.modalLock = false;
+      await this.dismissLoading();
     }
     this.callActionStatus.next('');
   }
@@ -261,6 +268,7 @@ export class WebRtcService extends ApiService {
 
   private async resetCallData() {
     try {
+      await this.dismissLoading();
       if (this.activeModal) {
         await this.activeModal.dismiss();
         this.activeModal = null;
@@ -544,10 +552,11 @@ export class WebRtcService extends ApiService {
     await Intercom.closeGateNative();
   }
 
-  async fetchDataImages() {
-    await Intercom.fetchDataImages({
-      id: "12345"
+  async fetchDataImages(hardLimit?: number): Promise<{ status?: string; count?: number }> {
+    const res = await Intercom.fetchDataImages({
+      hard_limit: hardLimit && hardLimit > 0 ? hardLimit : 10
     });
+    return res || { status: 'completed', count: 0 };
   }
 
   async startScan() {
@@ -574,6 +583,20 @@ export class WebRtcService extends ApiService {
       this.presentToast('Remote: Restart app.')
     }
     await Intercom.restartApp();
+  }
+
+  async reinitializeQrScanner(is_remote: boolean = false): Promise<{ success: boolean }> {
+    if (is_remote) {
+      this.presentToast('Remote: Refresh QR Scanner.');
+    }
+    return await Intercom.reinitializeQrScanner();
+  }
+
+  async reinitializeCardReader(is_remote: boolean = false): Promise<{ success: boolean }> {
+    if (is_remote) {
+      this.presentToast('Remote: Refresh Card Reader.');
+    }
+    return await Intercom.reinitializeCardReader();
   }
 
   async stopRingtoneRtc(is_remote: boolean = false) {
@@ -739,26 +762,50 @@ export class WebRtcService extends ApiService {
   //   }
   // }
 
-  async showLoading(message: string) {
+  async showLoading(message: string = 'Call on process...') {
     try {
       await this.dismissLoading();
+      this.isLoadingPresenting = true;
       this.loadingElement = await this.loadingController.create({
         // message: message,
         cssClass: 'transparent-loading',
         backdropDismiss: false,
-        spinner: 'crescent'
+        spinner: 'crescent',
+        duration: 10000
       });
       await this.loadingElement.present();
     } catch (e) {
       console.error("Error showing loading spinner:", e);
+    } finally {
+      this.isLoadingPresenting = false;
     }
   }
 
   async dismissLoading() {
     try {
+      if (this.isLoadingPresenting) {
+        await new Promise(resolve => setTimeout(resolve, 150));
+      }
+
       if (this.loadingElement) {
-        await this.loadingElement.dismiss();
+        const elem = this.loadingElement;
         this.loadingElement = null;
+        try {
+          await elem.dismiss();
+        } catch (e) {
+          // Ignore if already dismissing
+        }
+      }
+
+      // Safety fallback: Dismiss any orphaned loading overlay in loadingController
+      let topLoading = await this.loadingController.getTop();
+      while (topLoading) {
+        try {
+          await topLoading.dismiss();
+        } catch (e) {
+          break;
+        }
+        topLoading = await this.loadingController.getTop();
       }
     } catch (e) {
       console.error("Error dismissing loading spinner:", e);
@@ -889,7 +936,6 @@ export class WebRtcService extends ApiService {
   // }
 
   async startLocalStream(): Promise<boolean> {
-    await this.showLoading('Call on process...')
     try {
       console.log(navigator);
       console.log('Stopping Intercom activities to release camera hardware...');
@@ -933,8 +979,6 @@ export class WebRtcService extends ApiService {
         errMsg = `${error.name}: ${error.message}`;
       }
       return false;
-    } finally {
-      await this.dismissLoading();
     }
   }
 
@@ -963,70 +1007,82 @@ export class WebRtcService extends ApiService {
       return;
     }
 
-    await this.startLocalStream();
+    await this.showLoading('Call on process...');
 
-    this.peerConnection = new RTCPeerConnection({ iceServers: this.iceServers, iceTransportPolicy: 'all' });
-
-    console.log('this.localStreamthis.localStreamthis.localStream', this.localStream)
-    this.localStream.getTracks().forEach(track => {
-      this.peerConnection.addTrack(track, this.localStream);
-    });
-
-    this.peerConnection.onicecandidate = (event) => {
-      if (event.candidate) {
-        this.socket.emit('ice-candidate', event.candidate);
-        this.callerpendingCandidates.push(event.candidate);
+    try {
+      const streamOk = await this.startLocalStream();
+      if (!streamOk || !this.localStream) {
+        console.error('Cannot create offer: localStream is not available');
+        await this.dismissLoading();
+        return;
       }
-    };
-    console.log("this perrrrrrr==========");
-    console.log(this.peerConnection);
 
-    this.peerConnection.ontrack = (event) => {
-      this.remoteStream = event.streams[0];
-      const remoteVideo: HTMLVideoElement = document.getElementById('remote-video') as HTMLVideoElement;
-      if (remoteVideo) {
-        remoteVideo.srcObject = this.remoteStream;
-      }
-    };
+      this.peerConnection = new RTCPeerConnection({ iceServers: this.iceServers, iceTransportPolicy: 'all' });
 
-    this.peerConnection.oniceconnectionstatechange = () => {
-      const state = this.peerConnection.iceConnectionState;
+      console.log('this.localStreamthis.localStreamthis.localStream', this.localStream)
+      this.localStream.getTracks().forEach(track => {
+        this.peerConnection.addTrack(track, this.localStream);
+      });
 
-      switch (state) {
-        case "checking":
-          this.updateAudioStatus("Connecting audio...");
-          break;
-        case "connected":
-        case "completed":
-          this.updateAudioStatus("Audio connected");
-          break;
-      }
-    };
+      this.peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+          this.socket.emit('ice-candidate', event.candidate);
+          this.callerpendingCandidates.push(event.candidate);
+        }
+      };
+      console.log("this perrrrrrr==========");
+      console.log(this.peerConnection);
 
-    const offer = await this.peerConnection.createOffer();
-    await this.peerConnection.setLocalDescription(offer);
+      this.peerConnection.ontrack = (event) => {
+        this.remoteStream = event.streams[0];
+        const remoteVideo: HTMLVideoElement = document.getElementById('remote-video') as HTMLVideoElement;
+        if (remoteVideo) {
+          remoteVideo.srcObject = this.remoteStream;
+        }
+      };
 
-    this.unitId = unit_id
-    this.callerName = this.userName;
+      this.peerConnection.oniceconnectionstatechange = () => {
+        const state = this.peerConnection.iceConnectionState;
 
-    this.callerId = this.userId;
-    // ✅ FIX: Use the socket uniqueId as the reliable callerId fallback.
-    // In the APK build, 'family_id' (passed from the page component via getCurrentConfig)
-    // is sometimes undefined at call time because vmsPreferences() hasn't returned yet.
-    // this.intercomUniqueId is set once at socket connection time from the JWT and is
-    // always correct (e.g. 'Intercom-36'), preventing 'Public-User' from being sent.
-    const reliableCallerId = family_id || this.intercomUniqueId;
-    this.socket.emit('offer', {
-      offerObj: offer,
-      receiverPhone: receiverPhone,
-      receiverId: receiverId,
-      callerName: this.callerName,
-      callerId: reliableCallerId,
-      unitId: unit_id,
-      isResident: isResident,
-      isIntercomToUnit: unit_id ? true : false,
-    });
+        switch (state) {
+          case "checking":
+            this.updateAudioStatus("Connecting audio...");
+            break;
+          case "connected":
+          case "completed":
+            this.updateAudioStatus("Audio connected");
+            break;
+        }
+      };
 
+      const offer = await this.peerConnection.createOffer();
+      await this.peerConnection.setLocalDescription(offer);
+
+      this.unitId = unit_id
+      this.callerName = this.userName;
+
+      this.callerId = this.userId;
+      // ✅ FIX: Use the socket uniqueId as the reliable callerId fallback.
+      // In the APK build, 'family_id' (passed from the page component via getCurrentConfig)
+      // is sometimes undefined at call time because vmsPreferences() hasn't returned yet.
+      // this.intercomUniqueId is set once at socket connection time from the JWT and is
+      // always correct (e.g. 'Intercom-36'), preventing 'Public-User' from being sent.
+      const reliableCallerId = family_id || this.intercomUniqueId;
+      this.socket.emit('offer', {
+        offerObj: offer,
+        receiverPhone: receiverPhone,
+        receiverId: receiverId,
+        callerName: this.callerName,
+        callerId: reliableCallerId,
+        unitId: unit_id,
+        isResident: isResident,
+        isIntercomToUnit: unit_id ? true : false,
+      });
+      // NOTE: Loading remains visible until receiver-info arrives and OutgoingCallPage is presented!
+    } catch (err) {
+      console.error("Error creating offer:", err);
+      await this.dismissLoading();
+    }
   }
 
   async receiverConnected() {
@@ -1439,6 +1495,7 @@ export class WebRtcService extends ApiService {
 
   async handleEndCall() {
     console.log("END CALL CALLED ===================??? hereee")
+    await this.dismissLoading();
     if (this.localStream) {
       this.localStream.getTracks().forEach(track => track.stop());
     }
@@ -1456,6 +1513,7 @@ export class WebRtcService extends ApiService {
   }
 
   async handleRejectCall() {
+    await this.dismissLoading();
     await this.stopOutgoingRingtone();
     await this.stopRingtone();
     await this.closeModal();
@@ -1463,6 +1521,7 @@ export class WebRtcService extends ApiService {
   }
 
   async rejectCall() {
+    await this.dismissLoading();
     await this.stopOutgoingRingtone();
     await this.stopRingtone();
     this.socket.emit('reject-call', {
@@ -1514,6 +1573,7 @@ export class WebRtcService extends ApiService {
   }
 
   async handleUserNotFound(data: any) {
+    await this.dismissLoading();
     await this.rejectCall();
     this.presentToast(data.message, 'danger');
   }
@@ -1529,6 +1589,7 @@ export class WebRtcService extends ApiService {
 
 
   async closeModal() {
+    await this.dismissLoading();
     const topModal = await this.modalController.getTop();
     if (topModal) {
       try {

@@ -9,6 +9,7 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import io.ionic.starter.DMAccessUtil;
+import io.ionic.starter.MainActivity;
 
 @CapacitorPlugin(name = "Intercom")
 public class IntercomPlugin extends Plugin {
@@ -83,6 +84,16 @@ public class IntercomPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void openWhiteLed(PluginCall call) {
+        try {
+            DMAccessUtil.getInstance().openWhiteLed();
+            call.resolve();
+        } catch (Exception e) {
+            call.reject("Error: " + e.getMessage());
+        }
+    }
+
+    @PluginMethod
     public void closeGateNative(PluginCall call) {
         try {
             DMAccessUtil.getInstance().closeDoor();
@@ -142,12 +153,18 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void fetchDataImages(PluginCall call) {
-        Log.d(TAG, "fetchDataImages() plugin method triggered from Ionic JS");
+        int hardLimit = 10;
+        if (call.hasOption("hard_limit")) {
+            hardLimit = call.getInt("hard_limit", 10);
+        }
+        final int finalHardLimit = hardLimit;
+        Log.d(TAG, "fetchDataImages() plugin method triggered from Ionic JS with hard_limit=" + finalHardLimit);
         new Thread(() -> {
             try {
-                io.ionic.starter.facepass.FacePassHelper.getInstance().syncFacesFromBackend();
+                int count = io.ionic.starter.facepass.FacePassHelper.getInstance().syncFacesFromBackend(finalHardLimit);
                 JSObject ret = new JSObject();
                 ret.put("status", "completed");
+                ret.put("count", count);
                 call.resolve(ret);
             } catch (Exception e) {
                 Log.e(TAG, "Error in fetchDataImages: " + e.getMessage(), e);
@@ -178,6 +195,20 @@ public class IntercomPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void openSettings(PluginCall call) {
+        Log.d(TAG, "openSettings() called from JS");
+        try {
+            android.content.Intent intent = new android.content.Intent(android.provider.Settings.ACTION_SETTINGS);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
+            call.resolve();
+        } catch (Exception e) {
+            Log.e(TAG, "Error openSettings: " + e.getMessage());
+            call.reject("Error openSettings: " + e.getMessage());
+        }
+    }
+
+    @PluginMethod
     public void TestScan(PluginCall call) {
         call.resolve();
     }
@@ -189,7 +220,57 @@ public class IntercomPlugin extends Plugin {
 
     @PluginMethod
     public void restartApp(PluginCall call) {
-        call.resolve();
+        try {
+            Log.d(TAG, "restartApp called -> Triggering MainActivity app self-restart");
+            MainActivity activity = (MainActivity) getActivity();
+            if (activity != null) {
+                activity.performSelfRestart();
+                call.resolve();
+            } else {
+                call.reject("MainActivity instance is null");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error restarting app via restartApp: " + e.getMessage(), e);
+            call.reject("Error restarting app: " + e.getMessage());
+        }
+    }
+
+    @PluginMethod
+    public void reinitializeQrScanner(PluginCall call) {
+        try {
+            Log.d(TAG, "reinitializeQrScanner called from JS");
+            MainActivity activity = (MainActivity) getActivity();
+            if (activity != null) {
+                boolean ok = activity.reinitializeQrScanner();
+                JSObject ret = new JSObject();
+                ret.put("success", ok);
+                call.resolve(ret);
+            } else {
+                call.reject("MainActivity instance is null");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in reinitializeQrScanner: " + e.getMessage(), e);
+            call.reject("Error in reinitializeQrScanner: " + e.getMessage());
+        }
+    }
+
+    @PluginMethod
+    public void reinitializeCardReader(PluginCall call) {
+        try {
+            Log.d(TAG, "reinitializeCardReader called from JS");
+            MainActivity activity = (MainActivity) getActivity();
+            if (activity != null) {
+                boolean ok = activity.reinitializeCardReader();
+                JSObject ret = new JSObject();
+                ret.put("success", ok);
+                call.resolve(ret);
+            } else {
+                call.reject("MainActivity instance is null");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in reinitializeCardReader: " + e.getMessage(), e);
+            call.reject("Error in reinitializeCardReader: " + e.getMessage());
+        }
     }
 
     public void notifyFaceDetected(int faceCount) {

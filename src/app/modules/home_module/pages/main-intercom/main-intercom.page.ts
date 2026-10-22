@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { faAsterisk, faPhone, faQrcode, faQuestion, faUserTie, faSignOut, faGear, faSync, faSmile, faUsers } from '@fortawesome/free-solid-svg-icons';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { FunctionMainService } from 'src/app/service/function/function-main.service';
 import { App } from '@capacitor/app'
@@ -38,11 +38,12 @@ export class MainIntercomPage implements OnInit {
     private platform: Platform,
     private clientMainService: ClientMainService,
     private webRtc: WebRtcService,
+    private alertController: AlertController,
   ) {
     this.initializeBackButtonHandling();
   }
 
-  version = '(3.1.2-270)'
+  version = '(HF-3.1.4)'
 
   ngOnInit() {
     // this.openScanRecognitionModal()
@@ -154,7 +155,7 @@ export class MainIntercomPage implements OnInit {
   handleFaceRecognition(userId: string, score: number, userName?: string) {
     console.log('Face recognized:', userId, 'Score:', score, 'UserName:', userName);
     const displayName = userName || this.recognizedUserName || userId;
-    this.functionMain.presentToast(this.is_en ? `Face recognized: ${displayName} (${score}%)` : `人脸识别成功: ${displayName} (${score}%)`, 'success');
+    // this.functionMain.presentToast(this.is_en ? `Face recognized: ${displayName} (${score}%)` : `人脸识别成功: ${displayName} (${score}%)`, 'success');
   }
 
   valueReturn = '';
@@ -256,8 +257,10 @@ export class MainIntercomPage implements OnInit {
   showEnrolledFacesModal = false
   enrolledFaces: { id: string; name: string }[] = []
   enrolledFacesSearch = ''
+  isFetchingFaces = false
 
   async openEnrolledFacesModal() {
+    this.loadShortTimeout(this.longDuration)
     try {
       this.enrolledFaces = await this.webRtc.getEnrolledFaces();
     } catch (e) {
@@ -265,6 +268,154 @@ export class MainIntercomPage implements OnInit {
       this.enrolledFaces = [];
     }
     this.showEnrolledFacesModal = true;
+  }
+
+  async fetchEnrolledFaces() {
+    if (this.isFetchingFaces) return;
+    this.clearShortTimeout();
+
+    let isActionTriggered = false;
+
+    const alert = await this.alertController.create({
+      header: this.is_en ? 'Fetch Face Data' : '获取人脸数据',
+      message: this.is_en 
+        ? 'Enter the number of face data to fetch (1 - 50, leave empty for max 50):' 
+        : '请输入要获取的人脸数据数量（1 - 50，留空默认为 50）：',
+      inputs: [
+        {
+          name: 'hard_limit',
+          type: 'number',
+          placeholder: this.is_en ? '1 - 50 (max: 50)' : '1 - 50 (最大: 50)',
+          min: 1,
+          max: 50
+        }
+      ],
+      buttons: [
+        {
+          text: this.is_en ? 'Cancel' : '取消',
+          role: 'cancel',
+          handler: () => {
+            isActionTriggered = true;
+            this.loadShortTimeout(this.longDuration);
+          }
+        },
+        {
+          text: this.is_en ? 'Fetch' : '获取',
+          handler: (data) => {
+            isActionTriggered = true;
+            let limit = data.hard_limit ? parseInt(data.hard_limit, 10) : 50;
+            if (isNaN(limit) || limit <= 0) {
+              limit = 50;
+            } else if (limit > 50) {
+              limit = 50;
+            }
+            this.executeFetchFaces(limit);
+          }
+        }
+      ]
+    });
+
+    alert.onDidDismiss().then(() => {
+      if (!isActionTriggered && !this.isFetchingFaces) {
+        this.loadShortTimeout(this.longDuration);
+      }
+    });
+
+    await alert.present();
+  }
+
+  async executeFetchFaces(hardLimit: number = 50) {
+    if (this.isFetchingFaces) return;
+    if (hardLimit > 50) hardLimit = 50;
+    if (hardLimit <= 0) hardLimit = 50;
+    this.isFetchingFaces = true;
+    this.clearShortTimeout();
+    this.functionMain.presentToast(
+      this.is_en 
+        ? `Fetching face data from server (limit: ${hardLimit})...` 
+        : `正在从服务器获取人脸数据 (限制: ${hardLimit})...`,
+      'dark'
+    );
+    try {
+      await this.webRtc.fetchDataImages(hardLimit);
+      this.enrolledFaces = await this.webRtc.getEnrolledFaces();
+      this.functionMain.presentToast(
+        this.is_en ? `Face data updated (${this.enrolledFaces.length} faces)` : `人脸数据已更新 (${this.enrolledFaces.length} 个人脸)`,
+        'success'
+      );
+    } catch (e: any) {
+      console.error('Error in fetchEnrolledFaces:', e);
+      this.functionMain.presentToast(
+        (this.is_en ? 'Failed to fetch face data: ' : '获取人脸数据失败: ') + (e?.message || e),
+        'danger'
+      );
+    } finally {
+      this.isFetchingFaces = false;
+      this.loadShortTimeout(this.longDuration);
+    }
+  }
+
+  async fetchAllFaces() {
+    if (this.isFetchingFaces) return;
+    this.isFetchingFaces = true;
+    this.clearShortTimeout();
+
+    this.functionMain.presentToast(
+      this.is_en ? 'Starting batch face sync (10 per batch)...' : '正在开始批量同步人脸数据（每次 10 个）...',
+      'dark'
+    );
+
+    let batchNumber = 1;
+    let totalFetchedThisSession = 0;
+
+    try {
+      while (true) {
+        this.functionMain.presentToast(
+          this.is_en 
+            ? `Fetching batch #${batchNumber} (10 faces)...` 
+            : `正在获取第 ${batchNumber} 批数据 (10 个)...`,
+          'dark'
+        );
+
+        const res = await this.webRtc.fetchDataImages(10);
+        const batchCount = res?.count ?? 0;
+
+        this.enrolledFaces = await this.webRtc.getEnrolledFaces();
+        totalFetchedThisSession += batchCount;
+
+        console.log(`[FETCH-ALL] Batch #${batchNumber} completed. Fetched: ${batchCount}. Total enrolled: ${this.enrolledFaces.length}`);
+
+        // If no data was returned from backend, stop the loop
+        if (batchCount === 0) {
+          break;
+        }
+
+        // If returned less than 10, this was the last batch
+        if (batchCount < 10) {
+          break;
+        }
+
+        batchNumber++;
+        // Small delay between batches to ensure smooth UI and avoid network congestion
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+
+      this.functionMain.presentToast(
+        this.is_en 
+          ? `Fetch All completed! (${this.enrolledFaces.length} total registered faces)` 
+          : `获取全部完成！(共 ${this.enrolledFaces.length} 个已注册人脸)`,
+        'success'
+      );
+    } catch (e: any) {
+      console.error('Error in fetchAllFaces:', e);
+      this.functionMain.presentToast(
+        (this.is_en ? 'Failed to fetch face data: ' : '获取人脸数据失败: ') + (e?.message || e),
+        'danger'
+      );
+    } finally {
+      this.isFetchingFaces = false;
+      this.loadShortTimeout(this.longDuration);
+    }
   }
 
   closeEnrolledFacesModal() {
@@ -312,31 +463,50 @@ export class MainIntercomPage implements OnInit {
     clearTimeout(this.timeoutId)
   }
 
+  async stopCameraForCall() {
+    console.log("Stopping face recognition camera before video call...");
+    try {
+      if (Plugins['Intercom']) {
+        await Plugins['Intercom']['stopApproachDetection']();
+        await Plugins['Intercom']['stopScan']();
+        await Plugins['Intercom']['stopRecognition']();
+      }
+    } catch (e) {
+      console.log("Error stopping intercom camera:", e);
+    }
+  }
+
   onFamilySearch() {
     if (this.isDisable) {
       return;
     }
     this.loadDisable()
 
-    this.clientMainService.getApi({ family_code: this.family_code }, '/intercom/get/family_code').subscribe({
-      next: (results) => {
+    const projectId = this.projectInfo ? this.projectInfo.project_id : false;
+    this.clientMainService.getApi({ family_code: this.family_code, project_id: projectId }, '/intercom/get/family_code').subscribe({
+      next: async (results) => {
         console.log(results)
-        if (results.result.status_code === 200) {
+        if (results && results.result && results.result.status_code === 200) {
           this.closeModal()
-          if (results.result.result.unit_id) {
-            console.log(results.result.result.unit_id)
-            this.isDisable = false
-            this.webRtc.createOffer(false, false, results.result.result.unit_id, false, this.family_id)
-          } else {
-            this.isDisable = false
-            this.webRtc.createOffer(false, results.result.result.family_id, false, false, this.family_id)
+          await this.stopCameraForCall();
+          try {
+            if (results.result.result.unit_id) {
+              console.log(results.result.result.unit_id)
+              await this.webRtc.createOffer(false, false, results.result.result.unit_id, false, this.family_id);
+            } else {
+              await this.webRtc.createOffer(false, results.result.result.family_id, false, false, this.family_id);
+            }
+          } finally {
+            this.isDisable = false;
           }
         } else {
           this.isDisable = false
-          this.functionMain.presentToast(results.result.status_description, 'danger');
+          const desc = (results && results.result && results.result.status_description) ? results.result.status_description : 'Invalid Code';
+          this.functionMain.presentToast(desc, 'danger');
         }
       },
       error: (error) => {
+        this.isDisable = false
         this.functionMain.presentToast('An error occurred!', 'danger');
         console.error(error);
       }
@@ -360,22 +530,14 @@ export class MainIntercomPage implements OnInit {
       return;
     }
     this.loadDisable()
-    console.log("Stopping face recognition camera before video call...");
-    try {
-      if (Plugins['Intercom']) {
-        await Plugins['Intercom']['stopApproachDetection']();
-        await Plugins['Intercom']['stopScan']();
-        await Plugins['Intercom']['stopRecognition']();
-      }
-    } catch (e) {
-      console.log("Error stopping intercom camera:", e);
-    }
+    await this.stopCameraForCall();
 
-    // Delay slightly to ensure hardware camera is fully released by Android
-    // setTimeout(() => {
     const project_id = 'Project-' + (this.projectInfo.project_id).toString();
-    this.webRtc.createOffer(false, project_id, false, true, this.family_id);
-    // }, 500);
+    try {
+      await this.webRtc.createOffer(false, project_id, false, true, this.family_id);
+    } finally {
+      this.isDisable = false;
+    }
   }
 
   isMain = true
@@ -659,8 +821,10 @@ export class MainIntercomPage implements OnInit {
     }, 20000);
   }
 
+  shortDuration = 5000
+  longDuration = 20000
   shortTimeoutId: any = null;
-  loadShortTimeout() {
+  loadShortTimeout(duration: number) {
     if (this.shortTimeoutId) {
       clearTimeout(this.shortTimeoutId);
     }
@@ -668,7 +832,15 @@ export class MainIntercomPage implements OnInit {
     this.shortTimeoutId = setTimeout(() => {
       this.closeModal();
       this.closeLogoutModal()
-    }, 5000);
+      this.closeEnrolledFacesModal()
+    }, duration);
+  }
+
+  clearShortTimeout() {
+    if (this.shortTimeoutId) {
+      clearTimeout(this.shortTimeoutId);
+      this.shortTimeoutId = null;
+    }
   }
 
   isSetting = false
@@ -680,15 +852,22 @@ export class MainIntercomPage implements OnInit {
     this.logoutCode = ''
     this.isSetting = false
     this.isSettingSwitch = false
-    this.loadShortTimeout()
+    this.loadShortTimeout(this.shortDuration)
   }
 
   onSettingClick() {
     this.showLogoutModal = true
     this.logoutCode = ''
     this.isSetting = true
+    this.isSettingSwitch = true
+    this.loadShortTimeout(this.shortDuration)
+  }
+  
+  isSettingSwitch = false
+  openSettingSwitch() {
+    this.loadShortTimeout(this.shortDuration)
+    this.showLogoutModal = true
     this.isSettingSwitch = false
-    this.loadShortTimeout()
   }
 
   closeLogoutModal() {
@@ -699,41 +878,48 @@ export class MainIntercomPage implements OnInit {
 
   onChangeLogoutCode() {
     if (this.isSetting) {
-      this.loadShortTimeout()
+      this.loadShortTimeout(this.shortDuration)
     } else {
-      this.loadShortTimeout()
+      this.loadShortTimeout(this.shortDuration)
     }
   }
 
   async onLogout() {
     if (this.logoutCode) {
+      this.clearShortTimeout();
       this.clientMainService.getApi({ code: this.logoutCode }, '/intercom/post/logout').subscribe({
         next: (results) => {
           if (results.result.status_code === 200) {
             this.showLogoutModal = false
             if (this.isSetting) {
-              this.onOpenSettings()
+              // this.onOpenSettings()
+              // this.isSettingSwitch = false
+              this.openSettingSwitch()
             } else {
               this.functionMain.logout().then(() => {
                 setTimeout(() => {
                   this.router.navigate(['/']);
                 }, 300);
               })
+              this.closeLogoutModal()
             }
-            this.closeLogoutModal()
           } else if (results.result.status_code === 401) {
             this.functionMain.presentToast(results.result.status_description, 'danger');
+            this.loadShortTimeout(this.shortDuration);
           } else {
             this.functionMain.presentToast('An error occurred while trying to verify the project code!', 'danger');
+            this.loadShortTimeout(this.shortDuration);
           }
         },
         error: (error) => {
           this.functionMain.presentToast('An error occurred while trying to verify the project code!', 'danger');
           console.error(error);
+          this.loadShortTimeout(this.shortDuration);
         }
       });
     } else {
       this.functionMain.presentToast('Project code is required!', 'warning')
+      this.loadShortTimeout(this.shortDuration)
     }
   }
 
@@ -749,9 +935,9 @@ export class MainIntercomPage implements OnInit {
     this.webRtc.openRedLed()
   }
 
-  openWhiteLed() {
-    this.webRtc.openWhiteLed()
-  }
+  // openWhiteLed() {
+  //   this.webRtc.openWhiteLed()
+  // }
 
   closeLed() {
     this.webRtc.closeLed()
@@ -760,24 +946,18 @@ export class MainIntercomPage implements OnInit {
   ringtoneDelay = false
   stopRingtone() {
     if (this.ringtoneDelay) return
-    this.loadShortTimeout()
+    this.loadShortTimeout(this.shortDuration)
     this.ringtoneDelay = true
     setTimeout(() => {
       this.ringtoneDelay = false
     }, 3000);
-    this.loadShortTimeout()
+    this.loadShortTimeout(this.shortDuration)
     this.webRtc.stopRingtone()
     this.webRtc.stopOutgoingRingtone()
   }
 
   startRingtone() {
     this.webRtc.playOutgoingRingtone()
-  }
-
-  isSettingSwitch = false
-  openSettingSwitch() {
-    this.loadShortTimeout()
-    this.isSettingSwitch = true
   }
 
   // async rebootDevice() {
@@ -793,7 +973,7 @@ export class MainIntercomPage implements OnInit {
   faceRefreshDelay = false
   async onRefreshCameraClick() {
     if (this.faceRefreshDelay) return
-    this.loadShortTimeout()
+    this.loadShortTimeout(this.shortDuration)
     this.faceRefreshDelay = true
     setTimeout(() => {
       this.faceRefreshDelay = false
@@ -811,7 +991,7 @@ export class MainIntercomPage implements OnInit {
   pingTestDelay = false
   pingTest() {
     if (this.pingTestDelay) return
-    this.loadShortTimeout()
+    this.loadShortTimeout(this.shortDuration)
     this.pingTestDelay = true
     this.clientMainService.getApi({}, '/api/test_connection').subscribe({
       next: (results) => {
@@ -828,6 +1008,68 @@ export class MainIntercomPage implements OnInit {
         console.error(error);
       }
     });
+  }
+
+  qrRefreshDelay = false;
+  async onRefreshQrScanner() {
+    if (this.qrRefreshDelay) return;
+    this.loadShortTimeout(this.shortDuration);
+    this.qrRefreshDelay = true;
+    try {
+      const res = await this.webRtc.reinitializeQrScanner();
+      if (res?.success) {
+        this.functionMain.presentToast(
+          this.is_en ? 'QR Scanner reinitialized successfully!' : '二维码扫描器重新初始化成功！',
+          'success'
+        );
+      } else {
+        this.functionMain.presentToast(
+          this.is_en ? 'Failed to reinitialize QR Scanner!' : '重新初始化二维码扫描器失败！',
+          'danger'
+        );
+      }
+    } catch (e: any) {
+      console.error('Error reinitializing QR scanner:', e);
+      this.functionMain.presentToast(
+        (this.is_en ? 'Error reinitializing QR Scanner: ' : '重新初始化二维码扫描器出错: ') + (e?.message || e),
+        'danger'
+      );
+    } finally {
+      setTimeout(() => {
+        this.qrRefreshDelay = false;
+      }, 1000);
+    }
+  }
+
+  cardRefreshDelay = false;
+  async onRefreshCardReader() {
+    if (this.cardRefreshDelay) return;
+    this.loadShortTimeout(this.shortDuration);
+    this.cardRefreshDelay = true;
+    try {
+      const res = await this.webRtc.reinitializeCardReader();
+      if (res?.success) {
+        this.functionMain.presentToast(
+          this.is_en ? 'Card Reader reinitialized successfully!' : '读卡器重新初始化成功！',
+          'success'
+        );
+      } else {
+        this.functionMain.presentToast(
+          this.is_en ? 'Failed to reinitialize Card Reader!' : '重新初始化读卡器失败！',
+          'danger'
+        );
+      }
+    } catch (e: any) {
+      console.error('Error reinitializing Card reader:', e);
+      this.functionMain.presentToast(
+        (this.is_en ? 'Error reinitializing Card Reader: ' : '重新初始化读卡器出错: ') + (e?.message || e),
+        'danger'
+      );
+    } finally {
+      setTimeout(() => {
+        this.cardRefreshDelay = false;
+      }, 1000);
+    }
   }
 
 }

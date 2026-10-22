@@ -120,6 +120,8 @@ public class InitFacePassHandler {
                 Context context = activity.getApplicationContext();
                 Log.d(TAG, ">>> [CAM-INIT-START] Starting FacePass SDK initialization in background thread...");
 
+                FacePassHelper.getInstance().initPersistentStore(context);
+
                 // 1. Authorize SDK
                 boolean isAuth = initSDKAuth(context);
 

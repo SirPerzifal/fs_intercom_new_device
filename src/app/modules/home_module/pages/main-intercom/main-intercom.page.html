@@ -122,10 +122,10 @@
           <fa-icon [icon]="faGear" (click)="onSettingClick()"
             class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
           </fa-icon>
-          <fa-icon [icon]="faUsers" (click)="openEnrolledFacesModal()"
+          <!-- <fa-icon [icon]="faUsers" (click)="openEnrolledFacesModal()"
             class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer"
             title="Registered Faces">
-          </fa-icon>
+          </fa-icon> -->
         </div>
         <fa-icon [icon]="faSignOut" (click)="onLogoutClick()"
           class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
@@ -189,10 +189,10 @@
           <fa-icon [icon]="faGear" (click)="onSettingClick()"
             class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
           </fa-icon>
-          <fa-icon [icon]="faUsers" (click)="openEnrolledFacesModal()"
+          <!-- <fa-icon [icon]="faUsers" (click)="openEnrolledFacesModal()"
             class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer"
             title="Registered Faces">
-          </fa-icon>
+          </fa-icon> -->
         </div>
         <fa-icon [icon]="faSignOut" (click)="onLogoutClick()"
           class="flex flex-col justify-center items-center text-3xl text-[var(--ion-color-primary)] cursor-pointer">
@@ -314,21 +314,33 @@
           </div>
         </div>
         <div class="w-full flex flex-col justify-center items-center space-y-2" *ngIf="!isSettingSwitch && isSetting">
-          <div class="flex flex-row space-x-2 w-full">
+          <div class="grid grid-cols-2 gap-3 w-full">
             <!-- <button class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
               (click)="startRingtone()">Play Ringtone</button> -->
             <button [disabled]="ringtoneDelay" [class]="ringtoneDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
               class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
               (click)="stopRingtone()">{{ is_en ? 'Stop Ringtone' : '停止铃声'}}</button>
-            <button [disabled]="faceRefreshDelay"
+            <!-- <button [disabled]="faceRefreshDelay"
               [class]="faceRefreshDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
               class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
-              (click)="onRefreshCameraClick()">{{ is_en ? 'Refresh Camera' : '刷新摄像头'}}</button>
+              (click)="onRefreshCameraClick()">{{ is_en ? 'Refresh Camera' : '刷新摄像头'}}</button> -->
             <button [disabled]="pingTestDelay" [class]="pingTestDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
               class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
               (click)="pingTest()">{{ is_en ? 'Connection Test' : '连接测试'}}</button>
-            <button class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
-              (click)="openSettingSwitch()">{{is_en ? 'Open Settings' : '打开设置'}}</button>
+            <button [class]="'bg-[var(--ion-color-primary)]'"
+              class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="openEnrolledFacesModal()">{{ is_en ? 'Registered Users' : '已注册用户'}}</button>
+            <button [class]="'bg-[var(--ion-color-primary)]'"
+              class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="onOpenSettings()">{{ is_en ? 'Open Settings' : '打开设置'}}</button>
+            <button [disabled]="qrRefreshDelay" [class]="qrRefreshDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
+              class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="onRefreshQrScanner()">{{ is_en ? 'Refresh QR Scanner' : '刷新二维码扫描'}}</button>
+            <button [disabled]="cardRefreshDelay" [class]="cardRefreshDelay ? 'bg-gray-300' : 'bg-[var(--ion-color-primary)]'"
+              class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="onRefreshCardReader()">{{ is_en ? 'Refresh Card Reader' : '刷新读卡器'}}</button>
+            <!-- <button class="h-20 w-full bg-[var(--ion-color-primary)] text-lg font-bold rounded text-white"
+              (click)="openSettingSwitch()">{{is_en ? 'Open Settings' : '打开设置'}}</button> -->
             <!-- <button class="h-20 w-full bg-red-600 text-lg font-bold rounded text-white"
               (click)="rebootDevice()">{{is_en ? 'Reboot Device' : '重启设备'}}</button> -->
           </div>
@@ -340,39 +352,68 @@
   <!-- Enrolled Faces Wizard Modal -->
   <ion-modal id="enrolled-faces-modal" [isOpen]="showEnrolledFacesModal" (didDismiss)="closeEnrolledFacesModal()">
     <ng-template>
-      <div class="p-6 w-full flex flex-col justify-between h-full bg-white rounded-lg">
-        <div class="flex flex-row justify-between items-center pb-4 border-b">
-          <h2 class="text-2xl font-bold text-[var(--ion-color-primary)]">
-            {{ is_en ? 'Registered Faces List' : '已注册人脸列表' }} ({{ enrolledFaces.length }})
-          </h2>
-          <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 font-bold rounded-lg text-lg text-gray-700" (click)="closeEnrolledFacesModal()">
-            {{ is_en ? 'Close' : '关闭' }}
+      <div class="p-5 w-full flex flex-col justify-between h-full bg-white rounded-xl shadow-lg">
+        <!-- Header -->
+        <div class="flex flex-row justify-between items-center pb-3 border-b border-gray-200">
+          <div class="flex items-center space-x-2">
+            <h2 class="text-2xl font-bold text-gray-800">
+              {{ is_en ? 'Registered Faces' : '已注册人脸' }}
+            </h2>
+            <span class="px-2.5 py-0.5 rounded-full text-sm font-semibold bg-green-100 text-green-800">
+              {{ enrolledFaces.length }}
+            </span>
+          </div>
+          <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 font-semibold rounded-lg text-base text-gray-700 transition cursor-pointer flex items-center space-x-1" 
+            (click)="closeEnrolledFacesModal()">
+            <span>✕</span>
+            <span>{{ is_en ? 'Close' : '关闭' }}</span>
           </button>
         </div>
 
-        <div class="py-4">
-          <input type="text" [(ngModel)]="enrolledFacesSearch" 
-            [placeholder]="is_en ? 'Search by ID or Name...' : '按 ID 或姓名搜索...'" 
-            class="w-full border p-3 rounded-lg text-xl outline-none border-gray-300 focus:border-[var(--ion-color-primary)]" />
+        <!-- Action & Search Toolbar -->
+        <div class="py-3 flex flex-row items-center gap-3">
+          <div class="flex-1 relative">
+            <input type="text" [(ngModel)]="enrolledFacesSearch" 
+              [placeholder]="is_en ? 'Search by name or ID...' : '按姓名或 ID 搜索...'" 
+              class="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-base outline-none focus:border-[var(--ion-color-primary)] focus:ring-1 focus:ring-[var(--ion-color-primary)] transition" />
+          </div>
+          <div class="flex flex-row gap-2 shrink-0">
+            <button [disabled]="isFetchingFaces" 
+              [class]="isFetchingFaces ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm cursor-pointer active:scale-95'"
+              class="px-4 py-2.5 font-bold rounded-lg text-base transition duration-150 flex items-center space-x-1.5" 
+              (click)="fetchAllFaces()">
+              <fa-icon [icon]="faSync" [class.animate-spin]="isFetchingFaces"></fa-icon>
+              <span>{{ isFetchingFaces ? (is_en ? 'Syncing...' : '正在同步...') : (is_en ? 'Fetch All' : '获取全部') }}</span>
+            </button>
+            <button [disabled]="isFetchingFaces" 
+              [class]="isFetchingFaces ? 'bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed' : 'border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 shadow-sm cursor-pointer active:scale-95'"
+              class="px-3 py-2.5 font-semibold rounded-lg text-base transition duration-150 flex items-center space-x-1" 
+              (click)="fetchEnrolledFaces()">
+              <fa-icon [icon]="faGear" class="text-gray-500"></fa-icon>
+              <span>{{ is_en ? 'Manual' : '手动' }}</span>
+            </button>
+          </div>
         </div>
 
-        <div class="flex-1 overflow-y-auto space-y-2 py-2 pr-2">
-          <div *ngIf="filteredEnrolledFaces.length === 0" class="text-center text-gray-500 text-xl py-8">
-            {{ is_en ? 'No registered faces found.' : '未找到已注册人脸。' }}
+        <!-- List Area -->
+        <div class="flex-1 overflow-y-auto space-y-2 py-1 pr-1">
+          <div *ngIf="filteredEnrolledFaces.length === 0" class="flex flex-col items-center justify-center py-12 text-gray-400 space-y-2">
+            <fa-icon [icon]="faUsers" class="text-4xl text-gray-300"></fa-icon>
+            <span class="text-lg">{{ is_en ? 'No registered faces found.' : '未找到已注册人脸。' }}</span>
           </div>
           <div *ngFor="let item of filteredEnrolledFaces; let i = index" 
-            class="flex flex-row justify-between items-center p-4 bg-gray-50 border rounded-xl hover:bg-green-50">
-            <div class="flex flex-row items-center space-x-4">
-              <span class="w-10 h-10 rounded-full bg-[var(--ion-color-primary)] text-white font-bold flex items-center justify-center text-lg">
+            class="flex flex-row justify-between items-center p-3.5 bg-gray-50 hover:bg-emerald-50/50 border border-gray-200/80 rounded-xl transition duration-150">
+            <div class="flex flex-row items-center space-x-3">
+              <span class="w-9 h-9 rounded-full bg-[var(--ion-color-primary)] text-white font-bold flex items-center justify-center text-sm shadow-sm">
                 {{ i + 1 }}
               </span>
               <div class="flex flex-col">
-                <span class="text-xl font-bold text-gray-800">{{ item.name }}</span>
-                <span class="text-sm text-gray-500">ID: {{ item.id }}</span>
+                <span class="text-lg font-bold text-gray-800">{{ item.name }}</span>
+                <span class="text-xs text-gray-400">ID: {{ item.id }}</span>
               </div>
             </div>
-            <span class="px-3 py-1 bg-green-100 text-green-700 font-semibold rounded-full text-sm">
-              Enrolled
+            <span class="px-2.5 py-1 bg-green-100 text-green-700 font-semibold rounded-full text-xs">
+              {{ is_en ? 'Enrolled' : '已注册' }}
             </span>
           </div>
         </div>

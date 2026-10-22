@@ -1,5 +1,7 @@
 package io.ionic.starter.facepass;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import io.ionic.starter.DMAccessUtil;
 import io.ionic.starter.plugin.IntercomPlugin;
@@ -14,6 +16,11 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import mcv.facepass.FacePassHandler;
 import mcv.facepass.types.FacePassDetectionResult;
@@ -23,16 +30,18 @@ import mcv.facepass.types.FacePassRecognitionResult;
 import mcv.facepass.types.FacePassRecognitionState;
 import mcv.facepass.types.FacePassTrackOptions;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 public class FacePassHelper {
     private static final String TAG = "FacePassHelper";
+    private static final String PREF_NAME = "facepass_enrolled_faces_pref";
+    private static final String KEY_FACE_MAP = "face_token_to_id_map";
+    private static final String KEY_ENROLLED_FACES = "enrolled_faces_list";
+
     private static FacePassHelper instance;
     private IntercomPlugin plugin;
+    private Context appContext;
     private boolean isScanning = false;
     private long lastFaceSendTime = 0;
+    private long lastRecognizeTime = 0;
     private long frameCounter = 0;
     private ScheduledExecutorService faceSyncScheduler;
 
@@ -45,6 +54,70 @@ public class FacePassHelper {
 
     public void setPlugin(IntercomPlugin plugin) {
         this.plugin = plugin;
+        if (plugin != null && plugin.getContext() != null) {
+            initPersistentStore(plugin.getContext());
+        }
+    }
+
+    public void initPersistentStore(Context context) {
+        if (context != null) {
+            this.appContext = context.getApplicationContext();
+            loadPersistedFaces();
+        }
+    }
+
+    private synchronized void savePersistedFaces() {
+        if (appContext == null) return;
+        try {
+            SharedPreferences prefs = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            JSONObject mapObj = new JSONObject();
+            for (Map.Entry<String, String> entry : faceTokenToIdMap.entrySet()) {
+                mapObj.put(entry.getKey(), entry.getValue());
+            }
+            editor.putString(KEY_FACE_MAP, mapObj.toString());
+
+            JSONArray array = new JSONArray();
+            for (JSONObject item : enrolledFacesList) {
+                array.put(item);
+            }
+            editor.putString(KEY_ENROLLED_FACES, array.toString());
+
+            editor.apply();
+            Log.d(TAG, ">>> [FACE-PERSIST-SAVE] Saved " + faceTokenToIdMap.size() + " face mappings and " + enrolledFacesList.size() + " enrolled face records to disk.");
+        } catch (Exception e) {
+            Log.e(TAG, ">>> [FACE-PERSIST-ERROR] Exception saving persisted faces: " + e.getMessage(), e);
+        }
+    }
+
+    private synchronized void loadPersistedFaces() {
+        if (appContext == null) return;
+        try {
+            SharedPreferences prefs = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+
+            String mapJsonStr = prefs.getString(KEY_FACE_MAP, null);
+            if (mapJsonStr != null && !mapJsonStr.isEmpty()) {
+                JSONObject mapObj = new JSONObject(mapJsonStr);
+                Iterator<String> keys = mapObj.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    faceTokenToIdMap.put(key, mapObj.getString(key));
+                }
+            }
+
+            String listJsonStr = prefs.getString(KEY_ENROLLED_FACES, null);
+            if (listJsonStr != null && !listJsonStr.isEmpty()) {
+                JSONArray array = new JSONArray(listJsonStr);
+                enrolledFacesList.clear();
+                for (int i = 0; i < array.length(); i++) {
+                    enrolledFacesList.add(array.getJSONObject(i));
+                }
+            }
+            Log.d(TAG, ">>> [FACE-PERSIST-LOAD] Loaded " + faceTokenToIdMap.size() + " face mappings and " + enrolledFacesList.size() + " enrolled face records from disk.");
+        } catch (Exception e) {
+            Log.e(TAG, ">>> [FACE-PERSIST-ERROR] Exception loading persisted faces: " + e.getMessage(), e);
+        }
     }
 
     public void startScan() {
@@ -96,41 +169,50 @@ public class FacePassHelper {
                 }
 
                 if (detectionResult.message != null && detectionResult.message.length > 0) {
-                    FacePassTrackOptions[] trackOpts = new FacePassTrackOptions[detectionResult.images.length];
-                    for (int i = 0; i < detectionResult.images.length; i++) {
-                        trackOpts[i] = new FacePassTrackOptions(detectionResult.images[i].trackId, 65f, 65f, 85f,
-                                -1.0f);
-                    }
+                    long nowTime = System.currentTimeMillis();
+                    if (nowTime - lastRecognizeTime >= 350) {
+                        lastRecognizeTime = nowTime;
+                        FacePassTrackOptions[] trackOpts = new FacePassTrackOptions[detectionResult.images.length];
+                        for (int i = 0; i < detectionResult.images.length; i++) {
+                            trackOpts[i] = new FacePassTrackOptions(detectionResult.images[i].trackId, 65f, 65f, 85f,
+                                    -1.0f);
+                        }
 
-                    FacePassRecognitionResult[][] recognizeResultArray = handler
-                            .recognize(InitFacePassHandler.GROUP_NAME, detectionResult.message, 1, trackOpts);
-                    if (recognizeResultArray != null && recognizeResultArray.length > 0) {
-                        for (FacePassRecognitionResult[] recognizeResult : recognizeResultArray) {
-                            if (recognizeResult != null && recognizeResult.length > 0) {
-                                for (FacePassRecognitionResult result : recognizeResult) {
-                                    if (result != null
-                                            && result.recognitionState == FacePassRecognitionState.RECOGNITION_PASS) {
-                                        String sdkFaceToken = new String(result.faceToken, StandardCharsets.ISO_8859_1);
-                                        String faceId = faceTokenToIdMap.getOrDefault(sdkFaceToken, sdkFaceToken);
-                                        int score = 100;
+                        FacePassRecognitionResult[][] recognizeResultArray = handler
+                                .recognize(InitFacePassHandler.GROUP_NAME, detectionResult.message, 1, trackOpts);
+                        if (recognizeResultArray != null && recognizeResultArray.length > 0) {
+                            for (FacePassRecognitionResult[] recognizeResult : recognizeResultArray) {
+                                if (recognizeResult != null && recognizeResult.length > 0) {
+                                    for (FacePassRecognitionResult result : recognizeResult) {
+                                        if (result != null
+                                                && result.recognitionState == FacePassRecognitionState.RECOGNITION_PASS) {
+                                            String sdkFaceToken = new String(result.faceToken, StandardCharsets.ISO_8859_1);
+                                            String faceId = faceTokenToIdMap.getOrDefault(sdkFaceToken, sdkFaceToken);
+                                            int score = 100;
 
-                                        Log.e(TAG, ">>> [CAM-RECOGNIZED-PASS] Face Matched! SDK Token: " + sdkFaceToken
-                                                + ", Backend FaceID: " + faceId + ", TrackId: " + result.trackId);
+                                            Log.e(TAG, ">>> [CAM-RECOGNIZED-PASS] Face Matched! SDK Token: " + sdkFaceToken
+                                                    + ", Backend FaceID: " + faceId + ", TrackId: " + result.trackId);
 
-                                        if (plugin != null) {
-                                            plugin.emitFaceRecognized(faceId, score, "Resident #" + result.trackId);
+                                            // Reset track state in Megvii SDK so subsequent scans work smoothly!
+                                            try {
+                                                handler.setMessage(result.trackId, 0);
+                                            } catch (Exception ignored) {}
+
+                                            if (plugin != null) {
+                                                plugin.emitFaceRecognized(faceId, score, "Resident #" + result.trackId);
+                                            }
+
+                                            long now = System.currentTimeMillis();
+                                            if (now - lastFaceSendTime > 5500) {
+                                                lastFaceSendTime = now;
+                                                Log.d(TAG, "[CAM-BACKEND-SEND] Sending FaceID (" + faceId + ") to backend /api/face_recog...");
+                                                sendFaceToBackend(faceId);
+                                            }
+                                            break;
+                                        } else if (result != null) {
+                                            Log.d(TAG, "[CAM-RECOGNIZED-FAIL] Face detected but match status: "
+                                                    + result.recognitionState);
                                         }
-
-                                        long now = System.currentTimeMillis();
-                                        if (now - lastFaceSendTime > 4000) {
-                                            lastFaceSendTime = now;
-                                            Log.d(TAG, "[CAM-BACKEND-SEND] Sending FaceID (" + faceId + ") to backend /api/face_recog...");
-                                            sendFaceToBackend(faceId);
-                                        }
-                                        break;
-                                    } else if (result != null) {
-                                        Log.d(TAG, "[CAM-RECOGNIZED-FAIL] Face detected but match status: "
-                                                + result.recognitionState);
                                     }
                                 }
                             }
@@ -183,6 +265,7 @@ public class FacePassHelper {
 
                     JSONObject root = new JSONObject(sb.toString());
                     JSONObject result = root.optJSONObject("result");
+                    // Log.d(TAG, ">>> [FACE-RECOG-RESP] Response newwww: " + (result.toString()));
                     if (result != null) {
                         if ("ignored".equals(result.optString("status"))) {
                             Log.d(TAG, ">>> [FACE-RECOG-RESP] Scan ignored by backend (cooldown active).");
@@ -208,7 +291,6 @@ public class FacePassHelper {
                             }
                         }
                     }
-                    Log.d(TAG, ">>> [FACE-RECOG-RESP] Response: " + (result != null ? result.toString() : sb.toString()));
                 } else {
                     Log.e(TAG, ">>> [FACE-RECOG-FAIL] HTTP Code: " + conn.getResponseCode());
                 }
@@ -230,6 +312,27 @@ public class FacePassHelper {
             return null;
         }
 
+        // If backendFaceId is already present, remove old tokens from SDK and map before enrolling new face data
+        if (backendFaceId != null && !backendFaceId.isEmpty()) {
+            java.util.List<String> oldTokensToRemove = new java.util.ArrayList<>();
+            for (Map.Entry<String, String> entry : faceTokenToIdMap.entrySet()) {
+                if (backendFaceId.equals(entry.getValue())) {
+                    oldTokensToRemove.add(entry.getKey());
+                }
+            }
+            for (String oldToken : oldTokensToRemove) {
+                try {
+                    byte[] tokenBytes = oldToken.getBytes(StandardCharsets.ISO_8859_1);
+                    handler.deleteFace(tokenBytes);
+                    Log.d(TAG, ">>> [FACE-REPLACE-OLD] Deleted old face token from FacePass SDK for FaceID: " + backendFaceId);
+                } catch (Exception delEx) {
+                    Log.w(TAG, ">>> [FACE-REPLACE-OLD-EX] Exception deleting old faceToken from SDK: " + delEx.getMessage());
+                }
+                faceTokenToIdMap.remove(oldToken);
+            }
+            enrolledFacesList.removeIf(item -> backendFaceId.equals(item.optString("id")));
+        }
+
         try {
             mcv.facepass.types.FacePassAddFaceResult addResult = handler.addFace(bitmap);
             if (addResult != null && addResult.result == 0) {
@@ -238,6 +341,7 @@ public class FacePassHelper {
                 if (backendFaceId != null && !backendFaceId.isEmpty()) {
                     faceTokenToIdMap.put(faceToken, backendFaceId);
                 }
+                savePersistedFaces();
                 Log.d(TAG,
                         ">>> [FACE-ENROLL-SUCCESS] Enrolled SDK faceToken: " + faceToken + " -> Backend FaceID: " + backendFaceId + ", bindGroup result: " + bindOk);
                 return faceToken;
@@ -265,10 +369,18 @@ public class FacePassHelper {
         return array;
     }
 
-    public void syncFacesFromBackend() {
+    public int syncFacesFromBackend() {
+        return syncFacesFromBackend(10);
+    }
+
+    public int syncFacesFromBackend(int hardLimit) {
+        int fetchedCount = 0;
         String serial = getDeviceSerial();
         String targetUrl = "https://ifs360-sg.com/api/image-info?serial_number=" + serial;
-        Log.e(TAG, ">>> [DEVICE-SERIAL-INFO] DEVICE SERIAL NUMBER: " + serial);
+        if (hardLimit > 0) {
+            targetUrl += "&hard_limit=" + hardLimit;
+        }
+        Log.e(TAG, ">>> [DEVICE-SERIAL-INFO] DEVICE SERIAL NUMBER: " + serial + (hardLimit > 0 ? " | HARD_LIMIT: " + hardLimit : ""));
         Log.d(TAG, ">>> [FACE-SYNC-START] Fetching registered face images from backend [METHOD: GET] (URL: " + targetUrl + ") for serial: " + serial);
         try {
             URL url = new URL(targetUrl);
@@ -302,6 +414,7 @@ public class FacePassHelper {
                     // 1. Process faces array from "result"
                     org.json.JSONArray faces = root.optJSONArray("result");
                     if (faces != null && faces.length() > 0) {
+                        fetchedCount = faces.length();
                         StringBuilder summaryLog = new StringBuilder();
                         for (int i = 0; i < faces.length(); i++) {
                             JSONObject f = faces.getJSONObject(i);
@@ -375,6 +488,7 @@ public class FacePassHelper {
                                 }
                             }
                         }
+                        savePersistedFaces();
                         Log.d(TAG, ">>> [FACE-SYNC-COMPLETE] Successfully synced & enrolled " + successCount + " / "
                                 + faces.length() + " face images for Serial: " + serial);
                     } else {
@@ -389,7 +503,9 @@ public class FacePassHelper {
                             JSONObject delObj = usersToDelete.getJSONObject(d);
                             String delId = delObj.optString("id");
                             enrolledFacesList.removeIf(item -> delId.equals(item.optString("id")));
+                            faceTokenToIdMap.entrySet().removeIf(entry -> delId.equals(entry.getValue()));
                         }
+                        savePersistedFaces();
                     }
                 } catch (Exception parseEx) {
                     Log.e(TAG, ">>> [FACE-SYNC-JSON-EXCEPTION] Exception parsing JSON response: " + parseEx.getMessage(), parseEx);
@@ -401,6 +517,7 @@ public class FacePassHelper {
         } catch (Exception e) {
             Log.e(TAG, ">>> [FACE-SYNC-ERROR] URL: " + targetUrl + " | Exception syncing faces: " + e.getMessage(), e);
         }
+        return fetchedCount;
     }
 
     private void triggerOpenDoor(long autoCloseDelayMs) {

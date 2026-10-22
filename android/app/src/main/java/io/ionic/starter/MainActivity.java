@@ -7,6 +7,11 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+import android.content.Context;
+import android.content.Intent;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.os.Build;
 
 import com.getcapacitor.BridgeActivity;
 import com.dk.usbNfc.DeviceManager.UsbNfcDevice;
@@ -15,6 +20,8 @@ import com.dk.usbNfc.Tool.StringTool;
 
 import android.app.smdt.SmdtManagerNew;
 import io.ionic.starter.plugin.IntercomPlugin;
+import io.ionic.starter.plugin.RingtonePlugin;
+import io.ionic.starter.plugin.ActivityLauncher;
 
 import org.json.JSONObject;
 
@@ -58,6 +65,8 @@ public class MainActivity extends BridgeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(TAG, "onCreate MainActivity");
         registerPlugin(IntercomPlugin.class);
+        registerPlugin(RingtonePlugin.class);
+        registerPlugin(ActivityLauncher.class);
         super.onCreate(savedInstanceState);
 
         // Inisialisasi SDK SMDT Hardware
@@ -85,6 +94,36 @@ public class MainActivity extends BridgeActivity {
             });
         } catch (Exception e) {
             Log.e(TAG, "Failed to initialize BleDoorAccessManager: " + e.getMessage(), e);
+        }
+
+        hideSystemUI();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
+    private void hideSystemUI() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            getWindow().setDecorFitsSystemWindows(false);
+            android.view.WindowInsetsController controller = getWindow().getInsetsController();
+            if (controller != null) {
+                controller.hide(android.view.WindowInsets.Type.statusBars() | android.view.WindowInsets.Type.navigationBars());
+                controller.setSystemBarsBehavior(android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+            }
+        } else {
+            android.view.View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | android.view.View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
     }
 
@@ -206,25 +245,49 @@ public class MainActivity extends BridgeActivity {
     // 📷 QR CODE SCANNER (/dev/ttyS7)
     // =========================================================================
 
-    private void setupQrCodeScanner() {
-        if (smdt == null)
-            return;
+    public boolean setupQrCodeScanner() {
+        return reinitializeQrScanner();
+    }
+
+    public boolean reinitializeQrScanner() {
+        if (smdt == null) {
+            smdt = SmdtManagerNew.getInstance(this);
+        }
+        if (smdt == null) {
+            Log.e(TAG, "[QR-INIT] SmdtManagerNew instance is null!");
+            return false;
+        }
         try {
+            // Power on USB ports in case module is powered through USB bus
+            try {
+                smdt.dev_setUsbPower(1, 1, true);
+                smdt.dev_setUsbPower(2, 1, true);
+            } catch (Exception ignored) {
+            }
+
             // Close any existing open UART handle before opening
             try {
                 smdt.dev_closeUart(QR_UART_PORT);
             } catch (Exception ignored) {
             }
 
+            // Reset stream buffer
+            synchronized (qrStreamBuffer) {
+                qrStreamBuffer.reset();
+            }
+
             int result = smdt.dev_openUart(QR_UART_PORT, QR_BAUD_RATE, 8, 1, 0, 0);
             if (result == 0) {
                 receiveQrUart();
                 Log.d(TAG, "[QR-INIT] QR Code Scanner (" + QR_UART_PORT + ") setup successfully installed.");
+                return true;
             } else {
                 Log.e(TAG, "Gagal buka port QR: " + QR_UART_PORT + " (code: " + result + ")");
+                return false;
             }
         } catch (Exception e) {
             Log.e(TAG, "Exception setup QR: " + e.getMessage());
+            return false;
         }
     }
 
@@ -280,9 +343,7 @@ public class MainActivity extends BridgeActivity {
 
             final String finalResult = qrText;
             Log.e(TAG, ">>> [QR-SCANNER] Scanned Code: " + finalResult);
-            runOnUiThread(
-                    () -> Toast.makeText(MainActivity.this, "[TEST] QR Code: " + finalResult, Toast.LENGTH_SHORT)
-                            .show());
+            // runOnUiThread(() -> Toast.makeText(MainActivity.this, "[TEST] QR Code: " + finalResult, Toast.LENGTH_SHORT).show());
 
             long now = System.currentTimeMillis();
             if (now - lastQrSendTime > 3000) {
@@ -301,8 +362,7 @@ public class MainActivity extends BridgeActivity {
             return;
 
         Log.e(TAG, ">>> [CARD-SCANNER] Source: " + sourceTag + " | Card UID: " + cardUid);
-        runOnUiThread(() -> Toast
-                .makeText(MainActivity.this, "[CARD] (" + sourceTag + ") UID: " + cardUid, Toast.LENGTH_SHORT).show());
+        // runOnUiThread(() -> Toast.makeText(MainActivity.this, "[CARD] (" + sourceTag + ") UID: " + cardUid, Toast.LENGTH_SHORT).show());
 
         long now = System.currentTimeMillis();
         if (now - lastCardSendTime > 3000) {
@@ -314,7 +374,30 @@ public class MainActivity extends BridgeActivity {
         }
     }
 
-    private void setupDerkUsbCardReader() {
+    public boolean reinitializeCardReader() {
+        if (smdt == null) {
+            smdt = SmdtManagerNew.getInstance(this);
+        }
+        try {
+            if (smdt != null) {
+                try {
+                    smdt.dev_setUsbPower(1, 1, true);
+                    smdt.dev_setUsbPower(2, 1, true);
+                } catch (Exception ignored) {
+                }
+            }
+
+            setupDerkUsbCardReader();
+            setupWiegandCardReader();
+            Log.d(TAG, "[CARD-REINIT] Card readers (DERK USB & Wiegand) reinitialized successfully.");
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "[CARD-REINIT] Exception reinitializing card readers: " + e.getMessage(), e);
+            return false;
+        }
+    }
+
+    public void setupDerkUsbCardReader() {
         try {
             if (usbNfcDevice != null) {
                 try {
@@ -343,7 +426,7 @@ public class MainActivity extends BridgeActivity {
         }
     };
 
-    private void setupWiegandCardReader() {
+    public void setupWiegandCardReader() {
         if (smdt == null)
             return;
         try {
@@ -454,27 +537,27 @@ public class MainActivity extends BridgeActivity {
                     JSONObject result = root.optJSONObject("result");
                     String errorMessage = result != null ? result.optString("message", "") : "";
                     if (result != null && result.optBoolean("open_door", false)) {
-                        plugin.sendToastMessage("Successfully open the door", true);
+                        if (plugin != null) plugin.sendToastMessage("Successfully open the door", true);
                         long delay = result.optLong("seconds_closing_door", 5) * 1000L;
                         triggerOpenDoor(delay);
                     } else {
                         if (errorMessage != "") {
-                            plugin.sendToastMessage(errorMessage, false);
+                            if (plugin != null) plugin.sendToastMessage(errorMessage, false);
                         } else {
-                            plugin.sendToastMessage("Failed to open the door", false);
+                            if (plugin != null) plugin.sendToastMessage("Failed to open the door", false);
                         }
                         temporaryRedLed();
                     }
                     Log.e(TAG, ">>> [QR-RESPONSE-SUCCESS] Response: " + responseText);
                 } else {
                     temporaryRedLed();
-                    plugin.sendToastMessage("Failed to open the door", false);
+                    if (plugin != null) plugin.sendToastMessage("Failed to open the door", false);
                     Log.e(TAG, ">>> [QR-RESPONSE-FAIL] HTTP Code: " + responseCode + " | Response: " + responseText);
                 }
                 conn.disconnect();
             } catch (Exception e) {
                 Log.e(TAG, ">>> [QR-RESPONSE-ERROR] Exception: " + e.getMessage());
-                plugin.sendToastMessage("Failed to open the door", false);
+                if (plugin != null) plugin.sendToastMessage("Failed to open the door", false);
                 temporaryRedLed();
             }
         }).start();
@@ -524,14 +607,14 @@ public class MainActivity extends BridgeActivity {
                     String errorMessage = result != null ? result.optString("message", "") : "";
 
                     if (result != null && result.optBoolean("open_door", false)) {
-                        plugin.sendToastMessage("Successfully open the door", true);
+                        if (plugin != null) plugin.sendToastMessage("Successfully open the door", true);
                         long delay = result.optLong("seconds_closing_door", 5) * 1000L;
                         triggerOpenDoor(delay);
                     } else {
                         if (errorMessage != "") {
-                            plugin.sendToastMessage(errorMessage, false);
+                            if (plugin != null) plugin.sendToastMessage(errorMessage, false);
                         } else {
-                            plugin.sendToastMessage("Failed to open the door", false);
+                            if (plugin != null) plugin.sendToastMessage("Failed to open the door", false);
                         }
                         temporaryRedLed();
                     }
@@ -539,12 +622,12 @@ public class MainActivity extends BridgeActivity {
                 } else {
                     temporaryRedLed();
                     Log.e(TAG, ">>> [CARD-RESPONSE-FAIL] HTTP Code: " + responseCode + " | Response: " + responseText);
-                    plugin.sendToastMessage("Failed to open the door", false);
+                    if (plugin != null) plugin.sendToastMessage("Failed to open the door", false);
                 }
                 conn.disconnect();
             } catch (Exception e) {
                 Log.e(TAG, ">>> [CARD-RESPONSE-ERROR] Exception: " + e.getMessage());
-                plugin.sendToastMessage("Failed to open the door", false);
+                if (plugin != null) plugin.sendToastMessage("Failed to open the door", false);
                 temporaryRedLed();
             }
         }).start();
@@ -625,6 +708,39 @@ public class MainActivity extends BridgeActivity {
             return cleaned.isEmpty() ? gbkCleaned : cleaned;
         } catch (Exception e) {
             return "";
+        }
+    }
+
+    public void performSelfRestart() {
+        try {
+            Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(
+                    this,
+                    9999,
+                    intent,
+                    PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                );
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                if (alarmManager != null) {
+                    long triggerTime = System.currentTimeMillis() + 2000; // 2 seconds delay
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+                    } else {
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+                    }
+                }
+            }
+            Log.d(TAG, "Killing current process for self-restart...");
+            DMAccessUtil.getInstance().closeRedLed();
+            DMAccessUtil.getInstance().closeWhiteLed();
+            DMAccessUtil.getInstance().closeGreenLed();
+        } catch (Exception e) {
+            Log.e(TAG, "Error during self-restart cleanup", e);
+        } finally {
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
         }
     }
 }
