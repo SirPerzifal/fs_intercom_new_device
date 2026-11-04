@@ -15,7 +15,10 @@ import android.bluetooth.le.AdvertiseCallback;
 import android.bluetooth.le.AdvertiseData;
 import android.bluetooth.le.AdvertiseSettings;
 import android.bluetooth.le.BluetoothLeAdvertiser;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.ParcelUuid;
@@ -62,7 +65,11 @@ public class BleDoorAccessManager {
     private String deviceSerialNumber = "";
     private DoorUnlockCallback unlockCallback;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final Handler bleRetryHandler = new Handler(Looper.getMainLooper());
     private boolean isRunning = false;
+    private boolean isReceiverRegistered = false;
+    private int advertiseRetryCount = 0;
+    private static final int MAX_ADVERTISE_RETRIES = 5;
 
     public interface DoorUnlockCallback {
         void onDoorUnlock(long autoCloseDelayMs);
@@ -81,10 +88,144 @@ public class BleDoorAccessManager {
         return instance;
     }
 
+    private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context ctx, Intent intent) {
+            String action = intent != null ? intent.getAction() : null;
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+                Log.i(TAG, ">>> [BLE-STATE-CHANGE] Bluetooth State: " + getBtStateString(state));
+
+                if (state == BluetoothAdapter.STATE_ON) {
+                    Log.i(TAG, ">>> [BLE-STATE-ON] Bluetooth is now ON! Restarting BLE Services in 1000ms...");
+                    mainHandler.postDelayed(() -> {
+                        restartBleServices();
+                    }, 1000L);
+                } else if (state == BluetoothAdapter.STATE_TURNING_OFF || state == BluetoothAdapter.STATE_OFF) {
+                    Log.w(TAG, ">>> [BLE-STATE-OFF] Bluetooth is turning OFF / OFF. Cleaning up BLE resources...");
+                    cleanupBleResources();
+                }
+            }
+        }
+    };
+
+    private String getBtStateString(int state) {
+        switch (state) {
+            case BluetoothAdapter.STATE_OFF: return "STATE_OFF (10)";
+            case BluetoothAdapter.STATE_TURNING_ON: return "STATE_TURNING_ON (11)";
+            case BluetoothAdapter.STATE_ON: return "STATE_ON (12)";
+            case BluetoothAdapter.STATE_TURNING_OFF: return "STATE_TURNING_OFF (13)";
+            default: return "UNKNOWN (" + state + ")";
+        }
+    }
+
+    private void registerBluetoothStateReceiver() {
+        if (isReceiverRegistered || context == null) return;
+        try {
+            IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+            context.registerReceiver(bluetoothReceiver, filter);
+            isReceiverRegistered = true;
+            Log.i(TAG, ">>> [BLE-RECEIVER] Registered Bluetooth ACTION_STATE_CHANGED receiver.");
+        } catch (Exception e) {
+            Log.e(TAG, ">>> [BLE-RECEIVER-ERROR] Failed to register Bluetooth receiver: " + e.getMessage(), e);
+        }
+    }
+
+    private void unregisterBluetoothStateReceiver() {
+        if (!isReceiverRegistered || context == null) return;
+        try {
+            context.unregisterReceiver(bluetoothReceiver);
+            isReceiverRegistered = false;
+            Log.i(TAG, ">>> [BLE-RECEIVER] Unregistered Bluetooth receiver.");
+        } catch (Exception e) {
+            Log.w(TAG, ">>> [BLE-RECEIVER-ERROR] Failed to unregister Bluetooth receiver: " + e.getMessage());
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    public synchronized void restartBleServices() {
+        if (context == null) return;
+        if (bluetoothManager == null) {
+            bluetoothManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
+        }
+        if (bluetoothAdapter == null && bluetoothManager != null) {
+            bluetoothAdapter = bluetoothManager.getAdapter();
+        }
+
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            Log.w(TAG, "Cannot restart BLE services: Bluetooth adapter is null or not enabled.");
+            return;
+        }
+
+        cleanupBleResources();
+        setBleAdapterName();
+        startGattServer();
+        advertiseRetryCount = 0;
+        startAdvertisingWithRetry();
+    }
+
+    @SuppressLint("MissingPermission")
+    private synchronized void cleanupBleResources() {
+        bleRetryHandler.removeCallbacksAndMessages(null);
+        try {
+            if (advertiser != null) {
+                advertiser.stopAdvertising(advertiseCallback);
+                advertiser = null;
+                Log.d(TAG, "Stopped previous BLE advertiser.");
+            }
+        } catch (Exception ignored) {}
+
+        try {
+            if (gattServer != null) {
+                gattServer.close();
+                gattServer = null;
+                Log.d(TAG, "Closed previous GATT server.");
+            }
+        } catch (Exception ignored) {}
+    }
+
+    @SuppressLint("MissingPermission")
+    private void setBleAdapterName() {
+        try {
+            if (bluetoothAdapter != null) {
+                String bleName = "IFS_" + (deviceSerialNumber.length() > 10 ? deviceSerialNumber.substring(deviceSerialNumber.length() - 10) : deviceSerialNumber);
+                bluetoothAdapter.setName(bleName);
+                Log.i(TAG, ">>> [BLE-NAME] Bluetooth adapter name set to: " + bleName);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Could not set Bluetooth adapter name: " + e.getMessage());
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void startAdvertisingWithRetry() {
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            Log.w(TAG, "Cannot start advertising: Bluetooth adapter not ready.");
+            return;
+        }
+
+        advertiser = bluetoothAdapter.getBluetoothLeAdvertiser();
+        if (advertiser == null) {
+            if (advertiseRetryCount < MAX_ADVERTISE_RETRIES) {
+                advertiseRetryCount++;
+                Log.w(TAG, ">>> [BLE-RETRY] getBluetoothLeAdvertiser() returned null. Retrying in 1500ms (attempt " + advertiseRetryCount + "/" + MAX_ADVERTISE_RETRIES + ")...");
+                bleRetryHandler.postDelayed(this::startAdvertisingWithRetry, 1500L);
+            } else {
+                Log.e(TAG, ">>> [BLE-ERROR] BLE Advertising not supported on this chipset or failed to initialize after retries.");
+            }
+            return;
+        }
+
+        startAdvertising();
+    }
+
     @SuppressLint("MissingPermission")
     public void init(Context ctx, String serialNumber, DoorUnlockCallback callback) {
         if (isRunning) {
-            Log.d(TAG, "BLE Door Access Manager is already running.");
+            Log.d(TAG, "BLE Door Access Manager is already running. Refreshing serial: " + serialNumber);
+            this.deviceSerialNumber = serialNumber != null ? serialNumber.trim() : "";
+            this.unlockCallback = callback;
+            restartBleServices();
             return;
         }
 
@@ -104,27 +245,22 @@ public class BleDoorAccessManager {
             return;
         }
 
+        registerBluetoothStateReceiver();
+
         if (!bluetoothAdapter.isEnabled()) {
             try {
+                Log.d(TAG, "Bluetooth is currently disabled. Enabling Bluetooth adapter...");
                 bluetoothAdapter.enable();
-                Log.d(TAG, "Enabling Bluetooth adapter...");
+                // The broadcast receiver will catch STATE_ON and start GATT + Advertising!
             } catch (Exception e) {
                 Log.e(TAG, "Failed to enable Bluetooth: " + e.getMessage());
             }
+        } else {
+            restartBleServices();
         }
 
-        // Set BLE friendly name with device serial for easy mobile app identification
-        try {
-            String bleName = "IFS_" + (deviceSerialNumber.length() > 10 ? deviceSerialNumber.substring(deviceSerialNumber.length() - 10) : deviceSerialNumber);
-            bluetoothAdapter.setName(bleName);
-        } catch (Exception e) {
-            Log.w(TAG, "Could not set Bluetooth adapter name: " + e.getMessage());
-        }
-
-        startGattServer();
-        startAdvertising();
         isRunning = true;
-        Log.i(TAG, "BLE Door Access Manager initialized for serial: " + deviceSerialNumber);
+        Log.i(TAG, ">>> [BLE-INIT-SUCCESS] BLE Door Access Manager initialized for serial: " + deviceSerialNumber);
     }
 
     @SuppressLint("MissingPermission")
@@ -413,19 +549,8 @@ public class BleDoorAccessManager {
     @SuppressLint("MissingPermission")
     public void stop() {
         isRunning = false;
-        try {
-            if (advertiser != null) {
-                advertiser.stopAdvertising(advertiseCallback);
-                advertiser = null;
-            }
-        } catch (Exception ignored) {}
-
-        try {
-            if (gattServer != null) {
-                gattServer.close();
-                gattServer = null;
-            }
-        } catch (Exception ignored) {}
+        unregisterBluetoothStateReceiver();
+        cleanupBleResources();
         Log.i(TAG, "BLE Door Access Manager stopped.");
     }
 }

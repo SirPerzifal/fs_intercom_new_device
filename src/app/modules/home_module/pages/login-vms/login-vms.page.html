@@ -1,5 +1,25 @@
 <ion-content [fullscreen]="true" class="vms-body flex flex-col justify-between">
+  <div (click)="onSecretCornerTap()"
+    class="fixed top-0 left-0 w-28 h-28 z-[99999] opacity-0 select-none pointer-events-auto cursor-pointer"
+    title="Secret Kiosk Toggle">
+  </div>
   <div class="flex flex-col items-center justify-center h-full w-full">
+    <div class="absolute top-2 right-2">
+        <div (click)="onNetworkIconClick()"
+            class="flex flex-row items-center space-x-2 cursor-pointer bg-white/70 hover:bg-white active:scale-95 transition-all px-3 py-1 rounded-full shadow-sm"
+          [title]="'Network: ' + networkStatus">
+          <fa-icon [icon]="faWifi"
+            [class]="'text-xl ' + (networkStatus === 'connected' ? 'text-green-600' : (networkStatus === 'connecting' ? 'text-amber-500 animate-pulse' : 'text-red-500'))">
+          </fa-icon>
+          <span class="text-sm font-semibold tracking-wide uppercase" [ngClass]="{
+            'text-green-700': networkStatus === 'connected',
+            'text-amber-600': networkStatus === 'connecting',
+            'text-red-600': networkStatus === 'disconnected'
+          }">
+            {{ networkStatus === 'connected' ? 'Online' : (networkStatus === 'connecting' ? 'Connecting' : 'Offline') }}
+          </span>
+        </div>
+    </div>
     <div class="mb-10">
       <img alt="iFS360 logo" src="assets/logoIFS.png" class="max-h-44 max-w-44" />
     </div>

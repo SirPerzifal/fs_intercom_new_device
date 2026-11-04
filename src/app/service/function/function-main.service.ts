@@ -16,12 +16,12 @@ export class FunctionMainService {
     private storage: StorageService,
   ) { }
 
-  async presentToast(message: string, color: 'success' | 'danger' | 'warning' | 'dark' = 'success') {
+  async presentToast(message: string, color: 'success' | 'danger' | 'warning' | 'dark' = 'success', position: 'top' | 'bottom' | 'middle' = 'top') {
     const toast = await this.toastController.create({
       message: message,
       duration: 4000,
       color: color,
-      position: 'top'
+      position: position
     });
     toast.present();
   }

@@ -194,6 +194,34 @@ public class IntercomPlugin extends Plugin {
         }
     }
 
+    
+    @PluginMethod
+    public void toggleHomeAppLock(PluginCall call) {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            boolean current = activity.isKioskLocked();
+            boolean newStatus = !current;
+            activity.setKioskLocked(newStatus);
+            JSObject ret = new JSObject();
+            ret.put("isLocked", newStatus);
+            call.resolve(ret);
+        } else {
+            call.reject("MainActivity instance is null");
+        }
+    }
+
+    @PluginMethod
+    public void getHomeAppLockStatus(PluginCall call) {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            JSObject ret = new JSObject();
+            ret.put("isLocked", activity.isKioskLocked());
+            call.resolve(ret);
+        } else {
+            call.reject("MainActivity instance is null");
+        }
+    }
+
     @PluginMethod
     public void openSettings(PluginCall call) {
         Log.d(TAG, "openSettings() called from JS");

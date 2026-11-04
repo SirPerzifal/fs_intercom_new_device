@@ -198,8 +198,9 @@ public class FacePassHelper {
                                                 handler.setMessage(result.trackId, 0);
                                             } catch (Exception ignored) {}
 
+                                            String residentName = getResidentNameById(faceId);
                                             if (plugin != null) {
-                                                plugin.emitFaceRecognized(faceId, score, "Resident #" + result.trackId);
+                                                plugin.emitFaceRecognized(faceId, score, residentName);
                                             }
 
                                             long now = System.currentTimeMillis();
@@ -272,7 +273,7 @@ public class FacePassHelper {
                             return;
                         }
                         boolean openDoor = result.optBoolean("open_door", false);
-                        String familyName = result.optString("family_name", "");
+                        String familyName = result.optString("family_name", result.optString("name", ""));
                         long delay = result.optLong("seconds_closing_door", 5000L);
                         if (delay < 100) {
                             delay = delay * 1000L;
@@ -283,6 +284,9 @@ public class FacePassHelper {
                             String msg = familyName.isEmpty() ? "Successfully open the door" : "Welcome, " + familyName;
                             if (plugin != null) {
                                 plugin.sendToastMessage(msg, true);
+                                if (!familyName.isEmpty()) {
+                                    plugin.emitFaceRecognized(faceId, 100, familyName);
+                                }
                             }
                         } else {
                             String msg = result.optString("message", "Face not recognized / Access Denied");
@@ -367,6 +371,16 @@ public class FacePassHelper {
             array.put(item);
         }
         return array;
+    }
+
+    public String getResidentNameById(String faceId) {
+        if (faceId == null || faceId.isEmpty()) return "";
+        for (JSONObject item : enrolledFacesList) {
+            if (faceId.equals(item.optString("id"))) {
+                return item.optString("family_name", item.optString("name", ""));
+            }
+        }
+        return "";
     }
 
     public int syncFacesFromBackend() {
@@ -543,15 +557,15 @@ public class FacePassHelper {
         String serial = getDeviceSerial();
         Log.e(TAG, ">>> [FACE-SYNC-INIT] STARTING PERIODIC FACE SYNC FOR DEVICE SERIAL: " + serial);
         faceSyncScheduler = Executors.newSingleThreadScheduledExecutor();
-        // Schedule immediately (0s delay) and repeat every 5 minutes
-        faceSyncScheduler.scheduleAtFixedRate(() -> {
+        // Schedule with initial delay (25s) to avoid freezing app startup, repeat every 5 minutes
+        faceSyncScheduler.scheduleWithFixedDelay(() -> {
             try {
                 syncFacesFromBackend();
             } catch (Exception e) {
                 Log.e(TAG, ">>> [FACE-SYNC-ERROR] Error in periodic face sync thread: " + e.getMessage(), e);
             }
-        }, 0, 5, TimeUnit.MINUTES);
-        Log.d(TAG, ">>> [FACE-SYNC-INIT] Native Java periodic face sync scheduled every 5 minutes!");
+        }, 25, 5 * 60, TimeUnit.SECONDS);
+        Log.d(TAG, ">>> [FACE-SYNC-INIT] Native Java periodic face sync scheduled every 5 minutes with 25s initial delay!");
     }
 
     public String getDeviceSerial() {

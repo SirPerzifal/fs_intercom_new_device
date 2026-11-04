@@ -49,6 +49,8 @@ interface IntercomPlugin {
   getEnrolledFaces(): Promise<{ faces: { id: string; name: string }[] }>;
   reinitializeQrScanner(): Promise<{ success: boolean }>;
   reinitializeCardReader(): Promise<{ success: boolean }>;
+  toggleHomeAppLock(): Promise<{ isLocked: boolean }>;
+  getHomeAppLockStatus(): Promise<{ isLocked: boolean }>;
 }
 
 const Ringtone = registerPlugin<RingtonePlugin>('Ringtone', {
@@ -112,13 +114,48 @@ export class WebRtcService extends ApiService {
   private remoteDescriptionSet = false;
   audioStatus = new BehaviorSubject<string>('');
   callActionStatus = new BehaviorSubject<string>('');
+  networkStatus$ = new BehaviorSubject<'connected' | 'connecting' | 'disconnected'>('connecting');
   private loadingElement: HTMLIonLoadingElement | null = null;
   private isLoadingPresenting = false;
 
   constructor(http: HttpClient, private storage: StorageService, private toastController: ToastController, private modalController: ModalController,
     private router: Router, private platform: Platform, private alertController: AlertController, private mainVms: MainVmsService, private loadingController: LoadingController) {
     super(http);
+    this.setupBrowserNetworkListeners();
     this.initializeSocket();
+  }
+
+  
+  private setupBrowserNetworkListeners() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('online', () => {
+        console.log('[Network] Browser/Device reported online');
+        if (this.socket && !this.socket.connected) {
+          this.networkStatus$.next('connecting');
+          this.socket.connect();
+        }
+      });
+
+      window.addEventListener('offline', () => {
+        console.warn('[Network] Browser/Device reported offline');
+        this.networkStatus$.next('disconnected');
+      });
+    }
+  }
+
+  public reconnectSocket() {
+    console.log('[Socket] Reconnect requested');
+    this.networkStatus$.next('connecting');
+    if (this.socket) {
+      if (!this.socket.connected) {
+        this.socket.connect();
+      } else {
+        this.socket.disconnect();
+        this.socket.connect();
+      }
+    } else {
+      this.initializeSocket();
+    }
   }
 
   private listenForNativeEvents() {
@@ -439,6 +476,7 @@ export class WebRtcService extends ApiService {
         if (hasRealIdentity || !newIdentityIsReal) {
           // Already connected with a real identity, or the new identity is also a fallback → skip
           console.log('Socket already connected with real identity — skipping re-initialization');
+          this.networkStatus$.next('connected');
           this.listenForNativeEvents();
           return;
         }
@@ -470,6 +508,37 @@ export class WebRtcService extends ApiService {
         timeout: 10000,
         transports: ['websocket', 'polling'],
       });
+
+      this.networkStatus$.next('connecting');
+
+      // Socket lifecycle & network status events
+      this.socket.on('connect', () => {
+        console.log('[Socket] Connected to server, socketId:', this.socket.id);
+        this.networkStatus$.next('connected');
+      });
+
+      this.socket.on('disconnect', (reason: any) => {
+        console.warn('[Socket] Disconnected from server. Reason:', reason);
+        this.networkStatus$.next('disconnected');
+      });
+
+      this.socket.on('connect_error', (error: any) => {
+        console.warn('[Socket] Connection error:', error?.message || error);
+        this.networkStatus$.next('disconnected');
+      });
+
+      if (this.socket.io) {
+        this.socket.io.on('reconnect_attempt', (attempt: number) => {
+          console.log('[Socket] Reconnection attempt #' + attempt);
+          this.networkStatus$.next('connecting');
+        });
+
+        this.socket.io.on('reconnect', () => {
+          console.log('[Socket] Reconnected successfully!');
+          this.networkStatus$.next('connected');
+        });
+      }
+
 
       // Register event handlers
       this.socket.on('offer', (offer: any) => this.handleOffer(offer));
@@ -602,6 +671,14 @@ export class WebRtcService extends ApiService {
       this.presentToast('Remote: Refresh Card Reader.');
     }
     return await Intercom.reinitializeCardReader();
+  }
+
+  async toggleHomeAppLock(): Promise<{ isLocked: boolean }> {
+    return await Intercom.toggleHomeAppLock();
+  }
+
+  async getHomeAppLockStatus(): Promise<{ isLocked: boolean }> {
+    return await Intercom.getHomeAppLockStatus();
   }
 
   async stopRingtoneRtc(is_remote: boolean = false) {

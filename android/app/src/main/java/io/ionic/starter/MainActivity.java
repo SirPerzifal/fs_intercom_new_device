@@ -102,8 +102,59 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
+        if (hasFocus && isKioskLocked) {
             hideSystemUI();
+        }
+    }
+
+    
+    private boolean isKioskLocked = true;
+
+    public boolean isKioskLocked() {
+        return isKioskLocked;
+    }
+
+    public void setKioskLocked(boolean locked) {
+        this.isKioskLocked = locked;
+        runOnUiThread(() -> {
+            if (locked) {
+                hideSystemUI();
+            } else {
+                showSystemUI();
+            }
+            // Show home chooser dialog so user can switch launcher
+            showHomeChooser();
+        });
+    }
+
+    public void showHomeChooser() {
+        try {
+            // Clear current preferred home so chooser dialog always appears
+            getPackageManager().clearPackagePreferredActivities(getPackageName());
+
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory(Intent.CATEGORY_HOME);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            Intent chooser = Intent.createChooser(homeIntent, "Select Home App");
+            chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(chooser);
+            Log.i(TAG, "showHomeChooser: dialog launched, isKioskLocked=" + isKioskLocked);
+        } catch (Exception e) {
+            Log.e(TAG, "showHomeChooser failed: " + e.getMessage());
+        }
+    }
+
+    public void showSystemUI() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            getWindow().setDecorFitsSystemWindows(true);
+            android.view.WindowInsetsController controller = getWindow().getInsetsController();
+            if (controller != null) {
+                controller.show(android.view.WindowInsets.Type.statusBars() | android.view.WindowInsets.Type.navigationBars());
+            }
+        } else {
+            android.view.View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
     }
 
@@ -136,7 +187,7 @@ public class MainActivity extends BridgeActivity {
                 // Merekam logcat khusus tag penting ke /sdcard/log_intercom.txt
                 String logCommand = "logcat -v time -f /sdcard/log_intercom.txt -r 51200 -n 3 " +
                         "FacePassHelper:V InitFacePassHandler:V MainActivity:V IntercomPlugin:V " +
-                        "FloatingCameraOverlay:V MegviiFacepass:V SmdtManagerNew:V DMAccessUtil:V *:S";
+                        "FloatingCameraOverlay:V MegviiFacepass:V SmdtManagerNew:V DMAccessUtil:V BleDoorAccessManager:V *:S";
 
                 Runtime.getRuntime().exec(logCommand);
                 Log.d(TAG, "[LOGCAT-INIT] Automated logcat recording started to /sdcard/log_intercom.txt");

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
-import { faAsterisk, faPhone, faQrcode, faQuestion, faUserTie, faSignOut, faGear, faSync, faSmile, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faAsterisk, faPhone, faQrcode, faQuestion, faUserTie, faSignOut, faGear, faSync, faSmile, faUsers, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { Platform, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { FunctionMainService } from 'src/app/service/function/function-main.service';
@@ -43,11 +43,23 @@ export class MainIntercomPage implements OnInit {
     this.initializeBackButtonHandling();
   }
 
-  version = '(HF-3.1.4)'
+  version = '(HF-3.1.6)'
+  faWifi = faWifi;
+  networkStatus: 'connected' | 'connecting' | 'disconnected' = 'connecting';
+  private networkSub!: Subscription;
+  private secretTapCount = 0;
+  private secretTapTimeout: any = null;
+  isAppLocked = true;
 
   ngOnInit() {
     // this.openScanRecognitionModal()
-    this.webRtc.initializeSocket()
+    this.webRtc.initializeSocket();
+    this.networkSub = this.webRtc.networkStatus$.subscribe(status => {
+      this.ngZone.run(() => {
+        this.networkStatus = status;
+        this.cdRef.detectChanges();
+      });
+    });
     this.initializeBackButtonHandling();
     this.startDate()
     console.log("TEST INIT")
@@ -55,6 +67,7 @@ export class MainIntercomPage implements OnInit {
     this.getCurrentConfig()
     // ADD: Setup face recognition listeners
     this.setupFaceRecognitionListeners();
+    this.checkAppLockStatus();
   }
 
   // ADD: Face recognition setup
@@ -196,7 +209,7 @@ export class MainIntercomPage implements OnInit {
             this.isCanReload = false
           }
         } else {
-          this.isCanReload = true
+          this.isCanReload = true;
         }
 
         this.cdRef.detectChanges(); // manually trigger update
@@ -204,10 +217,66 @@ export class MainIntercomPage implements OnInit {
     });
   }
 
+  
+  async checkAppLockStatus() {
+    try {
+      const res = await this.webRtc.getHomeAppLockStatus();
+      this.isAppLocked = res?.isLocked ?? true;
+    } catch (e) {
+      this.isAppLocked = true;
+    }
+  }
+
+  onSecretCornerTap() {
+    this.secretTapCount++;
+    if (this.secretTapTimeout) {
+      clearTimeout(this.secretTapTimeout);
+    }
+    this.secretTapTimeout = setTimeout(() => {
+      this.secretTapCount = 0;
+    }, 2000);
+
+    if (this.secretTapCount >= 6) {
+      this.secretTapCount = 0;
+      clearTimeout(this.secretTapTimeout);
+      // this.toggleAppLock();
+      this.onOpenSettings()
+    }
+  }
+
+  async toggleAppLock() {
+    try {
+      const res = await this.webRtc.toggleHomeAppLock();
+      this.isAppLocked = res?.isLocked ?? true;
+      if (this.isAppLocked) {
+        this.functionMain.presentToast('Kiosk LOCKED — Select "IFS360 Intercom" as Home App in the dialog', 'warning', 'bottom');
+      } else {
+        this.functionMain.presentToast('Kiosk UNLOCKED — Select another launcher in the dialog', 'success', 'bottom');
+      }
+    } catch (e) {
+      console.error('Error toggling app lock:', e);
+      this.functionMain.presentToast('Failed to toggle Kiosk Mode', 'danger', 'bottom');
+    }
+  }
+
+  onNetworkIconClick() {
+    if (this.networkStatus === 'connected') {
+      this.functionMain.presentToast(this.is_en ? 'Network Connected: Online (Server Ready)' : '网络已连接：在线（服务器就绪）', 'success', 'bottom');
+    } else if (this.networkStatus === 'connecting') {
+      this.functionMain.presentToast(this.is_en ? 'Connecting to server, please wait...' : '正在连接服务器，请稍候...', 'warning', 'bottom');
+    } else {
+      this.functionMain.presentToast(this.is_en ? 'Network Disconnected! Reconnecting...' : '网络已断开！正在重新连接...', 'danger', 'bottom');
+      this.webRtc.reconnectSocket();
+    }
+  }
+
   isCanReload = true
   private routerSubscription!: Subscription;
   ngOnDestroy() {
     clearInterval(this.intervalId);
+    if (this.networkSub) {
+      this.networkSub.unsubscribe();
+    }
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
@@ -483,7 +552,7 @@ export class MainIntercomPage implements OnInit {
     this.loadDisable()
 
     const projectId = this.projectInfo ? this.projectInfo.project_id : false;
-    this.clientMainService.getApi({ family_code: this.family_code, project_id: projectId }, '/intercom/get/family_code').subscribe({
+    this.clientMainService.getApi({ family_code: this.family_code, project_id: projectId }, '/intercom/get/family_code', true).subscribe({
       next: async (results) => {
         console.log(results)
         if (results && results.result && results.result.status_code === 200) {
@@ -676,7 +745,7 @@ export class MainIntercomPage implements OnInit {
             }, 300)
           })
         } else {
-          this.functionMain.presentToast('An error occurred while logging into Intercom!', 'danger');
+          this.functionMain.presentToast('An error occurred while refreshing Intercom!', 'danger');
         }
       },
       error: (error) => {

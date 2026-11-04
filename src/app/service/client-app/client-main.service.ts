@@ -22,7 +22,7 @@ export class ClientMainService extends ApiService {
   project: any = []
 
 
-  getApi(params: any, apiUrl: string): Observable<any> {
+  getApi(params: any, apiUrl: string, show_loading: boolean = false): Observable<any> {
     let modalRef: HTMLIonModalElement | null = null;
     let openLoading = false;
 
@@ -48,7 +48,7 @@ export class ClientMainService extends ApiService {
         }
         
         const urlSegments = apiUrl.split('/');
-        if (urlSegments.length > 2 && urlSegments[2] === 'post') {
+        if (show_loading || (urlSegments.length > 2 && urlSegments[2] === 'post')) {
           openLoading = true;
         }
   

@@ -1,4 +1,10 @@
 <ion-content [fullscreen]="true" class="flex flex-col justify-between">
+  <!-- Invisible Secret Touch Zone: 6 taps to Toggle Home App Lock/Unlock -->
+  <div (click)="onSecretCornerTap()"
+    class="fixed top-0 left-0 w-28 h-28 z-[99999] opacity-0 select-none pointer-events-auto cursor-pointer"
+    title="Secret Kiosk Toggle">
+  </div>
+
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)" style="z-index: 999;" pullFactor="0.3" pullMin="40"
     pullMax="80">
     <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
@@ -10,8 +16,25 @@
         {{ functionMain.returnNone(projectInfo.project_address) }}
       </div>
       <div class="flex flex-col justify-start items-end space-y-2 text-2xl font-bold w-1/2">
-        <div class="text-end">
-          {{ currentDate }}
+        <div class="flex flex-row items-center space-x-3 text-end">
+          <!-- Network Status Pill -->
+          <div (click)="onNetworkIconClick()"
+            class="flex flex-row items-center space-x-2 cursor-pointer bg-white/70 hover:bg-white active:scale-95 transition-all px-3 py-1 rounded-full shadow-sm"
+            [title]="'Network: ' + networkStatus">
+            <fa-icon [icon]="faWifi"
+              [class]="'text-xl ' + (networkStatus === 'connected' ? 'text-green-600' : (networkStatus === 'connecting' ? 'text-amber-500 animate-pulse' : 'text-red-500'))">
+            </fa-icon>
+            <span class="text-sm font-semibold tracking-wide uppercase" [ngClass]="{
+              'text-green-700': networkStatus === 'connected',
+              'text-amber-600': networkStatus === 'connecting',
+              'text-red-600': networkStatus === 'disconnected'
+            }">
+              {{ networkStatus === 'connected' ? 'Online' : (networkStatus === 'connecting' ? 'Connecting' : 'Offline') }}
+            </span>
+          </div>
+          <div class="text-end">
+            {{ currentDate }}
+          </div>
         </div>
         <div class="text-end">
           {{ currentTime }}
@@ -42,6 +65,22 @@
         <span class="text-4xl" *ngIf="is_gym">{{ functionMain.returnNone(facilityInfo.open_hour) }} - {{
           functionMain.returnNone(facilityInfo.close_hour) }}</span>
       </div>
+      <div class="w-full flex flex-row justify-center items-center" *ngIf="is_gym">
+        <div
+          class="mt-5 w-3/5 h-56 max-w-md bg-[#E6F0E5] hover:bg-[#c0c9bf] active:bg-[#a7d7af] flex flex-row items-center justify-center shadow-xl cursor-pointer rounded-2xl transition-all p-6"
+          (click)="openScanRecognitionModal()">
+          <div class="w-2/5 flex justify-center items-center p-4">
+            <fa-icon [icon]="faSmile"
+              class="flex flex-col justify-center items-center text-7xl text-[var(--ion-color-primary)]">
+          </fa-icon>
+        </div>
+        <div class="w-3/5 p-4">
+          <div class="text-3xl font-bold text-gray-800 leading-tight">
+            Face <br> Recognition
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="w-full flex flex-row h-1/2 space-x-4" *ngIf="!is_gym">
       <!-- Left Column: Call Host & Face Recognition -->
@@ -95,7 +134,7 @@
               Scan <br> QR Code
             </div>
             <div class="text-3xl font-bold" *ngIf="!is_en">
-              QR Code <br> 邀请扫描
+              QR Code <br> 扫描二维码
             </div>
           </div>
         </div>
@@ -136,9 +175,26 @@
 
   <div class="flex flex-col items-center justify-between h-full w-full bg-[#DCE7D6] p-4 space-y-4"
     *ngIf="facilityInfo && !is_gym">
-    <div class="w-full flex flex-row justify-between space-x-4 h-[12%]">
+    <div class="w-full flex flex-row justify-between items-center space-x-4">
       <div class="text-2xl font-bold break-words whitespace-normal w-1/2 overflow-x-auto uppercase">
         {{ functionMain.returnNone(projectInfo.project_name) }}
+      </div>
+      <!-- Network Status Pill -->
+      <div class="flex flex-row justify-end items-center w-1/2">
+        <div (click)="onNetworkIconClick()"
+          class="flex flex-row items-center space-x-2 cursor-pointer bg-white/70 hover:bg-white active:scale-95 transition-all px-3 py-1 rounded-full shadow-sm"
+          [title]="'Network: ' + networkStatus">
+          <fa-icon [icon]="faWifi"
+            [class]="'text-xl ' + (networkStatus === 'connected' ? 'text-green-600' : (networkStatus === 'connecting' ? 'text-amber-500 animate-pulse' : 'text-red-500'))">
+          </fa-icon>
+          <span class="text-sm font-semibold tracking-wide uppercase" [ngClass]="{
+            'text-green-700': networkStatus === 'connected',
+            'text-amber-600': networkStatus === 'connecting',
+            'text-red-600': networkStatus === 'disconnected'
+          }">
+            {{ networkStatus === 'connected' ? 'Online' : (networkStatus === 'connecting' ? 'Connecting' : 'Offline') }}
+          </span>
+        </div>
       </div>
     </div>
     <div class="flex flex-col justify-center items-center space-y-4 h-[30%] w-full">
@@ -161,25 +217,51 @@
       </div>
     </div>
 
-    <div
-      class="w-4/5 text-white bg-[var(--ion-color-success-tint)] h-[10%] rounded-lg p-4 flex flex-col justify-center items-center text-3xl font-bold"
-      *ngIf="!currentBook && !isBookLoading">
-      VACANT
-    </div>
-    <div class="w-full text-center text-2xl flex flex-col justify-center items-center h-[15%] font-bold"
-      *ngIf="currentBook && !isBookLoading">
-      <div
-        class="w-4/5 text-white bg-[var(--ion-color-danger-tint)] h-full rounded-lg p-4 flex flex-col justify-center items-center text-3xl font-bold mb-4">
-        OCCUPIED
+    <div class="w-4/5 flex flex-col items-center justify-center my-auto space-y-4">
+      <div class="w-full flex flex-row items-center justify-between gap-4">
+        <!-- Face Recognition Button (Left) -->
+        <div
+          class="flex-1 min-w-0 h-24 bg-[#E6F0E5] hover:bg-[#c0c9bf] active:bg-[#a7d7af] flex flex-row items-center justify-center shadow-lg cursor-pointer rounded-xl transition-all px-2 py-2"
+          (click)="openScanRecognitionModal()">
+          <div class="w-1/5 flex justify-center items-center p-1">
+            <fa-icon [icon]="faSmile"
+              class="flex flex-col justify-center items-center text-4xl sm:text-5xl text-[var(--ion-color-primary)]">
+            </fa-icon>
+          </div>
+          <div class="w-3/5 p-1">
+            <div class="text-2xl sm:text-xl font-bold text-gray-800 leading-tight">
+              Face Recognition
+            </div>
+          </div>
+        </div>
+
+        <!-- Status Button (Right) -->
+        <div
+          class="flex-1 min-w-0 h-24 text-white bg-[var(--ion-color-success-tint)] rounded-xl flex flex-col justify-center items-center text-2xl font-bold shadow-lg"
+          *ngIf="!currentBook && !isBookLoading">
+          VACANT
+        </div>
+
+        <div
+          class="flex-1 min-w-0 h-24 text-white bg-[var(--ion-color-danger-tint)] rounded-xl flex flex-col justify-center items-center text-2xl font-bold shadow-lg"
+          *ngIf="currentBook && !isBookLoading">
+          OCCUPIED
+        </div>
+
+        <div
+          class="flex-1 min-w-0 h-24 text-white bg-[var(--ion-color-warning-tint)] rounded-xl flex flex-col justify-center items-center shadow-lg"
+          *ngIf="isBookLoading">
+          <ion-spinner name="crescent" color="light"></ion-spinner>
+        </div>
       </div>
-      Booked By {{ functionMain.returnNone(currentBook.booked_by) }} at {{
-      functionMain.formatHours(currentBook.start_datetime) }} - {{ functionMain.formatHours(currentBook.stop_datettime)
-      }}
-    </div>
-    <div
-      class="w-4/5 text-white bg-[var(--ion-color-warning-tint)] h-[10%] rounded-lg p-4 flex flex-col justify-center items-center text-3xl font-bold mt-4"
-      *ngIf="isBookLoading">
-      <ion-spinner name="crescent" color="light"></ion-spinner>
+
+      <!-- Booking Info below both buttons -->
+      <div class="w-full text-center text-2xl font-bold text-gray-800"
+        *ngIf="currentBook && !isBookLoading">
+        Booked By {{ functionMain.returnNone(currentBook.booked_by) }} at {{
+        functionMain.formatHours(currentBook.start_datetime) }} - {{ functionMain.formatHours(currentBook.stop_datettime)
+        }}
+      </div>
     </div>
     <div class="h-[19%] w-full flex flex-col justify-between items-center">
       <div class="h-10"></div>

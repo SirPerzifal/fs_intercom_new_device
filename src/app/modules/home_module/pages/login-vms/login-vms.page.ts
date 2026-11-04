@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Platform } from '@ionic/angular';
@@ -7,6 +7,7 @@ import { FunctionMainService } from 'src/app/service/function/function-main.serv
 import { Preferences } from '@capacitor/preferences';
 import { App } from '@capacitor/app'
 import { WebRtcService } from 'src/app/service/fs-web-rtc/web-rtc.service';
+import { faWifi } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login-vms',
@@ -21,11 +22,20 @@ export class LoginVmsPage implements OnInit {
     private clientMainService: ClientMainService,
     public functionMain: FunctionMainService,
     public webRtc: WebRtcService,
+    private ngZone: NgZone,    
+    private cdRef: ChangeDetectorRef,
+    
   ) {
 
   }
 
   videoDevices: any = false
+  faWifi = faWifi;
+  networkStatus: 'connected' | 'connecting' | 'disconnected' = 'connecting';
+  private networkSub!: Subscription;
+  private secretTapCount = 0;
+  private secretTapTimeout: any = null;
+  isAppLocked = true;
 
   async getCameraList() {
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -35,6 +45,13 @@ export class LoginVmsPage implements OnInit {
 
   ngOnInit() {
     this.initializeBackButtonHandling()
+    this.webRtc.initializeSocket();
+    this.networkSub = this.webRtc.networkStatus$.subscribe(status => {
+      this.ngZone.run(() => {
+        this.networkStatus = status;
+        this.cdRef.detectChanges();
+      });
+    });
     // this.getCameraList()
   }
 
@@ -43,7 +60,11 @@ export class LoginVmsPage implements OnInit {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
+    if (this.networkSub) {
+      this.networkSub.unsubscribe();
+    }
   }
+
 
   code = ''
 
@@ -85,5 +106,57 @@ export class LoginVmsPage implements OnInit {
     this.platform.backButton.subscribeWithPriority(10, () => {
       App.exitApp();
     });
+  }
+
+  async checkAppLockStatus() {
+    try {
+      const res = await this.webRtc.getHomeAppLockStatus();
+      this.isAppLocked = res?.isLocked ?? true;
+    } catch (e) {
+      this.isAppLocked = true;
+    }
+  }
+
+  onSecretCornerTap() {
+    this.secretTapCount++;
+    if (this.secretTapTimeout) {
+      clearTimeout(this.secretTapTimeout);
+    }
+    this.secretTapTimeout = setTimeout(() => {
+      this.secretTapCount = 0;
+    }, 2000);
+
+    if (this.secretTapCount >= 6) {
+      this.secretTapCount = 0;
+      clearTimeout(this.secretTapTimeout);
+      // this.toggleAppLock();
+      this.webRtc.onOpenSetting()
+    }
+  }
+
+  async toggleAppLock() {
+    try {
+      const res = await this.webRtc.toggleHomeAppLock();
+      this.isAppLocked = res?.isLocked ?? true;
+      if (this.isAppLocked) {
+        this.functionMain.presentToast('Kiosk LOCKED — Select "IFS360 Intercom" as Home App in the dialog', 'warning', 'bottom');
+      } else {
+        this.functionMain.presentToast('Kiosk UNLOCKED — Select another launcher in the dialog', 'success', 'bottom');
+      }
+    } catch (e) {
+      console.error('Error toggling app lock:', e);
+      this.functionMain.presentToast('Failed to toggle Kiosk Mode', 'danger', 'bottom');
+    }
+  }
+
+  onNetworkIconClick() {
+    if (this.networkStatus === 'connected') {
+      this.functionMain.presentToast('Network Connected: Online (Server Ready)', 'success', 'bottom');
+    } else if (this.networkStatus === 'connecting') {
+      this.functionMain.presentToast('Connecting to server, please wait...', 'warning', 'bottom');
+    } else {
+      this.functionMain.presentToast('Network Disconnected! Reconnecting...', 'danger', 'bottom');
+      this.webRtc.reconnectSocket();
+    }
   }
 }
